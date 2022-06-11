@@ -86,7 +86,6 @@
                                                     <option value="{{ $company->id }}">{{ $company->company_name }}
                                                     </option>
                                                 @endforeach
-
                                             </select>
                                         </div>
 
@@ -279,9 +278,9 @@
                             <div class="modal-content">
                                 <div class="modal-header" id="exampleModalPopoversLabel">
                                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                                    </button>
-                                                                  </div> -->
+                                                                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                                        </button>
+                                                                      </div> -->
                                     <div class="modal-body">
                                         <p class="modal-text">Parberp.com says<br>
                                             Please select atleast one Checkbox
@@ -305,7 +304,8 @@
                 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                     <div class="widget-content widget-content-area br-6">
                         <div class="table-responsive mb-4 mt-4">
-                            <table id="html5-extension" class="table table-hover non-hover datatable_server" style="width:100%">
+                            <table id="html5-extension" class="table table-hover non-hover datatable_server"
+                                style="width:100%">
                                 <thead>
                                     <tr>
                                     <tr>
@@ -323,7 +323,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  
+
                                 </tbody>
                             </table>
                         </div>
@@ -420,7 +420,7 @@
             });
 
             $(document).on('click', '.delete', function() {
-                let id=$(this).attr('id');
+                let id = $(this).attr('id');
 
                 swal({
                     title: 'Are you sure?',
@@ -432,15 +432,15 @@
                 }).then(function(result) {
                     if (result.value) {
 
-                    $.ajax({
-                        url: "{{ route('hr_document.delete-offer-letter') }}",
-                        method: "GET",
-                        dataType: 'json',
-                        data: {
-                            id: id,
-                        },
-                        success: function(result) {
-                            swal(
+                        $.ajax({
+                            url: "{{ route('hr_document.delete-offer-letter') }}",
+                            method: "GET",
+                            dataType: 'json',
+                            data: {
+                                id: id,
+                            },
+                            success: function(result) {
+                                swal(
                                     'Deleted!',
                                     'Your Record has been deleted.',
                                     'success'
@@ -448,10 +448,10 @@
                                 setTimeout(function() {
                                     location.reload();
                                 }, 3000);
-                        }
-                    
-                    })
-                }
+                            }
+
+                        })
+                    }
                 })
             })
             var table = $('.datatable_server').DataTable({
@@ -524,14 +524,14 @@
                     {
                         data: "company_name",
                         orderable: true,
-                        name: "company_name" /*,width:"20%"*/,
+                        name: "company_name" /*,width:"20%"*/ ,
                         width: "25%"
 
                     },
                     {
                         data: "location_name",
                         orderable: true,
-                        name: "location_name" /*,width:"20%"*/,
+                        name: "location_name" /*,width:"20%"*/ ,
                         width: "25%"
 
                     },
@@ -546,7 +546,7 @@
                         name: "document",
                         width: "30%"
                     },
-                   
+
                     {
                         data: "action",
                         name: "action",
