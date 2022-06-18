@@ -11,12 +11,12 @@
                 <div>
                     <div>
                         <button type="button" class="btn btn-info mb-2 mr-2" data-toggle="modal"
-                            data-target=".bd-example-modal-lg">Add Award</button>
-                        <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal">Bulk Delete</button>
+                            data-target=".add-edit_modal">Add Award</button>
+                        {{-- <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal">Bulk Delete</button> --}}
                     </div>
 
-                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal fade add-edit_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                        aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -30,14 +30,16 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <form action="{{ route('general-master.store-award') }}" id="award_form" method="post">
+                                <form id="award_form" method="post">
                                     @csrf
+                                    <input type="hidden" id="id" name="id">
+
 
                                     <div class="row" style="padding: 10px;">
 
                                         <div class="col-md-6 form-group">
                                             <label>Company*</label>
-                                            <select name="company_id" id="company" class="form-control selectpicker"
+                                            <select name="company_id" id="company_id" class="form-control selectpicker"
                                                 data-live-search="true" data-live-search-style="begins"
                                                 title='Select Employee...'>
                                                 <option value="" disabled selected>Company Type</option>
@@ -52,7 +54,7 @@
 
                                         <div class="col-md-6 form-group">
                                             <label>Employee*</label>
-                                            <select name="employee_id" id="employee" class="form-control selectpicker"
+                                            <select name="employee_id" id="employee_id" class="form-control selectpicker"
                                                 data-live-search="true" data-live-search-style="begins"
                                                 title='Select Employee...'>
                                             </select>
@@ -62,9 +64,9 @@
 
                                         <div class="col-md-6 form-group">
                                             <label>Department*</label>
-                                            <select name="department_id" id="department" class="form-control selectpicker"
-                                                data-live-search="true" data-live-search-style="begins"
-                                                title='Select Employee...'>
+                                            <select name="department_id" id="department_id"
+                                                class="form-control selectpicker" data-live-search="true"
+                                                data-live-search-style="begins" title='Select Employee...'>
 
                                             </select>
                                         </div>
@@ -73,31 +75,31 @@
 
                                         <div class="col-md-6 form-group">
                                             <label>Award Type*</label>
-                                            <select name="award_type" id="location_head" class="form-control selectpicker"
+                                            <select name="award_type" id="award_type" class="form-control selectpicker"
                                                 data-live-search="true" data-live-search-style="begins"
                                                 title='Select Employee...'>
                                                 <option value="" disabled selected>Select Award</option>
-                                                <option value="361">Performer of the year</option>
-                                                <option value="361">Best Salesman</option>
-                                                <option value="361">Top Performer of month</option>
+                                                <option value="Performer of the year">Performer of the year</option>
+                                                <option value="Best Salesman">Best Salesman</option>
+                                                <option value="Top Performer of month">Top Performer of month</option>
 
 
                                             </select>
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label>Gift *</label>
-                                            <input type="text" name="gift" required class="form-control"
+                                            <input type="text" name="gift" id="gift" required class="form-control"
                                                 placeholder="Gift">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>Cash*</label>
-                                            <input type="number" step="0.1" name="cash" required class="form-control"
-                                                placeholder="Cash">
+                                            <input type="number" step="0.1" name="cash" id="cash" required
+                                                class="form-control" placeholder="Cash">
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label>Descrption* </label>
-                                            <textarea name="description" id="registered_address" class="form-control" placeholder=Optional></textarea>
+                                            <textarea name="description" id="description" class="form-control" placeholder=Optional></textarea>
                                         </div>
 
 
@@ -109,7 +111,8 @@
                                         </div>
                                         <div class="form-group" align="center" style="margin-left: 45%;">
 
-                                            <button type="submit" class="btn btn-warning">Add </button>
+                                            <button id="add-edit-btn" formaction="{{ route('general-master.store-award') }}" type="submit"
+                                                class="btn btn-warning">Add </button>
                                         </div>
                                     </div>
                                 </form>
@@ -167,7 +170,7 @@
     <script>
         $(document).ready(function() {
 
-            $(document).on('change', '#company', function() {
+            $(document).on('change', '#company_id', function() {
                 $.ajax({
                     url: "{{ route('get_department_by_company') }}",
                     method: "GET",
@@ -176,20 +179,20 @@
                         company_id: $(this).val(),
                     },
                     success: function(result) {
-                        $("#department").empty();
-                        $("#department").append(
+                        $("#department_id").empty();
+                        $("#department_id").append(
                             '<option value="" disabled selected>Select Department</option>');
                         $.each(result['department'], function(a, b) {
-                            $("#department").append('<option value="' + b.id + '">' + b
+                            $("#department_id").append('<option value="' + b.id + '">' + b
                                 .department + '</option>');
                         });
 
 
-                        $("#employee").empty();
-                        $("#employee").append(
+                        $("#employee_id").empty();
+                        $("#employee_id").append(
                             '<option value="" disabled selected>Select Employee</option>');
                         $.each(result['employee'], function(a, b) {
-                            $("#employee").append('<option value="' + b.id + '">' + b
+                            $("#employee_id").append('<option value="' + b.id + '">' + b
                                 .full_name + '</option>');
                         });
                     }
@@ -266,8 +269,53 @@
                 }
             });
 
+            $(document).on('click', '.edit', function() {
+                let id = $(this).attr('id');
+                $.ajax({
+                    url: "{{ route('general-master.edit-award') }}",
+                    method: "GET",
+                    dataType: 'json',
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        console.log(result);
+                        $("#id").val(result.id);
+                        $("#company_id").val(result.company_id);
+                        $("#gift").val(result.gift);
+                        $("#cash").val(result.cash);
+                        $("#description").val(result.description);
+                        $("#start_date").val(result.start_date);
+                        $("#award_type").val(result.award_type);
+
+                        $("#company_id").change();
+                        setTimeout(function() {
+                            $("#employee_id").val(result.emp_id);
+                            $("#department_id").val(result.dept_id);
+                        }, 1500);
+
+                        $("#myLargeModalLabel").text("Edit Award")
+                        $("#add-edit-btn").text("Update");
+                        let formaction = '{{ route('general-master.update-award') }}';
+                        $("#add-edit-btn").attr("formaction", formaction);
+
+                    }
+
+                })
+            })
+
+            $('.add-edit_modal').on('hidden.bs.modal', function() {
+                $("#myLargeModalLabel").text("Add Award");
+                $("#add-edit-btn").text("Add");
+                $('#award_form').trigger("reset");
+                $("#store_logo").text('');
+                let formaction = '{{ route('general-master.store-award') }}';
+                $("#add-edit-btn").attr("formaction", formaction);
+
+            });
+
             $(document).on('click', '.delete', function() {
-                let id=$(this).attr('id');
+                let id = $(this).attr('id');
 
                 swal({
                     title: 'Are you sure?',
@@ -283,10 +331,10 @@
                             method: "GET",
                             dataType: 'json',
                             data: {
-                                id:id,
+                                id: id,
                             },
                             success: function(result) {
-                              
+
                                 swal(
                                     'Deleted!',
                                     'Your Record has been deleted.',

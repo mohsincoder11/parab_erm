@@ -42,6 +42,35 @@ class AppointmentLetter extends Controller
         return response()->json(1);
     }
 
+    public function edit_appointment_letter(Request $request)
+    {
+        $data = DB::table('appointment_letter')
+            ->where('appointment_letter.id', $request->id)
+            ->first();
+        return response()->json($data);
+    }
+
+    public function update_appointment_letter(Request $request)
+    {
+        if ($request->hasFile('upload_file')) {
+            $image = $request->file('upload_file');
+            $file_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/appointment_letter'), $file_name);
+        } else {
+            $file_name = $request->old_file;
+        }
+        AppointmentLetterModel::where('id', $request->id)->update([
+            'company_id' => $request->company_id,
+            'location_id' => $request->location_id,
+            'project_id' => $request->project_id,
+            'document' => $request->document,
+            'employee_status' => $request->employee_status,
+            'file' => $file_name,
+        ]);
+
+        return back()->with('success', 'Record updated successfully.');
+    }
+
     public function get_appointment_letter_record(){
         $data=DB::table('appointment_letter')
         ->join('companies','companies.id','=','appointment_letter.company_id')
@@ -75,8 +104,8 @@ class AppointmentLetter extends Controller
         })
        
         ->addColumn('action', function ($data) {
-            return '<a class="Edit" id="'.$data->id.'" data-toggle="modal" data-placement="top"
-        title="Edit" ><svg
+            return '<a class="edit" id="'.$data->id.'" data-toggle="modal" data-placement="top"
+            title="Edit" data-toggle="modal" data-target=".add-edit_modal" ><svg
             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round"

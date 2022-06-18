@@ -12,23 +12,23 @@
                 <div>
                     <div>
                         <button type="button" class="btn btn-info mb-2 mr-2" data-toggle="modal"
-                            data-target=".bd-example-modal-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                            data-target=".add-edit_modal"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>Add Complaints</button>
-                        <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal"><svg
+                        {{-- <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal"><svg
                                 xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                 fill="currentColor">
                                 <path fill-rule="evenodd"
                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
                                     clip-rule="evenodd" />
                             </svg>Bulk
-                            Delete</button>
+                            Delete</button> --}}
 
 
                     </div>
 
-                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                    <div class="modal fade add-edit_modal" tabindex="-1" role="dialog"
                         aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -44,13 +44,15 @@
                                     </button>
                                 </div>
 
-                                <form action="{{ route('hr_document.store-complaint') }}" id="complaint_form" method="post">
+                                <form  id="complaint_form" method="post">
                                     @csrf
+                                        <input type="hidden" id="id" name="id">
+
                                 <div class="row" style="padding: 10px;">
 
                                     <div class="col-md-6 form-group">
                                         <label>Company *</label>
-                                        <select name="company_id" id="company" class="form-control selectpicker"
+                                        <select name="company_id" id="company_id" class="form-control selectpicker"
                                             data-live-search="true" data-live-search-style="begins"
                                             title='Select Company Type...'>
                                             <option value="">Please select company
@@ -59,9 +61,9 @@
                                                 <option value="{{ $company->id }}">{{ $company->company_name }}
                                                 </option>
                                             @endforeach
-
                                         </select>
                                     </div>
+
                                     <div class="col-md-6 form-group">
                                         <label>Complaint From*</label>
                                         <select name="complaint_from" id="complaint_from"
@@ -102,7 +104,7 @@
 
                                     <div class="form-group" align="center" style="margin-left: 45%;">
 
-                                        <button type="submit" class="btn btn-warning">Add </button>
+                                        <button formaction="{{ route('hr_document.store-complaint') }}" type="submit" class="btn btn-warning" id="add-edit-btn">Add </button>
                                     </div>
 
                                 </div>
@@ -154,7 +156,7 @@
 
     <script>
         $(document).ready(function() {
-            $(document).on('change', '#company', function() {
+            $(document).on('change', '#company_id', function() {
                 $.ajax({
                     url: "{{ route('get_employee_by_company') }}",
                     method: "GET",
@@ -272,6 +274,50 @@
                     }
                 })
             })
+
+            $(document).on('click', '.edit', function() {
+                let id = $(this).attr('id');
+                $.ajax({
+                    url: "{{ route('hr_document.edit-complaint') }}",
+                    method: "GET",
+                    dataType: 'json',
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        $("#id").val(result.id);
+                        $("#company_id").val(result.company_id);
+                        $("#complaint_title").val(result.complaint_title);
+                        $("#complaint_date").val(result.complaint_date);
+                        $("#description").val(result.description);                 
+
+
+                        $("#company_id").change();
+                        setTimeout(function() {
+                            $("#complaint_from").val(result.complaint_from);
+                            $("#complaint_of").val(result.complaint_of);
+                        }, 1500);
+                       
+                        $("#myLargeModalLabel").text("Edit Complaint")
+                        $("#add-edit-btn").text("Update");
+                        let formaction = '{{ route('hr_document.update-complaint') }}';
+                        $("#add-edit-btn").attr("formaction", formaction);
+
+                    }
+
+                })
+            })
+
+            $('.add-edit_modal').on('hidden.bs.modal', function() {
+                $("#myLargeModalLabel").text("Add Offer Letter");
+                $("#add-edit-btn").text("Add");
+                $('#offer_letter_form').trigger("reset");
+                $("#store_logo").text('');
+                let formaction = '{{ route('hr_document.store-complaint') }}';
+                $("#add-edit-btn").attr("formaction", formaction);
+                $("#upload_file").removeClass('ignore');
+
+            });
 
             var table = $('.datatable_server').DataTable({
                 dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',

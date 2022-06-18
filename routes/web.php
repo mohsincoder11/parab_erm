@@ -150,46 +150,160 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/offer-letter', 'OfferLetter@offer_letter')->name('offer-letter');
         Route::post('/store-offer-letter', 'OfferLetter@store_offer_letter')->name('store-offer-letter');
         Route::get('/delete-offer-letter', 'OfferLetter@delete_offer_letter')->name('delete-offer-letter');
-        Route::get('/get_offer_letter_record', 'OfferLetter@get_offer_letter_record')->name('get_offer_letter_record');        
-       
+        Route::get('/edit-offer-letter', 'OfferLetter@edit_offer_letter')->name('edit-offer-letter');
+        Route::post('/update-offer-letter', 'OfferLetter@update_offer_letter')->name('update-offer-letter');
+        Route::get('/get_offer_letter_record', 'OfferLetter@get_offer_letter_record')->name('get_offer_letter_record');
+
         Route::get('/appointment-letter', 'AppointmentLetter@appointment_letter')->name('appointment-letter');
         Route::post('/store-appointment-letter', 'AppointmentLetter@store_appointment_letter')->name('store-appointment-letter');
         Route::get('/delete-appointment-letter', 'AppointmentLetter@delete_appointment_letter')->name('delete-appointment-letter');
+        Route::get('/edit-appointment-letter', 'AppointmentLetter@edit_appointment_letter')->name('edit-appointment-letter');
+        Route::post('/update-appointment-letter', 'AppointmentLetter@update_appointment_letter')->name('update-appointment-letter');
         Route::get('/get_appointment_letter_record', 'AppointmentLetter@get_appointment_letter_record')->name('get_appointment_letter_record');
-       
+
         Route::get('/complaint', 'Complaint@complaint')->name('complaint');
         Route::post('/store-complaint', 'Complaint@store_complaint')->name('store-complaint');
         Route::get('/delete-complaint', 'Complaint@delete_complaint')->name('delete-complaint');
+        Route::get('/edit-complaint', 'Complaint@edit_complaint')->name('edit-complaint');
+        Route::post('/update-complaint', 'Complaint@update_complaint')->name('update-complaint');
         Route::get('/get_complaint_record', 'Complaint@get_complaint_record')->name('get_complaint_record');
-     
-       
+
+
         Route::get('/confirmation-letter', 'ConfirmationLetter@confirmation_letter')->name('confirmation-letter');
         Route::post('/store-confirmation-letter', 'ConfirmationLetter@store_confirmation_letter')->name('store-confirmation-letter');
         Route::get('/delete-confirmation-letter', 'ConfirmationLetter@delete_confirmation_letter')->name('delete-confirmation-letter');
+        Route::get('/edit-confirmation-letter', 'ConfirmationLetter@edit_confirmation_letter')->name('edit-confirmation-letter');
+        Route::post('/update-confirmation-letter', 'ConfirmationLetter@update_confirmation_letter')->name('update-confirmation-letter');
         Route::get('/get_confirmation_letter_record', 'ConfirmationLetter@get_confirmation_letter_record')->name('get_confirmation_letter_record');
-       
-  
+
+
         Route::get('/award', 'Award@award')->name('award');
     });
 
     //master/admin-master
     Route::namespace("admin\master\admin_master")->name('admin_master.')->prefix('masters/admin-master')->group(function () {
         Route::get('/expenses-category', 'ExpenseCategory@expenses_category')->name('expenses-category');
+        Route::post('/store-expenses-category', 'ExpenseCategory@store_expenses_category')->name('store-expenses-category');
+        Route::post('/update-expenses-category', 'ExpenseCategory@update_expenses_category')->name('update-expenses-category');
+        Route::get('/edit-expenses-category', 'ExpenseCategory@edit_expenses_category')->name('edit-expenses-category');
+        Route::get('/delete-expenses-category', 'ExpenseCategory@delete_expenses_category')->name('delete-expenses-category');
+        Route::get('/get-expenses-category-record', 'ExpenseCategory@get_expenses_category_record')->name('get-expenses-category-record');
     });
 
     //master/assets_masters
     Route::namespace("admin\master\asset_master")->name('assets_masters.')->prefix('masters/assets-masters')->group(function () {
         Route::get('/assets-category', 'AssetsCategory@assets_category')->name('assets-category');
         Route::get('/assets', 'Assets@assets')->name('assets');
+
         Route::get('/category', 'Category@category')->name('category');
+        Route::post('/store-category', 'Category@store_category')->name('store-category');
+        Route::post('/update-category', 'Category@update_category')->name('update-category');
+        Route::get('/edit-category', 'Category@edit_category')->name('edit-category');
+        Route::get('/delete-category', 'Category@delete_category')->name('delete-category');
+
         Route::get('/company-assets', 'CompanyAssets@company_assets')->name('company-assets');
+        Route::post('/store-company-assets', 'CompanyAssets@store_company_assets')->name('store-company-assets');
+        Route::post('/update-company-assets', 'CompanyAssets@update_company_assets')->name('update-company-assets');
+        Route::get('/edit-company-assets', 'CompanyAssets@edit_company_assets')->name('edit-company-assets');
+        Route::get('/delete-company-assets', 'CompanyAssets@delete_company_assets')->name('delete-company-assets');
     });
 
-//master/employee-master
+    //master/employee-master
     Route::namespace('admin\master\employee_master')->name('employees_masters.')->prefix('masters/employee-masters')->group(function () {
-        Route::get('/employee-master', 'EmployeeMaster@employee_master')->name('employee-master');
         Route::get('/official-details', 'OfficialDetails@official_details')->name('official-details');
+        Route::post('/store-official-details', 'OfficialDetails@store_official_details')->name('store-official-details');
+        Route::get('/edit-official-details', 'OfficialDetails@edit_official_details')->name('edit-official-details');
+        Route::post('/update-official-details', 'OfficialDetails@update_official_details')->name('update-official-details');
+        Route::get('/delete-official-details', 'OfficialDetails@delete_official_details')->name('delete-official-details');
+        Route::get('/get-official-details', 'OfficialDetails@get_official_details')->name('get-official-details');
+
+        Route::get('/master', 'Master@master')->name('master');
+
+        //Leave Type Master
+        Route::post('/store-leave-type', 'Master@store_leave_type')->name('store-leave-type');
+        Route::post('/update-leave-type', 'Master@update_leave_type')->name('update-leave-type');
+        Route::get('/delete-leave-type', 'Master@delete_leave_type')->name('delete-leave-type');
+        Route::get('/edit-leave-type', 'Master@edit_leave_type')->name('edit-leave-type');
+
+        //Award Type Master
+        Route::post('/store-award-type', 'Master@store_award_type')->name('store-award-type');
+        Route::post('/update-award-type', 'Master@update_award_type')->name('update-award-type');
+        Route::get('/delete-award-type', 'Master@delete_award_type')->name('delete-award-type');
+        Route::get('/edit-award-type', 'Master@edit_award_type')->name('edit-award-type');
+
+        //Warning Type Master
+        Route::post('/store-warning-type', 'Master@store_warning_type')->name('store-warning-type');
+        Route::post('/update-warning-type', 'Master@update_warning_type')->name('update-warning-type');
+        Route::get('/delete-warning-type', 'Master@delete_warning_type')->name('delete-warning-type');
+        Route::get('/edit-warning-type', 'Master@edit_warning_type')->name('edit-warning-type');
+
+        //Termination Type Master
+        Route::post('/store-termination-type', 'Master@store_termination_type')->name('store-termination-type');
+        Route::post('/update-termination-type', 'Master@update_termination_type')->name('update-termination-type');
+        Route::get('/delete-termination-type', 'Master@delete_termination_type')->name('delete-termination-type');
+        Route::get('/edit-termination-type', 'Master@edit_termination_type')->name('edit-termination-type');
+
+        //Expense Type Master
+        Route::post('/store-expense-type', 'Master@store_expense_type')->name('store-expense-type');
+        Route::post('/update-expense-type', 'Master@update_expense_type')->name('update-expense-type');
+        Route::get('/delete-expense-type', 'Master@delete_expense_type')->name('delete-expense-type');
+        Route::get('/edit-expense-type', 'Master@edit_expense_type')->name('edit-expense-type');
+
+
+        //employee_status Type Master
+        Route::post('/store-employee_status-type', 'Master@store_employee_status_type')->name('store-employee_status-type');
+        Route::post('/update-employee_status-type', 'Master@update_employee_status_type')->name('update-employee_status-type');
+        Route::get('/delete-employee_status-type', 'Master@delete_employee_status_type')->name('delete-employee_status-type');
+        Route::get('/edit-employee_status-type', 'Master@edit_employee_status_type')->name('edit-employee_status-type');
+
+
+        //document Type Master
+        Route::post('/store-document-type', 'Master@store_document_type')->name('store-document-type');
+        Route::post('/update-document-type', 'Master@update_document_type')->name('update-document-type');
+        Route::get('/delete-document-type', 'Master@delete_document_type')->name('delete-document-type');
+        Route::get('/edit-document-type', 'Master@edit_document_type')->name('edit-document-type');
+
+
+
         Route::get('/other-master', 'OtherMaster@other_master')->name('other-master');
+
+        //Arrangement Methods
+        Route::post('/store-arrangement_method-type', 'OtherMaster@store_arrangement_method_type')->name('store-arrangement_method-type');
+        Route::post('/update-arrangement_method-type', 'OtherMaster@update_arrangement_method_type')->name('update-arrangement_method-type');
+        Route::get('/delete-arrangement_method-type', 'OtherMaster@delete_arrangement_method_type')->name('delete-arrangement_method-type');
+        Route::get('/edit-arrangement_method-type', 'OtherMaster@edit_arrangement_method_type')->name('edit-arrangement_method-type');
+
+        //Payment Type
+        Route::post('/store-payment-type', 'OtherMaster@store_payment_type')->name('store-payment-type');
+        Route::post('/update-payment-type', 'OtherMaster@update_payment_type')->name('update-payment-type');
+        Route::get('/delete-payment-type', 'OtherMaster@delete_payment_type')->name('delete-payment-type');
+        Route::get('/edit-payment-type', 'OtherMaster@edit_payment_type')->name('edit-payment-type');
+
+
+        //job category
+        Route::post('/store-job_category', 'OtherMaster@store_job_category')->name('store-job-category');
+        Route::post('/update-job_category', 'OtherMaster@update_job_category')->name('update-job-category');
+        Route::get('/delete-job_category', 'OtherMaster@delete_job_category')->name('delete-job-category');
+        Route::get('/edit-job_category', 'OtherMaster@edit_job_category')->name('edit-job-category');
+
+        //Education Level
+        Route::post('/store-education_level', 'OtherMaster@store_education_level')->name('store-education-level');
+        Route::post('/update-education_level', 'OtherMaster@update_education_level')->name('update-education-level');
+        Route::get('/delete-education_level', 'OtherMaster@delete_education_level')->name('delete-education-level');
+        Route::get('/edit-education_level', 'OtherMaster@edit_education_level')->name('edit-education-level');
+
+
+        //Language skill
+        Route::post('/store-language_skill', 'OtherMaster@store_language_skill')->name('store-language-skill');
+        Route::post('/update-language_skill', 'OtherMaster@update_language_skill')->name('update-language-skill');
+        Route::get('/delete-language_skill', 'OtherMaster@delete_language_skill')->name('delete-language-skill');
+        Route::get('/edit-language_skill', 'OtherMaster@edit_language_skill')->name('edit-language-skill');
+
+        //skill
+        Route::post('/store-skills', 'OtherMaster@store_skills')->name('store-skills');
+        Route::post('/update-skills', 'OtherMaster@update_skills')->name('update-skills');
+        Route::get('/delete-skills', 'OtherMaster@delete_skills')->name('delete-skills');
+        Route::get('/edit-skills', 'OtherMaster@edit_skills')->name('edit-skills');
     });
 
 
@@ -208,45 +322,52 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/profession-tax-master', 'ProfessionTaxMaster@profession_tax_master')->name('profession-tax-master');
     });
 
-   //Statutory Reports/Event-Meeting
-   Route::namespace('admin\statutory_reports\event_and_meetings')->name('event_and_meetings.')->prefix('statutory-reports/event-and-meetings')->group(function () {
-    Route::get('/event', 'Events@events')->name('event');
-    Route::get('/meeting', 'Meetings@meeting')->name('meeting');
-});
+    //Statutory Reports/Event-Meeting
+    Route::namespace('admin\statutory_reports\event_and_meetings')->name('event_and_meetings.')->prefix('statutory-reports/event-and-meetings')->group(function () {
+        Route::get('/event', 'Events@events')->name('event');
+        Route::get('/meeting', 'Meetings@meeting')->name('meeting');
+    });
 
-   //Statutory Reports/Training
-   Route::namespace('admin\statutory_reports\training')->name('training.')->prefix('statutory-reports/training')->group(function () {
-    Route::get('/trainer', 'Trainer@trainer')->name('trainer');
-    Route::get('/training-list', 'TrainingList@training_list')->name('training-list');
-});
+    //Statutory Reports/Training
+    Route::namespace('admin\statutory_reports\training')->name('training.')->prefix('statutory-reports/training')->group(function () {
+        Route::get('/trainer', 'Trainer@trainer')->name('trainer');
+        Route::get('/training-list', 'TrainingList@training_list')->name('training-list');
+    });
 
-//Admin Reports
-Route::namespace('admin\admin_reports')->name('admin-reports.')->prefix('admin-reports/')->group(function () {
-    Route::get('/expence-report', 'ExpenceReport@expence_report')->name('expence-report');
-    Route::get('/job-post', 'JobPost@job_post')->name('job-post');
-});
+    //Admin Reports
+    Route::namespace('admin\admin_reports')->name('admin-reports.')->prefix('admin-reports/')->group(function () {
+        Route::get('/expence-report', 'ExpenceReport@expence_report')->name('expence-report');
+        Route::get('/job-post', 'JobPost@job_post')->name('job-post');
+    });
 
-      //admin\general_master
-      Route::namespace('admin\general_master')->name('general-master.')->prefix('general-master')->group(function () {
+    //admin\general_master
+    Route::namespace('admin\general_master')->name('general-master.')->prefix('general-master')->group(function () {
         Route::get('/award', 'Award@award')->name('award');
         Route::post('/store-award', 'Award@store_award')->name('store-award');
+        Route::post('/update-award', 'Award@update_award')->name('update-award');
+        Route::get('/edit-award', 'Award@edit_award')->name('edit-award');
         Route::get('/delete-award-record', 'Award@delete_award_record')->name('delete-award-record');
         Route::get('/get-award-record', 'Award@get_award_record')->name('get-award-record');
-        
     });
 
-     //UserManagement
-     Route::namespace('admin\user_management')->name('user_management.')->prefix('user-management')->group(function () {
+    //UserManagement
+    Route::namespace('admin\user_management')->name('user_management.')->prefix('user-management')->group(function () {
         Route::get('/user-management', 'UserManagement@user_management')->name('user-management');
     });
-    
+
     //ajax call to get data
     Route::get('/get_department_by_company', 'DepartmentController@get_department_by_company')->name('get_department_by_company');
     Route::get('/get_location_by_company', 'LocationController@get_location_by_company')->name('get_location_by_company');
     Route::get('/get_employee_by_company', 'EmployeeController@get_employee_by_company')->name('get_employee_by_company');
+    Route::get('/get_department_location_by_company', 'admin\master\admin_master\ExpenseCategory@get_department_location_by_company')->name('get_department_location_by_company');
+});
 
 
-
-
-
+Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    return redirect()->back();
+    //return "All cache cleared!";
 });
