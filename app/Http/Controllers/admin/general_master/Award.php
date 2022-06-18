@@ -32,11 +32,34 @@ class Award extends Controller
         ]);
         return back()->with('success', 'Record added successfully.');
     }
+    public function update_award(Request $request)
+    {
+        // dd($request->all());
+        AwardModel::where('id',$request->id)->update([
+            'company_id' => $request->company_id,
+            'employee_id' => $request->employee_id,
+            'department_id' => $request->department_id,
+            'award_type' => $request->award_type,
+            'gift' => $request->gift,
+            'cash' => $request->cash,
+            'description' => $request->description,
+            'start_date' => date('Y-m-d', strtotime($request->start_date))
+        ]);
+        return back()->with('success', 'Record updated successfully.');
+    }
 
     public function delete_award_record(Request $request)
     {
         AwardModel::where('id', $request->id)->delete();
         return response()->json(1);
+    }
+    public function edit_award(Request $request)
+    {
+        $data = DB::table('awards')
+        ->where('awards.id',$request->id)
+        ->first();
+        return response()->json($data);
+
     }
 
     public function get_award_record()
@@ -78,8 +101,8 @@ class Award extends Controller
                 return $data->start_date;
             })
             ->addColumn('action', function ($data) {
-                return '<a class="Edit" id="'.$data->id.'" data-toggle="modal" data-placement="top"
-            title="Edit" ><svg
+                return '<a class="edit" id="'.$data->id.'" data-toggle="modal" data-placement="top"
+                title="Edit" data-toggle="modal" data-target=".add-edit_modal"><svg
                 xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round"

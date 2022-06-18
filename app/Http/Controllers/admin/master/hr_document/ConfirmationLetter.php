@@ -42,14 +42,44 @@ class ConfirmationLetter extends Controller
         return response()->json(1);
     }
 
+    public function edit_confirmation_letter(Request $request)
+    {
+        $data = DB::table('confirmation_letter')
+             ->where('confirmation_letter.id', $request->id)
+            ->first();
+        return response()->json($data);
+    }
+
+    public function update_confirmation_letter(Request $request)
+    {
+        if ($request->hasFile('upload_file')) {
+            $image = $request->file('upload_file');
+            $file_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/confirmation_letter'), $file_name);
+        } else {
+            $file_name = $request->old_file;
+        }
+        ConfirmationLetterModel::where('id', $request->id)->update([
+            'company_id' => $request->company_id,
+            'location_id' => $request->location_id,
+            'project_id' => $request->project_id,
+            'document' => $request->document,
+            'employee_status' => $request->employee_status,
+            'file' => $file_name,
+        ]);
+
+        return back()->with('success', 'Record updated successfully.');
+    }
+
     public function get_confirmation_letter_record(){
         $data=DB::table('confirmation_letter')
         ->join('companies','companies.id','=','confirmation_letter.company_id')
         ->join('locations','locations.id','=','confirmation_letter.location_id')
         ->join('projects','projects.id','=','confirmation_letter.project_id')
-        ->select('confirmation_letter.*','locations.location_name','companies.company_name','projects.project')
+        ->select('confirmation_letter.*','companies.company_name','locations.location_name','projects.project')
         ->orderby('confirmation_letter.id','desc')
         ->get();
+       
        
         return DataTables::of($data)
          ->addIndexColumn()
@@ -75,8 +105,8 @@ class ConfirmationLetter extends Controller
         })
        
         ->addColumn('action', function ($data) {
-            return '<a class="Edit" id="'.$data->id.'" data-toggle="modal" data-placement="top"
-        title="Edit" ><svg
+            return '<a class="edit" id="'.$data->id.'" data-toggle="modal" data-placement="top"
+            title="Edit" data-toggle="modal" data-target=".add-edit_modal"><svg
             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round"

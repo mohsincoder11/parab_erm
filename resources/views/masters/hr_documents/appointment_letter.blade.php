@@ -11,13 +11,13 @@
                 <div>
                     <div>
                         <button type="button" class="btn btn-info mb-2 mr-2" data-toggle="modal"
-                            data-target=".bd-example-modal-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                        data-target=".add-edit_modal"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>Add Appointment Letter</button>
 
 
-                        <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal"
+                        {{-- <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal"
                             data-target="#exampleModalRemoveAnimation"><svg xmlns="http://www.w3.org/2000/svg"
                                 class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd"
@@ -25,16 +25,16 @@
                                     clip-rule="evenodd" />
                             </svg>
                             Bulk Delete
-                        </button>
+                        </button> --}}
 
                     </div>
                     <!-- Model Start -->
-                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal fade add-edit_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                        aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="myLargeModalLabel">Add Offer Letter</h5>
+                                    <h5 class="modal-title" id="myLargeModalLabel">Add Appointment Letter</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -46,11 +46,11 @@
                                 </div>
 
 
-                                <form action="{{ route('hr_document.store-appointment-letter') }}" enctype="multipart/form-data"
-                                    id="appointment_letter_form" method="post">
+                                <form enctype="multipart/form-data" id="appointment_letter_form" method="post">
                                     @csrf
                                     <div class="row" style="padding: 10px;">
-
+                                        <input type="hidden" id="old_file" name="old_file">
+                                        <input type="hidden" id="id" name="id">
 
                                         <div class="col-md-6 form-group">
                                             <label>Choose File* </label>
@@ -86,7 +86,6 @@
                                                     <option value="{{ $company->id }}">{{ $company->company_name }}
                                                     </option>
                                                 @endforeach
-
                                             </select>
                                         </div>
 
@@ -135,7 +134,8 @@
                                         <div class="form-group" align="center"
                                             style="margin-top: 5%;  margin-left: 45%;">
 
-                                            <button type="submit" class="btn btn-warning">Add</button>
+                                            <button formaction="{{ route('hr_document.store-appointment-letter') }}"
+                                                type="submit" id="add-edit-btn" class="btn btn-warning">Add</button>
                                         </div>
 
                                     </div>
@@ -144,130 +144,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- model end -->
-
-
-                <!--edit Model Start -->
-                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                    id="editmodel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="myLargeModalLabel">Edit</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                    </svg>
-                                </button>
-                            </div>
-
-
-                            <div class="row" style="padding: 10px;">
-
-                                <div class="col-md-6 form-group">
-                                    <label>Choose File* </label>
-                                    <input type="file" name="company_logo" id="company_logo" class="form-control"
-                                        placeholder=Optional>
-                                    <span id="store_logo"></span>
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <label>Employee Status*</label>
-                                    <select name="location_head" id="location_head" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins" title='Select Employee...'>
-                                        <option value="" disabled selected> Select Status</option>
-
-                                        <option value="361">nhjbascn</option>
-                                        <option value="361">vugasjb</option>
-                                        <option value="361">bnbsah</option>
-
-
-                                    </select>
-                                </div>
-
-
-                                <div class="col-md-6 form-group">
-                                    <label>Company *</label>
-                                    <select name="company_type" id="company_type" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Company Type...'>
-                                        <option value="" disabled selected>Company Type</option>
-                                        <option value="corporation">Corporation</option>
-                                        <option value="exempt organization">Exempt Organization</option>
-                                        <option value="partnership">Partnership</option>
-                                        <option value="private foundation">Private Foundation</option>
-                                        <option value="limited liability company">Limited Liability Company
-                                        </option>
-
-                                    </select>
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <label>Location*</label>
-                                    <select name="location_head" id="location_head" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins" title='Select Employee...'>
-                                        <option value="361">1</option>
-                                        <option value="361">2</option>
-                                        <option value="361">3</option>
-
-
-                                    </select>
-                                </div>
-
-
-
-                                <div class="col-md-6 form-group">
-                                    <label>Project *</label>
-                                    <select name="company_type" id="company_type" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Company Type...'>
-                                        <option value="" disabled selected>Select Project</option>
-                                        <option value="corporation">jhbdehsd</option>
-                                        <option value="exempt organization">hszdjbsd</option>
-                                        <option value="partnership">hjbzsduygajs</option>
-                                        <option value="private foundation">Pbxdghb</option>
-
-
-                                    </select>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Select Document *</label>
-                                    <select name="company_type" id="company_type" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Company Type...'>
-                                        <option value="" disabled selected>Select Document </option>
-                                        <option value="corporation">Adhar card</option>
-                                        <option value="exempt organization">Pan card</option>
-                                        <option value="partnership">Domecial</option>
-                                        <option value="exempt organization">Leaving Certificate </option>
-
-                                        </option>
-
-                                    </select>
-                                </div>
-
-
-
-
-
-                                <div class="form-group" align="center" style="margin-top: 5%;  margin-left: 45%;">
-
-                                    <input type="submit" class="btn btn-warning" value=Edit />
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <!-- model end -->
-
+                    <!-- model end -->
 
 
             <!--bulk delete Model Start -->
@@ -329,11 +206,11 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
+</div>
+</div>
 @stop
 
 
@@ -419,6 +296,50 @@
                 }
             });
 
+            $(document).on('click', '.edit', function() {
+                let id = $(this).attr('id');
+                $.ajax({
+                    url: "{{ route('hr_document.edit-appointment-letter') }}",
+                    method: "GET",
+                    dataType: 'json',
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        $("#upload_file").addClass('ignore');
+                        $("#store_logo").text(result.file);
+                        $("#id").val(result.id);
+                        $("#old_file").val(result.file);
+                        $("#employee_status").val(result.employee_status);
+                        $("#company_id").val(result.company_id);
+                        $("#company_id").change();
+                        setTimeout(function() {
+                            $("#location_id").val(result.location_id);
+                        }, 1500);
+                        $("#project_id").val(result.project_id);
+                        $("#document").val(result.document);
+                        $("#myLargeModalLabel").text("Edit Appointment Letter")
+                        $("#add-edit-btn").text("Update");
+                        let formaction = '{{ route('hr_document.update-appointment-letter') }}';
+                        $("#add-edit-btn").attr("formaction", formaction);
+
+                    }
+
+                })
+            })
+
+            $('.add-edit_modal').on('hidden.bs.modal', function() {
+                $("#myLargeModalLabel").text("Add Appointment Letter");
+                $("#add-edit-btn").text("Add");
+                $('#appointment_letter_form').trigger("reset");
+                $("#store_logo").text('');
+                let formaction = '{{ route('hr_document.store-appointment-letter') }}';
+                $("#add-edit-btn").attr("formaction", formaction);
+                $("#upload_file").removeClass('ignore');
+
+            });
+
+
             $(document).on('click', '.delete', function() {
                 let id=$(this).attr('id');
                 swal({
@@ -451,6 +372,8 @@
                 }
                 })
             })
+
+
             var table = $('.datatable_server').DataTable({
                 dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
                 buttons: {

@@ -15,9 +15,9 @@ class Complaint extends Controller
     public function complaint()
     {
         $company = get_company_name_and_id();
-
         return view('masters.hr_documents.complaint', compact('company'));
     }
+    
     public function store_complaint(Request $request)
     {
         EmployeeComplaintModel::create([
@@ -29,11 +29,33 @@ class Complaint extends Controller
             'description' => $request->description,
         ]);
         return back()->with('success', 'Record added successfully.');
-    }
+    }   
+
     public function delete_complaint(Request $request)
     {
         EmployeeComplaintModel::where('id', $request->id)->delete();
         return response()->json(1);
+    }
+
+    public function update_complaint(Request $request)
+    {
+        EmployeeComplaintModel::where('id', $request->id)->update([
+            'company_id' => $request->company_id,
+            'complaint_from' => $request->complaint_from,
+            'complaint_of' => $request->complaint_of,
+            'complaint_title' => $request->complaint_title,
+            'complaint_date' => date('Y-m-d', strtotime($request->complaint_date)),
+            'description' => $request->description,
+        ]);
+        return back()->with('success', 'Record updated successfully.');
+    }
+
+    public function edit_complaint(Request $request)
+    {
+        $data = DB::table('employee_complaint')
+          ->where('employee_complaint.id',$request->id)
+        ->first();
+    return response()->json($data);
     }
 
     public function get_complaint_record()
@@ -69,8 +91,8 @@ class Complaint extends Controller
             })
 
             ->addColumn('action', function ($data) {
-                return '<a class="Edit" id="' . $data->id . '" data-toggle="modal" data-placement="top"
-        title="Edit" ><svg
+                return '<a class="edit" id="' . $data->id . '" data-toggle="modal" data-placement="top"
+                title="Edit" data-toggle="modal" data-target=".add-edit_modal"><svg
             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round"

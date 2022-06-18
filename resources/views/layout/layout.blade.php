@@ -400,34 +400,47 @@
                             </li>
                         </ul>
                     </li>
+                   
                     <li>
-                        <a href="#pages-error6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            Employee Masters <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg> </a>
-                        <ul class="collapse list-unstyled sub-submenu" id="pages-error6" data-parent="#pages">
+                        <a href="#pages-error6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">  Employee Masters <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg> </a>
+                        <ul class="collapse list-unstyled sub-submenu" id="pages-error6" data-parent="#pages"> 
                             <li>
-                                <a href="#">Masters </a>
+                                <a href="#">Personal Details </a>
+                            </li>
+                            <li>
+                                <a href="{{route('employees_masters.official-details')}}">Official Details </a>
                             </li>
 
                             <li>
-                                <a href="#">Other Masters </a>
+                                <a href="#"> Statutory Details </a>
+                            </li>
+
+                            <li>
+                                <a href="#"> Qualification Details </a>
+                            </li>
+
+                            <li>
+                                <a href="#"> Salary Details </a>
                             </li>
                             <li>
-                                <a href="#"> Statutory </a>
+                                <a href="{{route('employees_masters.master')}}">Masters </a>
                             </li>
+                            
+                             <li>
+                                <a href="{{route('employees_masters.other-master')}}">Other Masters </a>
+                            </li>
+                            
+                           
                             <li>
                                 <a href="#"> Asset/ Perk Details </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="#"> Payslip Master </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
 
-                    <li>
+                    {{-- <li>
                         <a href="#pages-error7" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             Admin Masters <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -451,7 +464,9 @@
                             </li>
 
                         </ul>
-                    </li>
+                    </li> --}}
+
+                    
                     <li>
                         <a href="#pages-error8" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             Asset Masters <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
