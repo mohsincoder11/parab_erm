@@ -439,6 +439,18 @@
                             </li> -->
                         </ul>
                     </li>
+                    <li>
+                        <a href="#pages-error44" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">  Bank Masters <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg> </a>
+                        <ul class="collapse list-unstyled sub-submenu" id="pages-error44" data-parent="#pages"> 
+                            <li>
+                                <a href="{{route('banks_masters.employer-bank')}}"> Employer Bank </a>
+                            </li>
+                            <li>
+                               <a href="{{route('banks_masters.salary_bank')}}"> Salary Bank </a>
+                            </li>
+                           
+                        </ul>
+                    </li>
 
                     {{-- <li>
                         <a href="#pages-error7" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -475,9 +487,9 @@
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg> </a>
                         <ul class="collapse list-unstyled sub-submenu" id="pages-error8" data-parent="#pages">
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('assets_masters.assets') }}">Assets </a>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="{{ route('assets_masters.category') }}">Category</a>
@@ -486,7 +498,7 @@
                                 <a href="#">Perk List</a>
                             </li>
                             <li>
-                                <a href="{{ route('assets_masters.assets-category') }}">Assets Category</a>
+                                <a href="{{ route('assets_masters.assets') }}">Assets Category</a>
                             </li>
                             <li>
                                 <a href="{{ route('assets_masters.company-assets') }}"> Comapny Assets </a>
@@ -509,20 +521,20 @@
                             </svg> </a>
                         <ul class="collapse list-unstyled sub-submenu" id="pages-error18" data-parent="#pages">
                             <li>
-                                <a href="#">Employee PF </a>
+                                <a href="{{route('statutory_masters.employee-pf')}}">Employee PF </a>
                             </li>
 
                             <li>
-                                <a href="#">Profession Tax</a>
+                                 <a href="{{route('statutory_masters.profession-tax')}}">Profession Tax</a>
                             </li>
                             <li>
-                                <a href="#"> ESIC </a>
+                                 <a href="{{route('statutory_masters.esic')}}"> ESIC </a>
                             </li>
                             <li>
-                                <a href="#"> Income Tax </a>
+                                 <a href="{{route('statutory_masters.income-tax')}}"> Income Tax </a>
                             </li>
                             <li>
-                                <a href="#">Gratuity</a>
+                                 <a href="{{route('statutory_masters.gratuity')}}">Gratuity</a>
                             </li>
 
                         </ul>

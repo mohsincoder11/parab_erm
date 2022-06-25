@@ -192,8 +192,14 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     //master/assets_masters
     Route::namespace("admin\master\asset_master")->name('assets_masters.')->prefix('masters/assets-masters')->group(function () {
-        Route::get('/assets-category', 'AssetsCategory@assets_category')->name('assets-category');
         Route::get('/assets', 'Assets@assets')->name('assets');
+        Route::post('/store-assets', 'Assets@store_assets')->name('store-assets');
+        Route::post('/update-assets', 'Assets@update_assets')->name('update-assets');
+        Route::get('/edit-assets', 'Assets@edit_assets')->name('edit-assets');
+        Route::get('/delete-assets', 'Assets@delete_assets')->name('delete-assets');
+        Route::get('/get-assets', 'Assets@get_assets')->name('get-assets');
+
+    
 
         Route::get('/category', 'Category@category')->name('category');
         Route::post('/store-category', 'Category@store_category')->name('store-category');
@@ -206,6 +212,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::post('/update-company-assets', 'CompanyAssets@update_company_assets')->name('update-company-assets');
         Route::get('/edit-company-assets', 'CompanyAssets@edit_company_assets')->name('edit-company-assets');
         Route::get('/delete-company-assets', 'CompanyAssets@delete_company_assets')->name('delete-company-assets');
+        Route::get('/get-company-assets', 'CompanyAssets@get_company_assets')->name('get-company-assets');
     });
 
     //master/employee-master
@@ -310,16 +317,61 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     //master/bank master
     Route::namespace('admin\master\bank_master')->name('banks_masters.')->prefix('masters/bank-masters')->group(function () {
         Route::get('/employer-bank', 'EmployerBank@employer_bank')->name('employer-bank');
-        Route::get('/salary-bank', 'SalaryBank@salary_bank')->name('salary-bank');
+        Route::post('/store-employer-bank', 'EmployerBank@store_employer_bank')->name('store-employer_bank');
+        Route::post('/update-employer-bank', 'EmployerBank@update_employer_bank')->name('update-employer_bank');
+        Route::get('/delete-employer-bank', 'EmployerBank@delete_employer_bank')->name('delete-employer_bank');
+        Route::get('/edit-employer-bank', 'EmployerBank@edit_employer_bank')->name('edit-employer_bank');
+        Route::get('/get-employer-bank', 'EmployerBank@get_employer_bank')->name('get-employer_bank');
+
+        Route::get('/salary-bank', 'SalaryBank@salary_bank')->name('salary_bank');
+        Route::post('/store-salary-bank', 'SalaryBank@store_salary_bank')->name('store-salary_bank');
+        Route::post('/update-salary-bank', 'SalaryBank@update_salary_bank')->name('update-salary_bank');
+        Route::get('/delete-salary-bank', 'SalaryBank@delete_salary_bank')->name('delete-salary_bank');
+        Route::get('/edit-salary-bank', 'SalaryBank@edit_salary_bank')->name('edit-salary_bank');
+        Route::get('/get-salary-bank', 'SalaryBank@get_salary_bank')->name('get-salary_bank');
+
     });
 
     //master/statutory_master
     Route::namespace('admin\master\statutory_master')->name('statutory_masters.')->prefix('masters/statutory-masters')->group(function () {
-        Route::get('/employee-pf-master', 'EmployeePF@employee_pf_master')->name('employee-pf-master');
-        Route::get('/ESIC-master', 'ESICMaster@esic_master')->name('ESIC-master');
+        Route::get('/employee-pf', 'EmployeePF@employee_pf')->name('employee-pf');
+        Route::post('/store-employee-pf', 'EmployeePF@store_employee_pf')->name('store-employee-pf');
+        Route::post('/update-employee-pf', 'EmployeePF@update_employee_pf')->name('update-employee-pf');
+        Route::get('/delete-employee-pf', 'EmployeePF@delete_employee_pf')->name('delete-employee-pf');
+        Route::get('/edit-employee-pf', 'EmployeePF@edit_employee_pf')->name('edit-employee-pf');
+        Route::get('/get-employee-pf', 'EmployeePF@get_employee_pf')->name('get-employee-pf');
+
+
+        Route::get('/esic', 'ESICMaster@esic')->name('esic');
+        Route::post('/store-employee-esic', 'ESICMaster@store_employee_esic')->name('store-employee-esic');
+        Route::post('/update-employee-esic', 'ESICMaster@update_employee_esic')->name('update-employee-esic');
+        Route::get('/delete-employee-esic', 'ESICMaster@delete_employee_esic')->name('delete-employee-esic');
+        Route::get('/edit-employee-esic', 'ESICMaster@edit_employee_esic')->name('edit-employee-esic');
+        Route::get('/get-employee-esic', 'ESICMaster@get_employee_esic')->name('get-employee-esic');
+
+
+
         Route::get('/gratuity', 'Gratuity@gratuity')->name('gratuity');
-        Route::get('/income-tax-master', 'IncomeTaxMaster@income_tax_master')->name('income-tax-master');
-        Route::get('/profession-tax-master', 'ProfessionTaxMaster@profession_tax_master')->name('profession-tax-master');
+        Route::post('/store-gratuity', 'Gratuity@store_gratuity')->name('store-gratuity');
+        Route::post('/update-gratuity', 'Gratuity@update_gratuity')->name('update-gratuity');
+        Route::get('/delete-gratuity', 'Gratuity@delete_gratuity')->name('delete-gratuity');
+        Route::get('/edit-gratuity', 'Gratuity@edit_gratuity')->name('edit-gratuity');
+        Route::get('/get-gratuity', 'Gratuity@get_gratuity')->name('get-gratuity');
+
+        Route::get('/income-tax', 'IncomeTaxMaster@income_tax')->name('income-tax');
+        Route::post('/store-income-tax', 'IncomeTaxMaster@store_income_tax')->name('store-income-tax');
+        Route::post('/update-income-tax', 'IncomeTaxMaster@update_income_tax')->name('update-income-tax');
+        Route::get('/delete-income-tax', 'IncomeTaxMaster@delete_income_tax')->name('delete-income-tax');
+        Route::get('/edit-income-tax', 'IncomeTaxMaster@edit_income_tax')->name('edit-income-tax');
+        Route::get('/get-income-tax', 'IncomeTaxMaster@get_income_tax')->name('get-income-tax');
+
+        Route::get('/profession-tax', 'ProfessionTaxMaster@profession_tax')->name('profession-tax');
+        Route::post('/store-profession-tax', 'ProfessionTaxMaster@store_profession_tax')->name('store-profession-tax');
+        Route::post('/update-profession-tax', 'ProfessionTaxMaster@update_profession_tax')->name('update-profession-tax');
+        Route::get('/delete-profession-tax', 'ProfessionTaxMaster@delete_profession_tax')->name('delete-profession-tax');
+        Route::get('/edit-profession-tax', 'ProfessionTaxMaster@edit_profession_tax')->name('edit-profession-tax');
+        Route::get('/get-profession-tax', 'ProfessionTaxMaster@get_profession_tax')->name('get-profession-tax');
+
     });
 
     //Statutory Reports/Event-Meeting

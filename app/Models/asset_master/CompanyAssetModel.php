@@ -11,7 +11,7 @@ class CompanyAssetModel extends Model
         'asset_name',
         'company_id',
         'asset_category_id',
-        'asset_sr_no'
+        'asset_serial_no'
     ];
 
 }

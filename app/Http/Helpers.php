@@ -15,6 +15,8 @@ use App\Location;
 use App\Designation;
 use App\Grade;
 use App\Models\employee_master\master\EmployeeStatusModel;
+use App\Models\bank_master\Bank;
+use App\Models\asset_master\AssetCategoryModel;
 
 
 
@@ -632,4 +634,22 @@ if (! function_exists('get_employee_status')) {
         return $employee_data;
     }
 }
+
+if (! function_exists('get_banks')) {  
+    function get_banks()
+    {
+        $bank=Bank::select('bank_name','id')->orderby('id','desc')->get();       
+        return $bank;
+    }
+}
+
+if (! function_exists('get_asset_category')) {  
+    function get_asset_category()
+    {
+        $asset_category=AssetCategoryModel::select('category_name','id')->orderby('id','desc')->get();       
+        return $asset_category;
+    }
+}
+
+
 

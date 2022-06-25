@@ -1,11 +1,10 @@
 @extends('layout/layout')
 @section('content')
-
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
 
 
-            <div style="margin-top: 3%; ">
+            <div style="margin-top: 3%;">
                 @include('layout.alerts')
 
                 <div>
@@ -14,23 +13,27 @@
                             data-target=".add-edit_modal"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                            </svg>Add Company Assets</button>
+                            </svg>Add Income Tax</button>
 
 
-                        {{-- <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal" data-target="#exampleModalRemoveAnimation"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
-                                      </svg>
-                                        Bulk Delete
-                                    </button> --}}
+                        {{-- <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal"
+                                data-target="#exampleModalRemoveAnimation"><svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Bulk Delete
+                            </button> --}}
 
                     </div>
                     <!-- Model Start -->
-                    <div class="modal fade add-edit_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                        aria-hidden="true">
+                    <div class="modal fade add-edit_modal" tabindex="-1" role="dialog"
+                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="myLargeModalLabel">Add Company Assets</h5>
+                                    <h5 class="modal-title" id="myLargeModalLabel">Add New income Tax</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -41,67 +44,35 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <form method="post" id="company_asset_form" enctype="multipart/form-data">
+
+                                <form method="post" id="income_tax_form" enctype="multipart/form-data">
 
                                     @csrf
 
-                                    <input type="hidden" name="id" id="company_assets_id">
+                                    <input type="hidden" name="id" id="income_tax_id">
+                                    <input type="hidden" name="old_file1" id="old_file1">
+                                    
 
                                     <div class="row" style="padding: 10px;">
 
                                         <div class="col-md-6 form-group">
-                                            <label>Assets Name*</label>
-                                            <input type="text" name="asset_name" id="asset_name" required
-                                                class="form-control" placeholder="Assets Name">
-                                        </div>
-
-                                        @php
-                                            $asset_category = get_asset_category();
-                                            $company = get_company_name_and_id();
-                                        @endphp
-
-                                        <div class="col-md-6 form-group">
-                                            <label>Category Name*</label>
-                                            <select name="asset_category_id" id="asset_category_id" class="form-control selectpicker"
-                                                data-live-search="true" data-live-search-style="begins"
-                                                title='Select Category'>
-                                                <option value="" disabled selected>Category</option>
-                                            
-                                            @foreach ($asset_category as $c)
-                                                <option value="{{ $c->id }}">{{ $c->category_name }}</option>
-                                            @endforeach
-                                            </select>
+                                            <label>Modify Income Tax Master</label>
+                                            <input type="file" class="form-control" name="income_tax_file" id="income_tax_file">
+                                            <span id="store_logo1"></span>
                                         </div>
 
                                         <div class="col-md-6 form-group">
-                                            <label>Company *</label>
-                                            <select name="company_id" id="company_id" class="form-control selectpicker"
-                                                data-live-search="true" data-live-search-style="begins"
-                                                title='Select Company Type...'>
-                                                <option value="" disabled selected>Company Type</option>
-                                                @foreach ($company as $companee)
-                                                    <option value="{{ $companee->id }}">{{ $companee->company_name }}
-                                                    </option>
-                                                @endforeach
-
-                                            </select>
-                                        </div>
-
-
-
-
-                                        <div class="col-md-6 form-group">
-                                            <label> Asset Sr No*</label>
-                                            <input type="text" name="asset_serial_no" id="asset_serial_no" required
+                                            <label>Chart A</label>
+                                            <input type="text" name="chartA" id="chartA" required
                                                 class="form-control" placeholder="">
                                         </div>
 
-
-                                        <div class="form-group" align="center" style="margin-top: 5%; margin-left: 45%;">
-
-                                            <button formaction="{{ route('assets_masters.store-company-assets') }}"
-                                                type="submit" id="add-edit-btn" class="btn btn-warning">Add</button>
+                                        <div class="form-group" align="center" style="margin-top: 5%; padding-left:45%;">
+                                            <button formaction="{{ route('statutory_masters.store-income-tax') }}" type="submit"
+                                            id="add-edit-btn" class="btn btn-warning">Add</button>
+                                          
                                         </div>
+                                       
 
                                     </div>
                                 </form>
@@ -113,8 +84,7 @@
                 <!-- model end -->
 
 
-              
-
+            
 
 
                 <!--bulk delete Model Start -->
@@ -126,9 +96,9 @@
                                 <div class="modal-content">
                                     <div class="modal-header" id="exampleModalPopoversLabel">
                                         <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                </button>
-                                              </div> -->
+                                                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                        </button>
+                                                      </div> -->
                                         <div class="modal-body">
                                             <p class="modal-text">Parberp.com says<br>
                                                 Please select atleast one Checkbox
@@ -146,21 +116,48 @@
                 </div>
                 <!-- model end -->
 
+                <!--view Model Start -->
+                <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+                    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="myExtraLargeModalLabel">Promotion Info.</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-x">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
 
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>
+                                    Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- model end -->
                 <div class="row" id="cancel-row">
 
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-6">
                             <div class="table-responsive mb-4 mt-4">
-                                <table class="table table-hover non-hover datatable_server" style="width:100%">
+                                <table  class="table table-hover non-hover datatable_server" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Sr.No.</th>
-                                            <th>Assets Name</th>
-                                            <th>Category Name</th>
-                                            <th> Select Company</th>
-                                            <th>Assets No.</th>
+                                            <th>Income Tax</th>
+
+                                            <th>Chart</th>
+
                                             <th>Action</th>
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -183,46 +180,32 @@
 @stop
 
 
-
 @section('js')
     <script>
         $(document).ready(function() {
 
 
-            $('#company_asset_form').validate({
+            $('#income_tax_form').validate({
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
-                    asset_name: {
+                    income_tax_file: {
                         required: true,
                     },
-                    asset_category_id: {
+                    chartA: {
                         required: true,
                     },
-                    company_id: {
-                        required: true,
-                    },
-                    asset_serial_no: {
-                        required: true,
-                    },
-
-
-
+                   
+                    
                 },
                 messages: {
-                    asset_name: {
+                    income_tax_file: {
                         required: "This field is required.",
                     },
-                    asset_category_id: {
-                        required: "Please select asset category.",
+                    chartA: {
+                        required: "This field is required.",
                     },
-                    company_id: {
-                        required: "Please select company.",
-                    },
-                    asset_serial_no: {
-                        required: 'This field is required.',
-                    },
-
+                   
 
                 },
                 errorElement: 'label',
@@ -239,21 +222,24 @@
             $(document).on('click', '.edit', function() {
                 let id = $(this).attr('id');
                 $.ajax({
-                    url: "{{ route('assets_masters.edit-company-assets') }}",
+                    url: "{{ route('statutory_masters.edit-income-tax') }}",
                     method: "GET",
                     dataType: 'json',
                     data: {
                         id: id,
                     },
                     success: function(result) {
-                        $("#company_assets_id").val(result.id);
-                        $("#asset_name").val(result.asset_name);
-                        $("#asset_category_id").val(result.asset_category_id);
-                        $("#company_id").val(result.company_id);
-                        $("#asset_serial_no").val(result.asset_serial_no);
-                           $("#myLargeModalLabel").text("Edit Company Asset Detail")
+                        $("#income_tax_file").addClass('ignore');
+                        $("#income_tax_id").val(result.id);
+                        $("#chartA").val(result.chartA);
+
+                        $("#store_logo1").text(result.income_tax_file);
+                        $("#old_file1").val(result.income_tax_file);
+
+
+                          $("#myLargeModalLabel").text("Edit income Tax Detail")
                         $("#add-edit-btn").text("Update");
-                        let formaction = '{{ route('assets_masters.update-company-assets') }}';
+                        let formaction = '{{ route('statutory_masters.update-income-tax') }}';
                         $("#add-edit-btn").attr("formaction", formaction);
 
                     }
@@ -262,10 +248,12 @@
             })
 
             $('.add-edit_modal').on('hidden.bs.modal', function() {
-                $("#myLargeModalLabel").text("Add Company Asset");
+                $("#myLargeModalLabel").text("Add income Tax Detail");
+                $("#store_logo").text('');
+
                 $("#add-edit-btn").text("Add");
-                $('#company_asset_form').trigger("reset");
-                let formaction = '{{ route('assets_masters.store-company-assets') }}';
+                $('#income_tax_form').trigger("reset");
+                let formaction = '{{ route('statutory_masters.store-income-tax') }}';
                 $("#add-edit-btn").attr("formaction", formaction);
                 $("#asset_image").removeClass('ignore');
 
@@ -285,7 +273,7 @@
                 }).then(function(result) {
                     if (result.value) {
                         $.ajax({
-                            url: "{{ route('assets_masters.delete-company-assets') }}",
+                            url: "{{ route('statutory_masters.delete-income-tax') }}",
                             method: "GET",
                             dataType: 'json',
                             data: {
@@ -353,7 +341,7 @@
                 },
 
                 "ajax": {
-                    url: "{{ route('assets_masters.get-company-assets') }}",
+                    url: "{{ route('statutory_masters.get-income-tax') }}",
                     type: "get",
                     data: function(d) {}
                 },
@@ -364,32 +352,19 @@
                         width: "5%"
                     },
                     {
-                        data: "asset_name",
+                        data: "income_tax_file",
                         orderable: true,
-                        name: "asset_name" /*,width:"20%"*/
+                        name: "income_tax_file" /*,width:"20%"*/
                     },
 
                     {
-                        data: "category_name",
+                        data: "chartA",
                         orderable: true,
-                        name: "category_name",
+                        name: "chartA",
                         width: "15%"
                     },
-                    {
-                        data: "company_name",
-                        orderable: true,
-                        name: "company_name",
-                        width: "15%"
-                    },
-                    {
-                        data: "asset_serial_no",
-                        orderable: true,
-                        name: "asset_serial_no" /*,width:"20%"*/ ,
-                        width: "25%"
-
-                    },
-
-
+                   
+                    
                     {
                         data: "action",
                         name: "action",
