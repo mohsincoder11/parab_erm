@@ -22,6 +22,7 @@ class OfficialDetails extends Controller
         $location = get_location_name_and_id();
         return view('masters.employee_masters.officialdetails', compact('employee_status', 'department', 'designation', 'grade', 'project', 'location'));
     }
+    
     public function store_official_details(Request $request)
     {
         OfficialDetailModel::create([

@@ -405,22 +405,22 @@
                         <a href="#pages-error6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">  Employee Masters <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg> </a>
                         <ul class="collapse list-unstyled sub-submenu" id="pages-error6" data-parent="#pages"> 
                             <li>
-                                <a href="#">Personal Details </a>
+                                <a href="{{route('employees_masters.personal-details')}}">Personal Details </a>
                             </li>
                             <li>
                                 <a href="{{route('employees_masters.official-details')}}">Official Details </a>
                             </li>
 
                             <li>
-                                <a href="#"> Statutory Details </a>
+                                <a href="{{route('employees_masters.statutory-details')}}"> Statutory Details </a>
                             </li>
 
                             <li>
-                                <a href="#"> Qualification Details </a>
+                                <a href="{{route('employees_masters.qualification-details')}}"> Qualification Details </a>
                             </li>
 
                             <li>
-                                <a href="#"> Salary Details </a>
+                                <a href="{{route('employees_masters.salary-details')}}"> Salary Details </a>
                             </li>
                             <li>
                                 <a href="{{route('employees_masters.master')}}">Masters </a>
@@ -432,7 +432,7 @@
                             
                            
                             <li>
-                                <a href="#"> Asset/ Perk Details </a>
+                                <a href="{{route('employees_masters.assetperk-details')}}"> Asset/ Perk Details </a>
                             </li>
                             <!-- <li>
                                 <a href="#"> Payslip Master </a>
