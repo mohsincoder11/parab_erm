@@ -224,6 +224,45 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/delete-official-details', 'OfficialDetails@delete_official_details')->name('delete-official-details');
         Route::get('/get-official-details', 'OfficialDetails@get_official_details')->name('get-official-details');
 
+        Route::get('/personal-details', 'PersonalDetail@personal_details')->name('personal-details');
+        Route::post('/store-personal-details', 'PersonalDetail@store_personal_details')->name('store-personal-details');
+        Route::get('/edit-personal-details', 'PersonalDetail@edit_personal_details')->name('edit-personal-details');
+        Route::post('/update-personal-details', 'PersonalDetail@update_personal_details')->name('update-personal-details');
+        Route::get('/delete-personal-details', 'PersonalDetail@delete_personal_details')->name('delete-personal-details');
+        Route::get('/get-personal-details', 'PersonalDetail@get_personal_details')->name('get-personal-details');
+
+        Route::get('/qualification-details', 'QualificationDetail@qualification_details')->name('qualification-details');
+        Route::post('/store-qualification-details', 'QualificationDetail@store_qualification_details')->name('store-qualification-details');
+        Route::get('/edit-qualification-details', 'QualificationDetail@edit_qualification_details')->name('edit-qualification-details');
+        Route::post('/update-qualification-details', 'QualificationDetail@update_qualification_details')->name('update-qualification-details');
+        Route::get('/delete-qualification-details', 'QualificationDetail@delete_qualification_details')->name('delete-qualification-details');
+        Route::get('/get-qualification-details', 'QualificationDetail@get_qualification_details')->name('get-qualification-details');
+
+
+        Route::get('/salary-details', 'salaryDetail@salary_details')->name('salary-details');
+        Route::post('/store-salary-details', 'salaryDetail@store_salary_details')->name('store-salary-details');
+        Route::get('/edit-salary-details', 'salaryDetail@edit_salary_details')->name('edit-salary-details');
+        Route::post('/update-salary-details', 'salaryDetail@update_salary_details')->name('update-salary-details');
+        Route::get('/delete-salary-details', 'salaryDetail@delete_salary_details')->name('delete-salary-details');
+        Route::get('/get-salary-details', 'salaryDetail@get_salary_details')->name('get-salary-details');
+
+
+        Route::get('/statutory-details', 'StatutoryDetail@statutory_details')->name('statutory-details');
+        Route::post('/store-statutory-details', 'StatutoryDetail@store_statutory_details')->name('store-statutory-details');
+        Route::get('/edit-statutory-details', 'StatutoryDetail@edit_statutory_details')->name('edit-statutory-details');
+        Route::post('/update-statutory-details', 'StatutoryDetail@update_statutory_details')->name('update-statutory-details');
+        Route::get('/delete-statutory-details', 'StatutoryDetail@delete_statutory_details')->name('delete-statutory-details');
+        Route::get('/get-statutory-details', 'StatutoryDetail@get_statutory_details')->name('get-statutory-details');
+
+
+        Route::get('/assetperk-details', 'AssetPerkDetail@assetperk_details')->name('assetperk-details');
+        Route::post('/store-assetperk-details', 'AssetPerkDetail@store_assetperk_details')->name('store-assetperk-details');
+        Route::get('/edit-assetperk-details', 'AssetPerkDetail@edit_assetperk_details')->name('edit-assetperk-details');
+        Route::post('/update-assetperk-details', 'AssetPerkDetail@update_assetperk_details')->name('update-assetperk-details');
+        Route::get('/delete-assetperk-details', 'AssetPerkDetail@delete_assetperk_details')->name('delete-assetperk-details');
+        Route::get('/get-assetperk-details', 'AssetPerkDetail@get_assetperk_details')->name('get-assetperk-details');
+
+
         Route::get('/master', 'Master@master')->name('master');
 
         //Leave Type Master

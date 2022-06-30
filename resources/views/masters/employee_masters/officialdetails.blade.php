@@ -382,7 +382,7 @@
                 },
                 messages: {
                     emp_code: {
-                        required: "Thsi field is required.",
+                        required: "This field is required.",
                     },
                     emp_status_id: {
                         required: "Please select employee status.",
