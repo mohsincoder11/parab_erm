@@ -14,18 +14,17 @@
                             data-target=".add-edit_modal"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                            </svg>Add Expenses Category </button>
-
+                            </svg>Add Vendor Details </button>
 
                         {{-- <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal"
-                            data-target="#exampleModalRemoveAnimation"><svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            Bulk Delete
-                        </button> --}}
+                                data-target="#exampleModalRemoveAnimation"><svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Bulk Delete
+                            </button> --}}
 
                     </div>
                     <!-- Model Start -->
@@ -34,7 +33,7 @@
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="myLargeModalLabel">Add Expenses Category </h5>
+                                    <h5 class="modal-title" id="myLargeModalLabel">Add Vendor Details</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -45,20 +44,16 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <form id="expense_category_form" method="post">
+
+                                <form id="vendor_details_form" method="post">
                                     @csrf
                                     <input type="hidden" id="id" name="id">
                                     <div class="row" style="padding: 10px;">
-
-
                                         <div class="col-md-6 form-group">
-                                            <label> Expenses Category Name</label>
-                                            <input type="text" name="category" id="category" class="form-control"
+                                            <label> Vendor Name</label>
+                                            <input type="text" name="vendor_name" id="vendor_name" class="form-control"
                                                 placeholder=Category Name>
                                         </div>
-
-
-
 
                                         <div class="col-md-6 form-group">
                                             <label>Company *</label>
@@ -97,9 +92,84 @@
                                             </select>
                                         </div>
 
-                                        <div class="form-group" align="center" style="margin-top: 5%;  margin-left: 45%;">
 
-                                            <button formaction="{{ route('admin_master.store-expenses-category') }}"
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Select Expenses Category*</label>
+                                            <select name="expense_category_id" id="expense_category_id"
+                                                class="form-control selectpicker" data-live-search="true"
+                                                data-live-search-style="begins" title='Select Company Type...'>
+                                                <option value="" disabled selected>Select Expenses Category </option>
+                                                @foreach ($expense_category as $expense_category)
+                                                    <option value="{{ $expense_category->id }}">
+                                                        {{ $expense_category->category }}
+                                                    </option>
+                                                @endforeach
+
+
+                                            </select>
+                                        </div>
+
+
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Select Vendor Category*</label>
+                                            <select name="vendor_category_id" id="vendor_category_id"
+                                                class="form-control selectpicker" data-live-search="true"
+                                                data-live-search-style="begins" title='Select Category...'>
+                                                <option value="" disabled selected>Select Vendor Category </option>
+                                                @foreach ($vendor_category as $vendor_category)
+                                                    <option value="{{ $vendor_category->id }}">
+                                                        {{ $vendor_category->vendor_category_name }}
+                                                    </option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Vendor Address</label>
+                                            <textarea name="address" id="address" class="form-control" placeholder=""></textarea>
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Vendor PAN </label>
+                                            <input type="text" name="pan" id="pan" class="form-control"
+                                                placeholder="">
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Vendor GSTN </label>
+                                            <input type="text" name="gst_no" id="gst_no" class="form-control"
+                                                placeholder="">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Vendor Contact No </label>
+                                            <input type="number" name="contact_no" id="contact_no" class="form-control"
+                                                placeholder="">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Contact Person </label>
+                                            <input type="text" name="contact_person" id="contact_person"
+                                                class="form-control" placeholder="">
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Unit Of Supply</label>
+                                            <input type="text" name="unit_of_supply" id="unit_of_supply"
+                                                class="form-control" placeholder="">
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Vendor Code </label>
+                                            <input type="text" name="vendor_code" id="vendor_code"
+                                                class="form-control" placeholder="">
+                                        </div>
+
+                                        <div class="form-group" align="center"
+                                            style="margin-top: 5%;  margin-left: 45%;">
+
+                                            <button formaction="{{ route('admin_master.store-vendor-details') }}"
                                                 type="submit" class="btn btn-warning" id="add-edit-btn">Add </button>
 
                                         </div>
@@ -115,129 +185,7 @@
 
 
                 <!--edit Model Start -->
-                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                    aria-labelledby="myLargeModalLabel" id="editmodel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="myLargeModalLabel">Edit</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-x">
-                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                    </svg>
-                                </button>
-                            </div>
 
-                            <div class="row" style="padding: 10px;">
-
-
-                                <div class="col-md-6 form-group">
-                                    <label>Category Name</label>
-                                    <input type="text" name="trading_name" id="trading_name" class="form-control"
-                                        placeholder=Category Name>
-                                </div>
-
-
-
-
-                                <div class="col-md-6 form-group">
-                                    <label>Company *</label>
-                                    <select name="company_type" id="company_type" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Company Type...'>
-                                        <option value="" disabled selected>Company Type</option>
-                                        <option value="corporation">Corporation</option>
-                                        <option value="exempt organization">Exempt Organization</option>
-                                        <option value="partnership">Partnership</option>
-                                        <option value="private foundation">Private Foundation</option>
-                                        <option value="limited liability company">Limited Liability Company
-                                        </option>
-
-                                    </select>
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <label>Location*</label>
-                                    <select name="location_head" id="location_head" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Employee...'>
-                                        <option value="361">1</option>
-                                        <option value="361">2</option>
-                                        <option value="361">3</option>
-
-
-                                    </select>
-                                </div>
-
-
-
-                                <div class="col-md-6 form-group">
-                                    <label>Project *</label>
-                                    <select name="company_type" id="company_type" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Company Type...'>
-                                        <option value="" disabled selected>Select Project</option>
-                                        <option value="corporation">jhbdehsd</option>
-                                        <option value="exempt organization">hszdjbsd</option>
-                                        <option value="partnership">hjbzsduygajs</option>
-                                        <option value="private foundation">Pbxdghb</option>
-
-
-                                    </select>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Select Department *</label>
-                                    <select name="company_type" id="company_type" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Company Type...'>
-                                        <option value="" disabled selected>Select Department </option>
-                                        <option value="corporation">1</option>
-                                        <option value="exempt organization">2</option>
-                                        <option value="partnership">3</option>
-                                        <option value="exempt organization">4 </option>
-
-                                        </option>
-
-                                    </select>
-                                </div>
-
-
-                                <div class="col-md-6 form-group">
-                                    <label>Select Expenses Category*</label>
-                                    <select name="company_type" id="company_type" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Company Type...'>
-                                        <option value="" disabled selected>Select Expenses Category </option>
-                                        <option value="corporation">1</option>
-                                        <option value="exempt organization">2</option>
-                                        <option value="partnership">3</option>
-                                        <option value="exempt organization">4 </option>
-
-                                        </option>
-
-                                    </select>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Unit Of Supply</label>
-                                    <input type="text" name="trading_name" id="trading_name" class="form-control"
-                                        placeholder="">
-                                </div>
-
-
-
-                                <div class="form-group" align="center" style="margin-top: 5%;  margin-left: 45%;">
-
-                                    <input type="submit" name="action_button" class="btn btn-warning" value=Edit />
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- model end -->
 
@@ -252,9 +200,9 @@
                             <div class="modal-content">
                                 <div class="modal-header" id="exampleModalPopoversLabel">
                                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                        </button>
-                                                      </div> -->
+                                                      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                    </button>
+                                                  </div> -->
                                     <div class="modal-body">
                                         <p class="modal-text">Parberp.com says<br>
                                             Please select atleast one Checkbox
@@ -278,20 +226,34 @@
                 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                     <div class="widget-content widget-content-area br-6">
                         <div class="table-responsive mb-4 mt-4">
-                            <table id="html5-extension" class="table table-hover non-hover datatable_server"
-                                style="width:100%">
+                            <table  class="table table-hover non-hover datatable_server" style="width:100%">
                                 <thead>
                                     <tr>
+                                    <tr>
                                         <th>Sr.no</th>
-                                        <th>Category</th>
+                                        <th>Vendor Name</th>
                                         <th>Company</th>
                                         <th>Location</th>
                                         <th>Department</th>
+                                        <th>Expences Category</th>
+                                        <th>Vendor Category</th>
+                                        <th>Address</th>
+                                        <th>PAN</th>
+                                        <th>GSTN</th>
+                                        <th>Contact Number</th>
+                                        <th>Contact Person</th>
+                                        <th>Unit of Supply</th>
+                                        <th>Vendor Code</th>
                                         <th>Action</th>
 
+                                    </tr>
 
+                                    </tr>
                                 </thead>
                                 <tbody>
+
+
+
 
                                 </tbody>
                             </table>
@@ -338,14 +300,14 @@
                 })
             })
 
-            $('#expense_category_form').validate({
+            $('#vendor_details_form').validate({
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
-                    company_id: {
+                    vendor_name: {
                         required: true,
                     },
-                    category: {
+                    company_id: {
                         required: true,
                     },
                     location_id: {
@@ -355,16 +317,51 @@
                     department_id: {
                         required: true,
                     },
+                    expense_category_id: {
+                        required: true,
+                        // notEqual:'complaint_from',
+                    },
+                    vendor_category_id: {
+                        required: true,
+                    },
+                    address: {
+                        required: true,
+                    },
+                    pan: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 10
+                    },
+                    gst_no: {
+                        required: true,
+                        minlength: 15,
+                        maxlength: 15
+                    },
+                    contact_no: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 10
+                    },
+                    contact_person: {
+                        required: true,
+                        // notEqual:'complaint_from',
+                    },
+                    unit_of_supply: {
+                        required: true,
+                    },
+                    vendor_code: {
+                        required: true,
+                    },
 
 
 
                 },
                 messages: {
+                    vendor_name: {
+                        required: "This field is required.",
+                    },
                     company_id: {
                         required: "Please select company.",
-                    },
-                    category: {
-                        required: "This field is required.",
                     },
                     location_id: {
                         required: "Please select location.",
@@ -372,6 +369,42 @@
                     },
                     department_id: {
                         required: 'Please select department.',
+                    },
+                    expense_category_id: {
+                        required: "Please select expense category.",
+                        // notEqual:"Please select other employee."
+                    },
+                    vendor_details_id: {
+                        required: 'Please select vendor category.',
+                    },
+                    address: {
+                        required: "This field is required.",
+                    },
+                    pan: {
+                        required: "This field is required.",
+                        minlength: "Please enter 10 digit number.",
+                        maxlength: "Please enter 10 digit number.",
+                    },
+                    gst_no: {
+                        required: "This field is required.",
+                        minlength: "Please enter 15 digit number.",
+                        maxlength: "Please enter 15 digit number.",
+                    },
+                    contact_no: {
+                        required: 'This field is required.',
+                        minlength: "Please enter 10 digit number.",
+                        maxlength: "Please enter 10 digit number.",
+
+                    },
+                    contact_person: {
+                        required: "This field is required.",
+                        // notEqual:"Please select other employee."
+                    },
+                    unit_of_supply: {
+                        required: 'This field is required.',
+                    },
+                    vendor_code: {
+                        required: 'This field is required.',
                     },
 
                 },
@@ -399,7 +432,7 @@
                 }).then(function(result) {
                     if (result.value) {
                         $.ajax({
-                            url: "{{ route('admin_master.delete-expenses-category') }}",
+                            url: "{{ route('admin_master.delete-vendor-details') }}",
                             method: "GET",
                             dataType: 'json',
                             data: {
@@ -425,7 +458,7 @@
             $(document).on('click', '.edit', function() {
                 let id = $(this).attr('id');
                 $.ajax({
-                    url: "{{ route('admin_master.edit-expenses-category') }}",
+                    url: "{{ route('admin_master.edit-vendor-details') }}",
                     method: "GET",
                     dataType: 'json',
                     data: {
@@ -434,19 +467,27 @@
                     success: function(result) {
                         $("#id").val(result.id);
                         $("#company_id").val(result.company_id);
-                        $("#category").val(result.category);
-
-
+                        $("#vendor_name").val(result.vendor_name);
+                        $("#expense_category_id").val(result.expense_category_id);
+                        $("#vendor_category_id").val(result.vendor_category_id);
+                        $("#unit_of_supply").val(result.unit_of_supply);
+                     
+                        $("#address").val(result.address);
+                        $("#pan").val(result.pan);
+                        $("#gst_no").val(result.gst_no);
+                        $("#contact_no").val(result.contact_no);
+                        $("#contact_person").val(result.contact_person);
+                        $("#vendor_code").val(result.vendor_code);
+                        
                         $("#company_id").change();
                         setTimeout(function() {
                             $("#location_id").val(result.location_id);
                             $("#department_id").val(result.department_id);
                         }, 1500);
 
-                        $("#myLargeModalLabel").text("Edit Expenses Category")
+                        $("#myLargeModalLabel").text("Edit Vendor Details")
                         $("#add-edit-btn").text("update");
-                        let formaction =
-                            '{{ route('admin_master.update-expenses-category') }}';
+                        let formaction = '{{ route('admin_master.update-vendor-details') }}';
                         $("#add-edit-btn").attr("formaction", formaction);
 
                     }
@@ -455,11 +496,11 @@
             })
 
             $('.add-edit_modal').on('hidden.bs.modal', function() {
-                $("#myLargeModalLabel").text("Add Expense Category");
+                $("#myLargeModalLabel").text("Add Vendor Details");
                 $("#add-edit-btn").text("Add");
-                $('#expense_category_form').trigger("reset");
+                $('#vendor_details_form').trigger("reset");
                 $("#store_logo").text('');
-                let formaction = '{{ route('admin_master.store-expenses-category') }}';
+                let formaction = '{{ route('admin_master.store-vendor-details') }}';
                 $("#add-edit-btn").attr("formaction", formaction);
                 $("#upload_file").removeClass('ignore');
 
@@ -511,7 +552,7 @@
                 },
 
                 "ajax": {
-                    url: "{{ route('admin_master.get-expenses-category-record') }}",
+                    url: "{{ route('admin_master.get-vendor-details-record') }}",
                     type: "get",
                     data: function(d) {}
                 },
@@ -522,9 +563,9 @@
                         width: "5%"
                     },
                     {
-                        data: "category",
+                        data: "vendor_name",
                         orderable: true,
-                        name: "category" /*,width:"20%"*/
+                        name: "vendor_name" /*,width:"20%"*/
                     },
                     {
                         data: "company_name",
@@ -541,6 +582,53 @@
                         orderable: true,
                         name: "department" /*,width:"20%"*/
                     },
+                    {
+                        data: "category",
+                        orderable: true,
+                        name: "category" /*,width:"20%"*/
+                    },
+                    {
+                        data: "vendor_category_name",
+                        orderable: true,
+                        name: "vendor_category_name" /*,width:"20%"*/
+                    },
+                    {
+                        data: "address",
+                        orderable: true,
+                        name: "address" /*,width:"20%"*/
+                    },
+                    {
+                        data: "pan",
+                        orderable: true,
+                        name: "pan" /*,width:"20%"*/
+                    },
+                    {
+                        data: "gst_no",
+                        orderable: true,
+                        name: "gst_no" /*,width:"20%"*/
+                    },
+                    {
+                        data: "contact_no",
+                        orderable: true,
+                        name: "contact_no" /*,width:"20%"*/
+                    },
+                    {
+                        data: "contact_person",
+                        orderable: true,
+                        name: "contact_person" /*,width:"20%"*/
+                    },
+                    {
+                        data: "unit_of_supply",
+                        orderable: true,
+                        name: "unit_of_supply" /*,width:"20%"*/
+                    },
+                    {
+                        data: "vendor_code",
+                        orderable: true,
+                        name: "vendor_code" /*,width:"20%"*/
+                    },
+
+
 
                     {
                         data: "action",

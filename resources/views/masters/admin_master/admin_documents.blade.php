@@ -1,6 +1,7 @@
 @extends('layout.layout')
 @section('content')
 
+    <!--  BEGIN CONTENT AREA  -->
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
 
@@ -14,18 +15,18 @@
                             data-target=".add-edit_modal"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                            </svg>Add Expenses Category </button>
+                            </svg>Add Admin Documents </button>
 
 
                         {{-- <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal"
-                            data-target="#exampleModalRemoveAnimation"><svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            Bulk Delete
-                        </button> --}}
+                                data-target="#exampleModalRemoveAnimation"><svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Bulk Delete
+                            </button> --}}
 
                     </div>
                     <!-- Model Start -->
@@ -34,7 +35,7 @@
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="myLargeModalLabel">Add Expenses Category </h5>
+                                    <h5 class="modal-title" id="myLargeModalLabel">Add Admin Documents </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -45,21 +46,21 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <form id="expense_category_form" method="post">
+                                <form id="admin_document_form" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" id="id" name="id">
-                                    <div class="row" style="padding: 10px;">
 
+                                    <div class="row" style="padding: 10px;">
+                                        <input type="hidden" id="old_file" name="old_file">
+                                        <input type="hidden" id="id" name="id">
 
                                         <div class="col-md-6 form-group">
-                                            <label> Expenses Category Name</label>
-                                            <input type="text" name="category" id="category" class="form-control"
-                                                placeholder=Category Name>
+                                            <label>Choose File* </label>
+                                            <input type="file" name="file" id="file" class="form-control"
+                                                placeholder=Optional>
+                                            <span id="store_logo"></span>
                                         </div>
 
-
-
-
+                                       
                                         <div class="col-md-6 form-group">
                                             <label>Company *</label>
                                             <select name="company_id" id="company_id" class="form-control selectpicker"
@@ -97,11 +98,51 @@
                                             </select>
                                         </div>
 
-                                        <div class="form-group" align="center" style="margin-top: 5%;  margin-left: 45%;">
 
-                                            <button formaction="{{ route('admin_master.store-expenses-category') }}"
+                                        @php
+                                            $project = get_project_name_and_id();
+                                        @endphp
+                                        <div class="col-md-6 form-group">
+                                            <label>Select Project*</label>
+                                            <select name="project_id" id="project_id" class="form-control selectpicker"
+                                                data-live-search="true" data-live-search-style="begins"
+                                                title='Select Company Type...'>
+                                                <option value="" disabled selected>Select Project </option>
+                                                @foreach ($project as $project)
+                                                    <option value="{{ $project->id }}">{{ $project->project }}
+                                                    </option>
+                                                @endforeach
+                                                </option>
+
+                                            </select>
+                                        </div>
+
+
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Select Document Type*</label>
+                                            <select name="document_type" id="document_type"
+                                                class="form-control selectpicker" data-live-search="true"
+                                                data-live-search-style="begins" title='Select Company Type...'>
+                                                <option value="" disabled selected>Select Document Type </option>
+                                                <option value="Purchase Order">Purchase Order</option>
+                                                <option value="Work Order">Work Order</option>
+                                                <option value="AMC">AMC </option>
+                                                <option value="Service contract">Service contract </option>
+
+                                                </option>
+
+                                            </select>
+                                        </div>
+
+
+
+                                        <div class="form-group" align="center"
+                                            style="margin-top: 5%;  margin-left: 45%;">
+
+
+                                            <button formaction="{{ route('admin_master.store-admin-documents') }}"
                                                 type="submit" class="btn btn-warning" id="add-edit-btn">Add </button>
-
                                         </div>
 
                                     </div>
@@ -115,129 +156,7 @@
 
 
                 <!--edit Model Start -->
-                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                    aria-labelledby="myLargeModalLabel" id="editmodel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="myLargeModalLabel">Edit</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-x">
-                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                    </svg>
-                                </button>
-                            </div>
 
-                            <div class="row" style="padding: 10px;">
-
-
-                                <div class="col-md-6 form-group">
-                                    <label>Category Name</label>
-                                    <input type="text" name="trading_name" id="trading_name" class="form-control"
-                                        placeholder=Category Name>
-                                </div>
-
-
-
-
-                                <div class="col-md-6 form-group">
-                                    <label>Company *</label>
-                                    <select name="company_type" id="company_type" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Company Type...'>
-                                        <option value="" disabled selected>Company Type</option>
-                                        <option value="corporation">Corporation</option>
-                                        <option value="exempt organization">Exempt Organization</option>
-                                        <option value="partnership">Partnership</option>
-                                        <option value="private foundation">Private Foundation</option>
-                                        <option value="limited liability company">Limited Liability Company
-                                        </option>
-
-                                    </select>
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <label>Location*</label>
-                                    <select name="location_head" id="location_head" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Employee...'>
-                                        <option value="361">1</option>
-                                        <option value="361">2</option>
-                                        <option value="361">3</option>
-
-
-                                    </select>
-                                </div>
-
-
-
-                                <div class="col-md-6 form-group">
-                                    <label>Project *</label>
-                                    <select name="company_type" id="company_type" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Company Type...'>
-                                        <option value="" disabled selected>Select Project</option>
-                                        <option value="corporation">jhbdehsd</option>
-                                        <option value="exempt organization">hszdjbsd</option>
-                                        <option value="partnership">hjbzsduygajs</option>
-                                        <option value="private foundation">Pbxdghb</option>
-
-
-                                    </select>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Select Department *</label>
-                                    <select name="company_type" id="company_type" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Company Type...'>
-                                        <option value="" disabled selected>Select Department </option>
-                                        <option value="corporation">1</option>
-                                        <option value="exempt organization">2</option>
-                                        <option value="partnership">3</option>
-                                        <option value="exempt organization">4 </option>
-
-                                        </option>
-
-                                    </select>
-                                </div>
-
-
-                                <div class="col-md-6 form-group">
-                                    <label>Select Expenses Category*</label>
-                                    <select name="company_type" id="company_type" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins"
-                                        title='Select Company Type...'>
-                                        <option value="" disabled selected>Select Expenses Category </option>
-                                        <option value="corporation">1</option>
-                                        <option value="exempt organization">2</option>
-                                        <option value="partnership">3</option>
-                                        <option value="exempt organization">4 </option>
-
-                                        </option>
-
-                                    </select>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Unit Of Supply</label>
-                                    <input type="text" name="trading_name" id="trading_name" class="form-control"
-                                        placeholder="">
-                                </div>
-
-
-
-                                <div class="form-group" align="center" style="margin-top: 5%;  margin-left: 45%;">
-
-                                    <input type="submit" name="action_button" class="btn btn-warning" value=Edit />
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- model end -->
 
@@ -252,9 +171,9 @@
                             <div class="modal-content">
                                 <div class="modal-header" id="exampleModalPopoversLabel">
                                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                        </button>
-                                                      </div> -->
+                                                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                </button>
+                                              </div> -->
                                     <div class="modal-body">
                                         <p class="modal-text">Parberp.com says<br>
                                             Please select atleast one Checkbox
@@ -278,20 +197,27 @@
                 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                     <div class="widget-content widget-content-area br-6">
                         <div class="table-responsive mb-4 mt-4">
-                            <table id="html5-extension" class="table table-hover non-hover datatable_server"
-                                style="width:100%">
+                            <table  class="table table-hover non-hover datatable_server" style="width:100%">
                                 <thead>
                                     <tr>
+                                    <tr>
                                         <th>Sr.no</th>
-                                        <th>Category</th>
-                                        <th>Company</th>
-                                        <th>Location</th>
-                                        <th>Department</th>
+                                        <th>Files</th>
+                                        <th> Company</th>
+                                        <th> Location </th>
+                                        <th> Department </th>
+                                        <th>Project</th>
+                                        <th>Document</th>
                                         <th>Action</th>
 
+                                    </tr>
 
+                                    </tr>
                                 </thead>
                                 <tbody>
+                                 
+
+
 
                                 </tbody>
                             </table>
@@ -338,14 +264,14 @@
                 })
             })
 
-            $('#expense_category_form').validate({
+            $('#admin_document_form').validate({
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
                     company_id: {
                         required: true,
                     },
-                    category: {
+                    file: {
                         required: true,
                     },
                     location_id: {
@@ -355,16 +281,23 @@
                     department_id: {
                         required: true,
                     },
+                    project_id: {
+                        required: true,
+                        // notEqual:'complaint_from',
+                    },
+                    document_type: {
+                        required: true,
+                    },
 
 
 
                 },
                 messages: {
+                    file: {
+                        required: "This field is required.",
+                    },
                     company_id: {
                         required: "Please select company.",
-                    },
-                    category: {
-                        required: "This field is required.",
                     },
                     location_id: {
                         required: "Please select location.",
@@ -372,6 +305,13 @@
                     },
                     department_id: {
                         required: 'Please select department.',
+                    },
+                    project_id: {
+                        required: "This field is required.",
+                        // notEqual:"Please select other employee."
+                    },
+                    document_type: {
+                        required: 'This field is required.',
                     },
 
                 },
@@ -399,7 +339,7 @@
                 }).then(function(result) {
                     if (result.value) {
                         $.ajax({
-                            url: "{{ route('admin_master.delete-expenses-category') }}",
+                            url: "{{ route('admin_master.delete-admin-documents') }}",
                             method: "GET",
                             dataType: 'json',
                             data: {
@@ -425,16 +365,21 @@
             $(document).on('click', '.edit', function() {
                 let id = $(this).attr('id');
                 $.ajax({
-                    url: "{{ route('admin_master.edit-expenses-category') }}",
+                    url: "{{ route('admin_master.edit-admin-documents') }}",
                     method: "GET",
                     dataType: 'json',
                     data: {
                         id: id,
                     },
                     success: function(result) {
+                        $("#file").addClass('ignore');
+                        $("#store_logo").text(result.file);
                         $("#id").val(result.id);
-                        $("#company_id").val(result.company_id);
-                        $("#category").val(result.category);
+                        $("#old_file").val(result.file);
+                                            $("#company_id").val(result.company_id);
+                        $("#admin_document_name").val(result.admin_document_name);
+                        $("#project_id").val(result.project_id);
+                        $("#document_type").val(result.document_type);
 
 
                         $("#company_id").change();
@@ -443,10 +388,9 @@
                             $("#department_id").val(result.department_id);
                         }, 1500);
 
-                        $("#myLargeModalLabel").text("Edit Expenses Category")
+                        $("#myLargeModalLabel").text("Edit Admin Document")
                         $("#add-edit-btn").text("update");
-                        let formaction =
-                            '{{ route('admin_master.update-expenses-category') }}';
+                        let formaction = '{{ route('admin_master.update-admin-documents') }}';
                         $("#add-edit-btn").attr("formaction", formaction);
 
                     }
@@ -455,13 +399,13 @@
             })
 
             $('.add-edit_modal').on('hidden.bs.modal', function() {
-                $("#myLargeModalLabel").text("Add Expense Category");
+                $("#myLargeModalLabel").text("Add Admin Document");
                 $("#add-edit-btn").text("Add");
-                $('#expense_category_form').trigger("reset");
+                $('#admin_document_form').trigger("reset");
                 $("#store_logo").text('');
-                let formaction = '{{ route('admin_master.store-expenses-category') }}';
+                let formaction = '{{ route('admin_master.store-admin-documents') }}';
                 $("#add-edit-btn").attr("formaction", formaction);
-                $("#upload_file").removeClass('ignore');
+                $("#file").removeClass('ignore');
 
             });
 
@@ -511,7 +455,7 @@
                 },
 
                 "ajax": {
-                    url: "{{ route('admin_master.get-expenses-category-record') }}",
+                    url: "{{ route('admin_master.get-admin-documents-record') }}",
                     type: "get",
                     data: function(d) {}
                 },
@@ -522,9 +466,9 @@
                         width: "5%"
                     },
                     {
-                        data: "category",
+                        data: "file",
                         orderable: true,
-                        name: "category" /*,width:"20%"*/
+                        name: "file" /*,width:"20%"*/
                     },
                     {
                         data: "company_name",
@@ -541,6 +485,18 @@
                         orderable: true,
                         name: "department" /*,width:"20%"*/
                     },
+                    {
+                        data: "project",
+                        orderable: true,
+                        name: "project" /*,width:"20%"*/
+                    },
+                    {
+                        data: "document_type",
+                        orderable: true,
+                        name: "document_type" /*,width:"20%"*/
+                    },
+
+
 
                     {
                         data: "action",

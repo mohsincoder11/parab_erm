@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin\master\employee_master;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\employee_master\PeronalDetailModel;
+use App\Models\employee_master\PersonalDetailModel;
 use DB;
 use Yajra\DataTables\DataTables;
 
@@ -18,7 +18,7 @@ class PersonalDetail extends Controller
 
     public function store_personal_details(Request $request)
     {
-        PeronalDetailModel::create([
+        PersonalDetailModel::create([
             'employee_name'=>$request->employee_name,
             'dob'=>$request->dob,
             'address'=>$request->address,
@@ -42,12 +42,12 @@ class PersonalDetail extends Controller
     }
     public function edit_personal_details(Request $request)
     {
-        $official_detail=PeronalDetailModel::where('id', $request->id)->first();
+        $official_detail=PersonalDetailModel::where('id', $request->id)->first();
         return response()->json($official_detail);
     }
     public function update_personal_details(Request $request)
     {
-        PeronalDetailModel::where('id', $request->id)->update([
+        PersonalDetailModel::where('id', $request->id)->update([
             'employee_name'=>$request->employee_name,
             'dob'=>date('Y-m-d', strtotime($request->dob)),
             'address'=>$request->address,
@@ -72,7 +72,7 @@ class PersonalDetail extends Controller
     }
     public function delete_personal_details(Request $request)
     {
-        PeronalDetailModel::where('id', $request->id)->delete();
+        PersonalDetailModel::where('id', $request->id)->delete();
         return response()->json(1);
     }
     public function get_personal_details(Request $request)

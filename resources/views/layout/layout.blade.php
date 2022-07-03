@@ -372,15 +372,15 @@
                             </svg> </a>
                         <ul class="collapse list-unstyled sub-submenu" id="pages-error5" data-parent="#pages">
                             <li>
-                                <a href="#"> Vendor Category </a>
+                                <a href="{{ route('admin_master.vendor-category') }}"> Vendor Category </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin_master.expenses-category') }}"> Expenses Category </a>
                             </li>
-                            <li>
+                           {{-- <li>
                                 <a href="#"> Vendor </a>
                             </li>
-                            <li>
+                             <li>
                                 <a href="#"> Documents </a>
                             </li>
                             <li>
@@ -388,16 +388,16 @@
                             </li>
                             <li>
                                 <a href="#"> Activity Category </a>
+                            </li>--}}
+                            <li> 
+                                <a href="{{ route('admin_master.vendor-details') }}"> Vendor Details </a>
                             </li>
                             <li>
-                                <a href="#"> Vendor Details </a>
+                                <a href="{{ route('admin_master.admin-documents') }}">Admin Documents </a>
                             </li>
-                            <li>
-                                <a href="#">Admin Documents </a>
-                            </li>
-                            <li>
+                            {{-- <li>
                                 <a href="#"> Item Master </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                    
