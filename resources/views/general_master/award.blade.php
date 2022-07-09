@@ -290,8 +290,8 @@
 
                         $("#company_id").change();
                         setTimeout(function() {
-                            $("#employee_id").val(result.emp_id);
-                            $("#department_id").val(result.dept_id);
+                            $("#employee_id").val(result.employee_id);
+                            $("#department_id").val(result.department_id);
                         }, 1500);
 
                         $("#myLargeModalLabel").text("Edit Award")

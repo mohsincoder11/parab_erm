@@ -16,7 +16,7 @@ class AdminDocuments extends Controller
     {
         $company = get_company_name_and_id();
 
-        return view('masters.admin_master.admin_documents', compact('company'));
+        return view('masters.admin_master.admin-documents', compact('company'));
     }
 
     public function store_admin_documents(Request $request)
