@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('public/assets/img/favicon.png') }}" />
     <link href="{{ asset('public/assets/css/loader.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('public/assets/js/loader.js') }}"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
@@ -25,7 +26,8 @@
     <!-- toastr -->
     <link href="{{ asset('public/plugins/notification/snackbar/snackbar.min.css') }}" rel="stylesheet"
         type="text/css" />
-        
+        <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
+
     <style>
         .error {
             margin-top: 5px;
@@ -34,6 +36,14 @@
             font-weight: 700;
             letter-spacing: 1px;
         }
+        .ui-autocomplete {
+z-index: 9999;
+}
+.ui-menu .ui-menu-item :hover{
+    background:#007bff !important;
+    color:#FFF !important;
+
+}
     </style>
 
     <!-- END Snackbar PLUGINS -->
@@ -138,7 +148,9 @@
     <!-- END MAIN CONTAINER -->
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="{{ asset('public/assets/js/libs/jquery-3.1.1.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+    
     <script src="{{ asset('public/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('public/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('public/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
@@ -207,6 +219,54 @@
     <script src="{{ asset('public/plugins/notification/snackbar/snackbar.min.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#employee_name").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('search_employee') }}",
+                dataType: "json",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    search_keyword: request.term
+                },
+                success: function(data) {
+                    var resp = $.map(data, function(obj) {
+                            return obj.employee_name;
+                        
+                    });
+                    console.log(resp);
+                    response(resp);
+                }
+            });
+        },
+        minLength: 2,
+        select: function(event, ui) {
+            var value_data = ui.item.label;
+            console.log(ui.item.value)
+                 $.ajax({
+                type: "POST",
+                url: "{{ route('get_employee_id') }}",
+                dataType: "json",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    search_keyword: ui.item.value
+                },
+                success: function(data) {
+                    $('#employee_id').val(data.id);
+                }
+            });
+        }
+    });
+        })
+    </script>
     @yield('js')
 
 

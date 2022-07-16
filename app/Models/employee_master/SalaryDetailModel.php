@@ -8,6 +8,8 @@ class SalaryDetailModel extends Model
 {
     protected $table = 'salary_detail';
     protected $fillable = [
+        'employee_id',
+
         'basic_salary',
         'allowance1',
         'allowance2',

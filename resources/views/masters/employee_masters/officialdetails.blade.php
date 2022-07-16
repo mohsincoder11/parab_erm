@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout.layout')
 @section('content')
 
     <div id="content" class="main-content">
@@ -14,7 +14,7 @@
                             data-target=".add-edit_modal"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                            </svg>Add Official Detais</button>
+                            </svg>Add Official Details</button>
 
 
                         {{-- <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal"
@@ -34,7 +34,7 @@
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="myLargeModalLabel">Add New Personal Details</h5>
+                                    <h5 class="modal-title" id="myLargeModalLabel">Add Official Details</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -51,13 +51,36 @@
                                         <input type="hidden" id="id" name="id">
 
                                         <div class="col-md-6 form-group">
-                                            <label>Employee code</label>
+                                            <label>Employee Name<span class="required">*</span></label>
+                                            <input name="employee_name" id="employee_name" class="form-control "
+                                                placeholder="Enter employee name" autocomplete="off">
+                                            <input type="hidden" name="employee_id" id="employee_id">
+
+                                        </div>
+                                        @php
+                                            $company = get_company_name_and_id();
+                                        @endphp
+                                        <div class="col-md-6 form-group">
+                                            <label>Company <span class="required">*</span></label>
+                                            <select name="company_id" id="company_id" class="form-control selectpicker"
+                                                data-live-search="true" data-live-search-style="begins"
+                                                title='Select Company Type...'>
+                                                <option value="" disabled selected>Company Type</option>
+                                                @foreach ($company as $c)
+                                                    <option value="{{ $c->id }}">{{ $c->company_name }}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Employee code<span class="required">*</span></label>
                                             <input type="text" name="emp_code" id="emp_code" required
                                                 class="form-control" placeholder="">
                                         </div>
 
                                         <div class="col-md-6 form-group">
-                                            <label>Employee Status </label>
+                                            <label>Employee Status <span class="required">*</span></label>
                                             <select name="emp_status_id" id="emp_status_id"
                                                 class="form-control selectpicker" data-live-search="true"
                                                 data-live-search-style="begins" title='Select Company Type...'>
@@ -71,13 +94,14 @@
                                         </div>
 
 
+
                                         <div class="col-md-6 form-group">
-                                            <label>Date of Joining</label>
+                                            <label>Date of Joining<span class="required">*</span></label>
                                             <input type="date" name="date_joining" id="date_joining"
                                                 class="form-control date" value="">
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label>Date of Conform</label>
+                                            <label>Date of Confirm</label>
                                             <input type="date" name="date_conform" id="date_conform"
                                                 class="form-control date" value="">
                                         </div>
@@ -87,7 +111,7 @@
                                                 class="form-control date" value="">
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label>Department</label>
+                                            <label>Department<span class="required">*</span></label>
                                             <select name="department_id" id="department_id"
                                                 class="form-control selectpicker" data-live-search="true"
                                                 data-live-search-style="begins" title='Select Department Type...'>
@@ -101,7 +125,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label>Designation</label>
+                                            <label>Designation<span class="required">*</span></label>
                                             <select name="designation_id" id="designation_id"
                                                 class="form-control selectpicker" data-live-search="true"
                                                 data-live-search-style="begins" title='Select Designation Type...'>
@@ -144,7 +168,7 @@
                                         </div>
 
                                         <div class="col-md-6 form-group">
-                                            <label>Location</label>
+                                            <label>Location<span class="required">*</span></label>
                                             <select name="location_id" id="location_id" class="form-control selectpicker"
                                                 data-live-search="true" data-live-search-style="begins"
                                                 title='Select Location Type...'>
@@ -158,24 +182,24 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label>Rporting Manager</label>
+                                            <label>Reporting Manager</label>
                                             <input type="text" name="reporting_manager" id="reporting_manager"
                                                 class="form-control " value="">
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label>Official Mobile No.</label>
-                                            <input type="number" name="official_mob_no" id="official_mob_no" required
+                                            <input type="number" name="official_mob_no" id="official_mob_no"
                                                 class="form-control" placeholder="">
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label>Official Mail Id</label>
-                                            <input type="email" name="official_mail_id" id="official_mail_id" required
+                                            <input type="email" name="official_mail_id" id="official_mail_id"
                                                 class="form-control" placeholder="">
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label>Working Hrs</label>
                                             <input type="number" step="0.5" name="working_hr" id="working_hr"
-                                                required class="form-control" placeholder="">
+                                                class="form-control" placeholder="">
                                         </div>
 
 
@@ -209,9 +233,9 @@
                                 <div class="modal-content">
                                     <div class="modal-header" id="exampleModalPopoversLabel">
                                         <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                                                    </button>
-                                                                                  </div> -->
+                                                                                              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                                                            </button>
+                                                                                          </div> -->
                                         <div class="modal-body">
                                             <p class="modal-text">Parberp.com says<br>
                                                 Please select atleast one Checkbox
@@ -264,6 +288,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sr.No.</th>
+                                            <th>Employee Name </th>
                                             <th>Employee Status </th>
                                             <th>Date of Joining </th>
                                             <th>Date of Conform</th>
@@ -305,8 +330,12 @@
 
 
 @section('js')
+
     <script>
         $(document).ready(function() {
+
+
+
             $(document).on('change', '#company_id', function() {
                 $.ajax({
                     url: "{{ route('get_location_by_company') }}",
@@ -334,53 +363,69 @@
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
+                    employee_name: {
+                        required: true,
+                    },
                     emp_code: {
                         required: true,
                     },
-                    emp_status_id: {
+                    company_id:{
                         required: true,
+
+
                     },
+                    // emp_status_id: {
+                    //     required: true,
+                    // },
                     date_joining: {
                         required: true,
                     },
-                    date_conform: {
-                        required: true,
-                    },
-                    date_leaving: {
-                        required: true,
-                    },
+                    // date_conform: {
+                    //     required: true,
+                    // },
+                    // date_leaving: {
+                    //     required: true,
+                    // },
                     department_id: {
                         required: true,
                     },
                     designation_id: {
                         required: true,
                     },
-                    grade_id: {
-                        required: true,
-                    },
-                    project_id: {
-                        required: true,
-                    },
+                    // grade_id: {
+                    //     required: true,
+                    // },
+                    // project_id: {
+                    //     required: true,
+                    // },
                     location_id: {
                         required: true,
                     },
-                    reporting_manager: {
-                        required: true,
-                    },
-                    official_mob_no: {
-                        required: true,
-                        minlength: 10,
-                        maxlength: 10,
-                    },
-                    official_mail_id: {
-                        required: true,
-                    },
-                    working_hr: {
-                        required: true,
-                    },
+                    // reporting_manager: {
+                    //     required: true,
+                    // },
+                    // official_mob_no: {
+                    //     required: true,
+                    //     minlength: 10,
+                    //     maxlength: 10,
+                    // },
+                    // official_mail_id: {
+                    //     required: true,
+                    // },
+                    // working_hr: {
+                    //     required: true,
+                    // },
 
                 },
                 messages: {
+                    company_id:{
+                        required: "This field is required.",
+
+
+                    },
+                    employee_name: {
+                        required: "This field is required.",
+                    },
                     emp_code: {
                         required: "This field is required.",
                     },
@@ -390,42 +435,42 @@
                     date_joining: {
                         required: "Please select date of joining.",
                     },
-                    date_conform: {
-                        required: 'Please select date of conform.',
-                    },
-                    date_leaving: {
-                        required: 'Please select date of leaving.',
-                    },
+                    // date_conform: {
+                    //     required: 'Please select date of conform.',
+                    // },
+                    // date_leaving: {
+                    //     required: 'Please select date of leaving.',
+                    // },
                     department_id: {
                         required: 'Please select deaprtment.',
                     },
                     designation_id: {
                         required: "Please select designation.",
                     },
-                    grade_id: {
-                        required: "Please select grade.",
-                    },
-                    project_id: {
-                        required: "Please select project.",
-                    },
+                    // grade_id: {
+                    //     required: "Please select grade.",
+                    // },
+                    // project_id: {
+                    //     required: "Please select project.",
+                    // },
                     location_id: {
                         required: 'Please select location.',
                     },
-                    reporting_manager: {
-                        required: 'This field is required.',
-                    },
-                    official_mob_no: {
-                        required: 'This field is required.',
-                        minlength: 'Mobile number must be 10 digits.',
-                        maxlength: 'Mobile number must be 10 digits.',
-                    },
+                    // reporting_manager: {
+                    //     required: 'This field is required.',
+                    // },
+                    // official_mob_no: {
+                    //     required: 'This field is required.',
+                    //     minlength: 'Mobile number must be 10 digits.',
+                    //     maxlength: 'Mobile number must be 10 digits.',
+                    // },
 
-                    official_mail_id: {
-                        required: 'This field is required.',
-                    },
-                    working_hr: {
-                        required: 'This field is required.',
-                    },
+                    // official_mail_id: {
+                    //     required: 'This field is required.',
+                    // },
+                    // working_hr: {
+                    //     required: 'This field is required.',
+                    // },
 
 
                 },
@@ -466,7 +511,7 @@
                         $("#official_mail_id").val(result.official_mail_id);
                         $("#working_hr").val(result.working_hr);
 
-                        $("#myLargeModalLabel").text("Edit New Personal Details");
+                        $("#myLargeModalLabel").text("Edit Official Details");
                         $("#add-edit-btn").text("Update");
                         let formaction =
                             '{{ route('employees_masters.update-official-details') }}';
@@ -478,7 +523,7 @@
             })
 
             $('.add-edit_modal').on('hidden.bs.modal', function() {
-                $("#myLargeModalLabel").text("Add New Personal Details");
+                $("#myLargeModalLabel").text("Add Official Details");
                 $("#add-edit-btn").text("Add");
                 $('#official_detail_form').trigger("reset");
                 let formaction = '{{ route('employees_masters.store-official-details') }}';
@@ -576,6 +621,11 @@
                         orderable: true,
                         name: "DT_RowIndex",
                         width: "5%"
+                    },
+                    {
+                        data: "employee_name",
+                        orderable: true,
+                        name: "employee_name" /*,width:"20%"*/
                     },
                     {
                         data: "employee_status_name",

@@ -49,46 +49,66 @@
                                     @csrf
                                     <div class="row" style="padding: 10px;">
                                         <input type="hidden" id="id" name="id">
+                                        <div class="col-md-6 form-group">
+                                            <label>Employee Name<span class="required">*</span></label>
+                                            <input name="employee_name" id="employee_name" class="form-control "
+                                                placeholder="Enter employee name" autocomplete="off">
+                                            <input type="hidden" name="employee_id" id="employee_id">
+
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Employee code<span class="required">*</span></label>
+                                            <input type="text" name="emp_code" id="emp_code" required
+                                                class="form-control" placeholder="">
+                                        </div>
+                                                                              
 
                                         <div class="col-md-6 form-group">
-                                            <label>UAN No. </label>
-                                            <input type="number" name="uan_no" id="uan_no" required
-                                                class="form-control" placeholder=" ">
-                                        </div>
+                                            <label>PF Applicable?<span class="required">*</span></label>
+                                            <select name="pf_applicable" id="pf_applicable" class="form-control selectpicker"
+                                                data-live-search="true" data-live-search-style="begins"
+                                                title='Select option...'>
+                                                <option value="" disabled selected> Select Option</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
 
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 form-group pf_show">
+                                            <label>UAN NO.</label>
+                                            <input type="text" name="uan_no" id="uan_no" 
+                                                class="form-control" placeholder="">
+                                        </div>
+                                       
                                         <div class="col-md-6 form-group">
-                                            <label>ESIC No. </label>
-                                            <input type="number" name="esic_no" id="esic_no" required
-                                                class="form-control" placeholder=" ">
+                                            <label>ESIC Applicable?<span class="required">*</span></label>
+                                            <select name="esic_applicable" id="esic_applicable" class="form-control selectpicker"
+                                                data-live-search="true" data-live-search-style="begins"
+                                                title='Select option...'>
+                                                <option value="" disabled selected> Select Option</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+
+                                            </select>
                                         </div>
-
-
-
-                                        <div class="col-md-4 form-group">
-                                            <label>PF Applicable </label><br>
-                                            <input type="radio" name="is_pf" value="yes" checked="checked">
-                                            <label for="yes">Yes</label>
-                                            <input type="radio" name="is_pf" value="no">
-                                            <label for="no">No</label>
+                                        <div class="col-md-6 form-group esic_show">
+                                            <label>ESIC NO.</label>
+                                            <input type="text" name="esic_no" id="esic_no" 
+                                                class="form-control" placeholder="">
                                         </div>
+                                        <div class="col-md-6 form-group">
 
-                                        <div class="col-md-4 form-group">
-                                            <label>ESIC Applicable </label><br>
-                                            <input type="radio" name="is_esic" value="yes" checked="checked">
-                                            <label for="yes">Yes</label>
-                                            <input type="radio" name="is_esic" value="no">
-                                            <label for="no">No</label>
-                                        </div>
+                                        <label>PT Applicable?<span class="required">*</span></label>
+                                        <select name="is_pt" id="is_pt" class="form-control selectpicker"
+                                            data-live-search="true" data-live-search-style="begins"
+                                            title='Select option...'>
+                                            <option value="" disabled selected> Select Option</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
 
-                                        <div class="col-md-4 form-group">
-                                            <label>PT Applicable </label><br>
-                                            <input type="radio" name="is_pt" value="yes" checked="checked">
-                                            <label for="yes">Yes</label>
-                                            <input type="radio" name="is_pt" value="no">
-                                            <label for="no">No</label>
-                                        </div>
-
-
+                                        </select>
+                                    </div>
+                                       
                                         <div class="form-group" align="center" style="margin-top: 5%; padding-left:45%;">
 
                                             <button formaction="{{ route('employees_masters.store-statutory-details') }}"
@@ -174,10 +194,11 @@
                                     <thead>
                                         <tr>
                                             <th>Sr.No.</th>
+                                            <th>Employee Name </th>
+                                            <th>Employee Code </th>
+
                                             <th>UAN No. </th>
                                             <th>ESIC No. </th>
-                                            <th>PF Applicable </th>
-                                            <th>ESIC Applicable </th>
                                             <th>PT Applicable </th>
                                             <th>Action</th>
                                         </tr>
@@ -210,36 +231,63 @@
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
-                    uan_no: {
+                    employee_name: {
                         required: true,
                     },
-                    esic_no: {
+                    emp_code: {
                         required: true,
                     },
-                    is_pf: {
+                    pf_applicable: {
                         required: true,
                     },
-                    is_esic: {
+                    esic_applicable: {
                         required: true,
                     },
+                    
+
+                    // uan_no: {
+                    //     required: true,
+                    // },
+                    // esic_no: {
+                    //     required: true,
+                    // },
+                    // is_pf: {
+                    //     required: true,
+                    // },
+                    // is_esic: {
+                    //     required: true,
+                    // },
                     is_pt: {
                         required: true,
                     },
 
                 },
                 messages: {
-                    uan_no: {
+                    employee_name: {
                         required: "This field is required.",
                     },
-                    esic_no: {
+                    emp_code: {
                         required: "This field is required.",
                     },
-                    is_pf: {
-                        required: "Please select a option.",
+                    pf_applicable: {
+                        required: "This field is required.",
                     },
-                    is_esic: {
-                        required: 'Please select a option.',
+                    esic_applicable: {
+                        required: "This field is required.",
                     },
+                    
+                    // uan_no: {
+                    //     required: "This field is required.",
+                    // },
+                    // esic_no: {
+                    //     required: "This field is required.",
+                    // },
+                    // is_pf: {
+                    //     required: "Please select a option.",
+                    // },
+                    // is_esic: {
+                    //     required: 'Please select a option.',
+                    // },
                     is_pt: {
                         required: 'Please select a option.',
                     },
@@ -255,8 +303,27 @@
                     return true;
                 }
             });
+            
+            $(".pf_show").hide();
 
-            $(document).on('click', '.edit', function() {
+$(".esic_show").hide();
+
+
+$(document).on('change', '#pf_applicable', function() {
+    if($(this).val() =='Yes')
+    $(".pf_show").show();
+    else
+    $(".pf_show").hide();
+})
+$(document).on('change', '#esic_applicable', function() {
+    if($(this).val() =='Yes')
+    $(".esic_show").show();
+    else
+    $(".esic_show").hide();
+
+})
+
+    $(document).on('click', '.edit', function() {
                 let id = $(this).attr('id');
                 $.ajax({
                     url: "{{ route('employees_masters.edit-statutory-details') }}",
@@ -268,13 +335,23 @@
                     success: function(result) {
                         $("#id").val(result.id);
                         $("#uan_no").val(result.uan_no);
+                        if(result.uan_no)
+                        $("#pf_applicable").val("Yes");
+                        else
+                        $("#pf_applicable").val("No");
+
                         $("#esic_no").val(result.esic_no);
-                        $("input[name=is_pf][value=" + result.is_pf + "]").attr('checked',
-                            'checked');
-                        $("input[name=is_esic][value=" + result.is_esic + "]").attr('checked',
-                            'checked');
-                        $("input[name=is_pt][value=" + result.is_pt + "]").attr('checked',
-                            'checked');
+                        if(result.esic_no)
+                        $("#esic_applicable").val("Yes");
+                        else
+                        $("#esic_applicable").val("No");
+                        $("#is_pt").val(result.is_pt);
+
+
+                        $("#emp_code").val(result.emp_code);
+                        $("#uan_no").val(result.uan_no);
+                        $("#esic_no").val(result.esic_no);
+                        
                         $("#myLargeModalLabel").text("Edit Statutory Details");
                         $("#add-edit-btn").text("Update");
                         let formaction =
@@ -385,6 +462,16 @@
                         width: "5%"
                     },
                     {
+                        data: "employee_name",
+                        orderable: true,
+                        name: "employee_name" /*,width:"20%"*/
+                    },
+                    {
+                        data: "emp_code",
+                        orderable: true,
+                        name: "emp_code" /*,width:"20%"*/
+                    },
+                    {
                         data: "uan_no",
                         orderable: true,
                         name: "uan_no" /*,width:"20%"*/
@@ -395,20 +482,7 @@
                         name: "esic_no",
                         width: "15%"
                     },
-                    {
-                        data: "is_pf",
-                        orderable: true,
-                        name: "is_pf" /*,width:"20%"*/ ,
-                        width: "25%"
-
-                    },
-                    {
-                        data: "is_esic",
-                        orderable: true,
-                        name: "is_esic" /*,width:"20%"*/ ,
-                        width: "25%"
-
-                    },
+                   
                     {
                         data: "is_pt",
                         orderable: true,

@@ -8,6 +8,7 @@ class PersonalDetailModel extends Model
 {
     protected $table = 'personal_detail';
     protected $fillable = [
+        'salutation',
         'employee_name',
         'dob',
         'address',

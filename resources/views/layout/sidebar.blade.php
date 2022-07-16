@@ -1,4 +1,4 @@
- <div class="sidebar-wrapper sidebar-theme">
+<div class="sidebar-wrapper sidebar-theme">
 
             <nav id="sidebar">
 
@@ -19,7 +19,7 @@
 
                     <li class="menu {{ request()->is('dashboard') ? 'active' : '' }}">
                         <a href="{{ url('dashboard') }}"
-                            aria-expanded=" {{ request()->is('dashboard') ? 'true' : 'false' }}"
+                            aria-expanded="true"
                             class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

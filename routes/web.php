@@ -469,6 +469,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     //ajax call to get data
     Route::get('/get_department_by_company', 'DepartmentController@get_department_by_company')->name('get_department_by_company');
+    Route::post('/get_employee_id', 'admin\master\employee_master\PersonalDetail@get_employee_id')->name('get_employee_id');
+    Route::post('/search_employee', 'admin\master\employee_master\PersonalDetail@search_employee')->name('search_employee');
+    
     Route::get('/get_location_by_company', 'LocationController@get_location_by_company')->name('get_location_by_company');
     Route::get('/get_employee_by_company', 'EmployeeController@get_employee_by_company')->name('get_employee_by_company');
     Route::get('/get_department_location_by_company', 'admin\master\admin_master\ExpenseCategory@get_department_location_by_company')->name('get_department_location_by_company');

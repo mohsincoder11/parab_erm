@@ -26,7 +26,10 @@ class OfficialDetails extends Controller
     public function store_official_details(Request $request)
     {
         OfficialDetailModel::create([
+            'employee_id'=>$request->employee_id,
+
             'emp_code' => $request->emp_code,
+            'company_id' => $request->company_id,
             'emp_status_id' => $request->emp_status_id,
             'date_joining' => date('Y-m-d', strtotime($request->date_joining)),
             'date_conform' => date('Y-m-d', strtotime($request->date_conform)),
@@ -53,7 +56,10 @@ class OfficialDetails extends Controller
     public function update_official_details(Request $request)
     {
         OfficialDetailModel::where('id', $request->id)->update([
+            'employee_id'=>$request->employee_id,
             'emp_code' => $request->emp_code,
+            'company_id' => $request->company_id,
+
             'emp_status_id' => $request->emp_status_id,
             'date_joining' => date('Y-m-d', strtotime($request->date_joining)),
             'date_conform' => date('Y-m-d', strtotime($request->date_conform)),
@@ -80,13 +86,14 @@ class OfficialDetails extends Controller
     public function get_official_details(Request $request)
     {
         $data = DB::table('employee_official_details')
-            ->join('employee_status_master', 'employee_status_master.id', '=', 'employee_official_details.emp_status_id')
-            ->join('locations', 'locations.id', '=', 'employee_official_details.location_id')
-            ->join('projects', 'projects.id', '=', 'employee_official_details.project_id')
-            ->join('designations', 'designations.id', '=', 'employee_official_details.designation_id')
-            ->join('departments', 'departments.id', '=', 'employee_official_details.department_id')
-            ->join('grades', 'grades.id', '=', 'employee_official_details.grade_id')
-            ->select('employee_official_details.*', 'employee_status_master.employee_status_name', 'locations.location_name', 'projects.project', 'designations.designation', 'grades.grade_name', 'departments.department')
+        ->join('personal_detail', 'personal_detail.id', '=', 'employee_official_details.employee_id')
+        ->leftjoin('employee_status_master', 'employee_status_master.id', '=', 'employee_official_details.emp_status_id')
+        ->leftjoin('locations', 'locations.id', '=', 'employee_official_details.location_id')
+            ->leftjoin('projects', 'projects.id', '=', 'employee_official_details.project_id')
+            ->leftjoin('designations', 'designations.id', '=', 'employee_official_details.designation_id')
+            ->leftjoin('departments', 'departments.id', '=', 'employee_official_details.department_id')
+            ->leftjoin('grades', 'grades.id', '=', 'employee_official_details.grade_id')
+            ->select('employee_official_details.*','personal_detail.employee_name', 'employee_status_master.employee_status_name', 'locations.location_name', 'projects.project', 'designations.designation', 'grades.grade_name', 'departments.department')
             ->orderby('employee_official_details.id', 'desc')
             ->get();
 
@@ -94,48 +101,51 @@ class OfficialDetails extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->rawColumns([
-                'employee_status_name', 'date_joining', 'date_conform', 'date_leaving', 'department', 'designation', 'grade_name', 'project', 'location_name', 'reporting_manager', 'official_mob_no', 'official_mail_id',
+                'employee_name','employee_status_name', 'date_joining', 'date_conform', 'date_leaving', 'department', 'designation', 'grade_name', 'project', 'location_name', 'reporting_manager', 'official_mob_no', 'official_mail_id',
                 'working_hr', 'action'
             ])
+            ->addColumn('employee_name', function ($data) {
+                return $data->employee_name;
+            })
             ->addColumn('employee_status_name', function ($data) {
                 return $data->employee_status_name;
             })
             ->addColumn('date_joining', function ($data) {
-                return $data->date_joining;
+                return $data->date_joining ?? 'N/A';
             })
             ->addColumn('date_conform', function ($data) {
-                return $data->date_conform;
+                return $data->date_conform ?? 'N/A';
             })
             ->addColumn('date_leaving', function ($data) {
-                return $data->date_leaving;
+                return $data->date_leaving ?? 'N/A';
             })
             ->addColumn('department', function ($data) {
-                return $data->department;
+                return $data->department ?? 'N/A';
             })
             ->addColumn('designation', function ($data) {
-                return $data->designation;
+                return $data->designation ?? 'N/A';
             })
             ->addColumn('grade_name', function ($data) {
-                return $data->grade_name;
+                return $data->grade_name ?? 'N/A';
             })
 
             ->addColumn('project', function ($data) {
-                return $data->project;
+                return $data->project ?? 'N/A';
             })
             ->addColumn('location_name', function ($data) {
-                return $data->location_name;
+                return $data->location_name ?? 'N/A';
             })
             ->addColumn('reporting_manager', function ($data) {
-                return $data->reporting_manager;
+                return $data->reporting_manager ?? 'N/A';
             })
             ->addColumn('official_mob_no', function ($data) {
-                return $data->official_mob_no;
+                return $data->official_mob_no ?? 'N/A';
             })
             ->addColumn('official_mail_id', function ($data) {
-                return $data->official_mail_id;
+                return $data->official_mail_id ?? 'N/A';
             })
             ->addColumn('working_hr', function ($data) {
-                return $data->working_hr;
+                return $data->working_hr ?? 'N/A';
             })
 
 

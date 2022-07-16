@@ -18,13 +18,17 @@ class AssetPerkDetail extends Controller
     public function store_assetperk_details(Request $request)
     {
         AssetPerkDetailModel::create([
+            'employee_id' => $request->employee_id,
+            'emp_code' => $request->emp_code,
+            'company_id' => $request->company_id,
+
             'perk_name' => $request->perk_name,
             'sr_no' => $request->sr_no,
             'issue_date' => date('Y-m-d', strtotime($request->issue_date)),
             'return_date' => date('Y-m-d', strtotime($request->return_date)),
             'value' => $request->value,
             'validity' => $request->validity,
-           
+
 
         ]);
 
@@ -32,12 +36,16 @@ class AssetPerkDetail extends Controller
     }
     public function edit_assetperk_details(Request $request)
     {
-        $official_detail=AssetPerkDetailModel::where('id', $request->id)->first();
+        $official_detail = AssetPerkDetailModel::where('id', $request->id)->first();
         return response()->json($official_detail);
     }
     public function update_assetperk_details(Request $request)
     {
         AssetPerkDetailModel::where('id', $request->id)->update([
+            'employee_id' => $request->employee_id,
+            'emp_code' => $request->emp_code,
+            'company_id' => $request->company_id,
+
             'perk_name' => $request->perk_name,
             'sr_no' => $request->sr_no,
             'issue_date' => date('Y-m-d', strtotime($request->issue_date)),
@@ -56,34 +64,41 @@ class AssetPerkDetail extends Controller
     }
     public function get_assetperk_details(Request $request)
     {
-        $data = DB::table('assetperk_detail')         
+        $data = DB::table('assetperk_detail')
+            ->join('personal_detail', 'personal_detail.id', '=', 'assetperk_detail.employee_id')
+            ->select('assetperk_detail.*', 'personal_detail.employee_name')
             ->get();
-
 
         return DataTables::of($data)
             ->addIndexColumn()
             ->rawColumns([
-                'perk_name', 'sr_no', 'issue_date', 'return_date', 'value', 'validity','action'
+                'employee_name','emp_code','perk_name', 'sr_no', 'issue_date', 'return_date', 'value', 'validity', 'action'
             ])
+            ->addColumn('employee_name', function ($data) {
+                return $data->employee_name;
+            })
+            ->addColumn('emp_code', function ($data) {
+                return $data->emp_code ?? 'N/A';
+            })
             ->addColumn('perk_name', function ($data) {
-                return $data->perk_name;
+                return $data->perk_name ?? 'N/A';
             })
             ->addColumn('sr_no', function ($data) {
-                return $data->sr_no;
+                return $data->sr_no ?? 'N/A';
             })
             ->addColumn('issue_date', function ($data) {
-                return $data->issue_date;
+                return $data->issue_date ?? 'N/A';
             })
             ->addColumn('return_date', function ($data) {
-                return $data->return_date;
+                return $data->return_date ?? 'N/A';
             })
             ->addColumn('value', function ($data) {
-                return $data->value;
+                return $data->value ?? 'N/A';
             })
             ->addColumn('validity', function ($data) {
-                return $data->validity;
+                return $data->validity ?? 'N/A';
             })
-          
+
 
 
 
@@ -115,4 +130,3 @@ class AssetPerkDetail extends Controller
         return response()->json(1);
     }
 }
-
