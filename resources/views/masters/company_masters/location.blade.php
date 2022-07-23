@@ -72,7 +72,7 @@
 
                                     <div class="col-md-4 form-group">
                                         <label>Address Line *</label>
-                                        <input type="text" name="address1" id="address1" required class="form-control"
+                                        <input type="text" name="address" id="address" required class="form-control"
                                             placeholder="full address">
                                     </div>
 
@@ -246,7 +246,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group" align="center" style="margin-top: 4%;margin-left: 50%;">
-                                        <input type="submit" name="action_button" class="btn btn-warning" value="Add" />
+                                        <input type="submit" name="action_button" class="btn btn-warning" value="Update" />
                                     </div>
 
                                 </div>
@@ -347,8 +347,55 @@
 @section('js')
 <script type="text/javascript">
 
+$('#sample_form').validate({
+            
+      ignore: ".ignore",
+            rules: {
+                company_id: {
+                    required: true,
+                }, 
+                location_name: {
+                    required: true,
+                }, 
+                address: {
+                    required: true,
+                }, 
+                city: {
+                    required: true,
+                }, 
+                state: {
+                    required: true,
+                },           
+
+            },
+            messages: {
+                company_id: {
+                    required: "This field is required.",
+                },   
+                location_name: {
+                    required: "This field is required.",
+                },   
+                address: {
+                    required: "This field is required.",
+                },   
+                city: {
+                    required: "This field is required.",
+                },                  
+                state: {
+                    required: "This field is required.",
+                },   
+
+            },
+            errorElement: 'label',
+            errorPlacement: function(error, element) {
+                element.closest('.form-group').append(error);
+
+            }
+        });
 
     $('#sample_form').on('submit', function (event) {
+        var isvalid = $("#sample_form").valid();
+        if (isvalid) {
         event.preventDefault();
 
         $.ajax({
@@ -388,6 +435,7 @@
 
             }
         });
+    }
     });
 
     $('#update_form').on('submit', function (event) {

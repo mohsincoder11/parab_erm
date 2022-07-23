@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin\master\employee_master;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\employee_master\PeronalDetailModel;
+use App\Models\employee_master\PersonalDetailModel;
 use DB;
 use Yajra\DataTables\DataTables;
 
@@ -18,10 +18,13 @@ class PersonalDetail extends Controller
 
     public function store_personal_details(Request $request)
     {
-        PeronalDetailModel::create([
+        PersonalDetailModel::create([
+            'salutation'=>$request->salutation,
             'employee_name'=>$request->employee_name,
             'dob'=>$request->dob,
             'address'=>$request->address,
+            'locality'=>$request->locality,
+
             'city'=>$request->city,
             'pincode'=>$request->pincode,
             'contact_no'=>$request->contact_no,
@@ -42,15 +45,19 @@ class PersonalDetail extends Controller
     }
     public function edit_personal_details(Request $request)
     {
-        $official_detail=PeronalDetailModel::where('id', $request->id)->first();
+        $official_detail=PersonalDetailModel::where('id', $request->id)->first();
         return response()->json($official_detail);
     }
     public function update_personal_details(Request $request)
     {
-        PeronalDetailModel::where('id', $request->id)->update([
+        PersonalDetailModel::where('id', $request->id)->update([
+            'salutation'=>$request->salutation,
+
             'employee_name'=>$request->employee_name,
             'dob'=>date('Y-m-d', strtotime($request->dob)),
             'address'=>$request->address,
+            'locality'=>$request->locality,
+            
             'city'=>$request->city,
             'pincode'=>$request->pincode,
             'contact_no'=>$request->contact_no,
@@ -72,7 +79,7 @@ class PersonalDetail extends Controller
     }
     public function delete_personal_details(Request $request)
     {
-        PeronalDetailModel::where('id', $request->id)->delete();
+        PersonalDetailModel::where('id', $request->id)->delete();
         return response()->json(1);
     }
     public function get_personal_details(Request $request)
@@ -85,26 +92,25 @@ class PersonalDetail extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->rawColumns([
-                'employee_name', 'dob', 'address', 'city', 'pincode', 'contact_no', 'gender', 'blood_group', 'marital_status', 'spouse_name',                
+                'employee_name', 'dob', 'locality','address', 'contact_no', 'gender', 'blood_group', 'marital_status', 'spouse_name',                
                 'marriage_date', 'personal_email', 'emergency_contact_no', 'pan_no', 'adhar_no', 'driving_license_no', 
                 'action'
 
             ])
+         
             ->addColumn('employee_name', function ($data) {
-                return $data->employee_name;
+                return $data->salutation.' '.$data->employee_name;
             })
             ->addColumn('dob', function ($data) {
                 return $data->dob;
             })
             ->addColumn('address', function ($data) {
-                return $data->address;
+                return $data->address.','.$data->city.'. '.$data->pincode;
             })
-            ->addColumn('city', function ($data) {
-                return $data->city;
+            ->addColumn('locality', function ($data) {
+                return $data->locality ?? 'N/A';
             })
-            ->addColumn('pincode', function ($data) {
-                return $data->pincode;
-            })
+            
             ->addColumn('contact_no', function ($data) {
                 return $data->contact_no;
             })
@@ -113,23 +119,23 @@ class PersonalDetail extends Controller
             })
 
             ->addColumn('blood_group', function ($data) {
-                return $data->blood_group;
+                return $data->blood_group ?? 'N/A';
             })
             ->addColumn('marital_status', function ($data) {
-                return $data->marital_status;
+                return $data->marital_status ?? 'N/A';
             })
             ->addColumn('spouse_name', function ($data) {
-                return $data->spouse_name;
+                return $data->spouse_name ?? 'N/A';
             })
             
             ->addColumn('marriage_date', function ($data) {
-                return $data->marriage_date;
+                return $data->marriage_date ?? 'N/A';
             })
             ->addColumn('personal_email', function ($data) {
-                return $data->personal_email;
+                return $data->personal_email ?? 'N/A';
             })
             ->addColumn('emergency_contact_no', function ($data) {
-                return $data->emergency_contact_no;
+                return $data->emergency_contact_no ?? 'N/A';
             })
             ->addColumn('pan_no', function ($data) {
                 return $data->pan_no;
@@ -138,7 +144,7 @@ class PersonalDetail extends Controller
                 return $data->adhar_no;
             })
             ->addColumn('driving_license_no', function ($data) {
-                return $data->driving_license_no;
+                return $data->driving_license_no ?? 'N/A';
             })
           
 
@@ -169,6 +175,22 @@ class PersonalDetail extends Controller
             ->make(true);
         return response()->json(1);
     }
+
+    public function search_employee(Request $request){
+        $search_keyword =$request->search_keyword;
+        $employee=PersonalDetailModel::where(function ($query) use ($search_keyword) {
+            $query->where('employee_name', 'LIKE', "%$search_keyword%");
+        })
+        ->select('employee_name')
+        ->get();
+        return response()->json($employee);
+    } 
+    
+    public function get_employee_id(Request $request){
+        $employee=PersonalDetailModel::where('employee_name',$request->search_keyword)->first();
+                return response()->json($employee);
+    }
+
 }
 
 

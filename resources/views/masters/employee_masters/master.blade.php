@@ -774,6 +774,7 @@
 
                 },
                 submitHandler: function(form) {
+                    
                     // $("#load_screen").show();
                     return true;
                 }

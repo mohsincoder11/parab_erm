@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class QualificationDetailModel extends Model
 {
-    protected $table='qualification_detail';
+    protected $table = 'qualification_detail';
     protected $fillable = [
+        'employee_id',
+        'emp_code',
+        'basic_qualification',
         'graduation',
         'graduation_year',
         'post_graduation',

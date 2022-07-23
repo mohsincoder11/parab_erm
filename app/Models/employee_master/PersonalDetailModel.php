@@ -4,10 +4,11 @@ namespace App\Models\employee_master;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PeronalDetailModel extends Model
+class PersonalDetailModel extends Model
 {
     protected $table = 'personal_detail';
     protected $fillable = [
+        'salutation',
         'employee_name',
         'dob',
         'address',

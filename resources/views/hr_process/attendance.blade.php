@@ -264,7 +264,7 @@ $employeeLastAttendance['clock_out']='';
                 let _token = $('input[name="_token"]').val();
                 $.ajax({
                     url: "{{ url('getAllEmployees')}}/" + id,
-                    method: "POST",
+                    method: "get",
                     dataType: "JSON",
                     success: function (result) {
                         $('#employee_id').empty();

@@ -1,12 +1,12 @@
-@extends('layout/layout')
+@extends('layout.layout')
 @section('content')
 
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
 
 
-            <div style="margin-top: 3%;"> 
-                           @include('layout.alerts')
+            <div style="margin-top: 3%;">
+                @include('layout.alerts')
 
                 <div>
                     <div>
@@ -29,22 +29,23 @@
 
                     </div>
                     <!-- Model Start -->
-                    <div class="modal fade add-edit_modal" tabindex="-1" role="dialog"
-                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal fade add-edit_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                        aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="myLargeModalLabel">Add Expenses Category </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-x">
                                             <line x1="18" y1="6" x2="6" y2="18"></line>
                                             <line x1="6" y1="6" x2="18" y2="18"></line>
                                         </svg>
                                     </button>
                                 </div>
-                                <form id="complaint_form" method="post">
+                                <form id="expense_category_form" method="post">
                                     @csrf
                                     <input type="hidden" id="id" name="id">
                                     <div class="row" style="padding: 10px;">
@@ -76,10 +77,10 @@
 
                                         <div class="col-md-6 form-group">
                                             <label>Location*</label>
-                                            <select name="location_id" id="location_id"
-                                                class="form-control selectpicker" data-live-search="true"
-                                                data-live-search-style="begins" title='Select location...'>
-                                                
+                                            <select name="location_id" id="location_id" class="form-control selectpicker"
+                                                data-live-search="true" data-live-search-style="begins"
+                                                title='Select location...'>
+
                                             </select>
                                         </div>
 
@@ -87,17 +88,16 @@
 
                                         <div class="col-md-6 form-group">
                                             <label>Select Department *</label>
-                                            <select name="department_id" id="department_id" class="form-control selectpicker"
-                                                data-live-search="true" data-live-search-style="begins"
-                                                title='Select Department'>
-                                                
+                                            <select name="department_id" id="department_id"
+                                                class="form-control selectpicker" data-live-search="true"
+                                                data-live-search-style="begins" title='Select Department'>
+
                                                 </option>
 
                                             </select>
                                         </div>
 
-                                        <div class="form-group" align="center"
-                                            style="margin-top: 5%;  margin-left: 45%;">
+                                        <div class="form-group" align="center" style="margin-top: 5%;  margin-left: 45%;">
 
                                             <button formaction="{{ route('admin_master.store-expenses-category') }}"
                                                 type="submit" class="btn btn-warning" id="add-edit-btn">Add </button>
@@ -115,16 +115,17 @@
 
 
                 <!--edit Model Start -->
-                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                    id="editmodel" aria-hidden="true">
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" id="editmodel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="myLargeModalLabel">Edit</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-x">
                                         <line x1="18" y1="6" x2="6" y2="18"></line>
                                         <line x1="6" y1="6" x2="18" y2="18"></line>
                                     </svg>
@@ -162,7 +163,8 @@
                                 <div class="col-md-6 form-group">
                                     <label>Location*</label>
                                     <select name="location_head" id="location_head" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-style="begins" title='Select Employee...'>
+                                        data-live-search="true" data-live-search-style="begins"
+                                        title='Select Employee...'>
                                         <option value="361">1</option>
                                         <option value="361">2</option>
                                         <option value="361">3</option>
@@ -250,9 +252,9 @@
                             <div class="modal-content">
                                 <div class="modal-header" id="exampleModalPopoversLabel">
                                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                    </button>
-                                                  </div> -->
+                                                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                        </button>
+                                                      </div> -->
                                     <div class="modal-body">
                                         <p class="modal-text">Parberp.com says<br>
                                             Please select atleast one Checkbox
@@ -276,7 +278,8 @@
                 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                     <div class="widget-content widget-content-area br-6">
                         <div class="table-responsive mb-4 mt-4">
-                            <table id="html5-extension" class="table table-hover non-hover datatable_server" style="width:100%">
+                            <table id="html5-extension" class="table table-hover non-hover datatable_server"
+                                style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Sr.no</th>
@@ -286,10 +289,10 @@
                                         <th>Department</th>
                                         <th>Action</th>
 
-                                   
+
                                 </thead>
                                 <tbody>
-                                  
+
                                 </tbody>
                             </table>
                         </div>
@@ -328,13 +331,14 @@
                                 b.department + '</option>');
                         });
                         $.each(result['location'], function(a, b) {
-                            $("#location_id").append('<option value="' + b.id + '">' + b.location_name + '</option>');
+                            $("#location_id").append('<option value="' + b.id + '">' + b
+                                .location_name + '</option>');
                         });
                     }
                 })
             })
 
-            $('#complaint_form').validate({
+            $('#expense_category_form').validate({
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
@@ -351,7 +355,7 @@
                     department_id: {
                         required: true,
                     },
-                   
+
 
 
                 },
@@ -369,7 +373,7 @@
                     department_id: {
                         required: 'Please select department.',
                     },
-                   
+
                 },
                 errorElement: 'label',
                 errorPlacement: function(error, element) {
@@ -441,7 +445,8 @@
 
                         $("#myLargeModalLabel").text("Edit Expenses Category")
                         $("#add-edit-btn").text("update");
-                        let formaction = '{{ route('admin_master.update-expenses-category') }}';
+                        let formaction =
+                            '{{ route('admin_master.update-expenses-category') }}';
                         $("#add-edit-btn").attr("formaction", formaction);
 
                     }
@@ -450,9 +455,9 @@
             })
 
             $('.add-edit_modal').on('hidden.bs.modal', function() {
-                $("#myLargeModalLabel").text("Add Offer Letter");
+                $("#myLargeModalLabel").text("Add Expense Category");
                 $("#add-edit-btn").text("Add");
-                $('#offer_letter_form').trigger("reset");
+                $('#expense_category_form').trigger("reset");
                 $("#store_logo").text('');
                 let formaction = '{{ route('admin_master.store-expenses-category') }}';
                 $("#add-edit-btn").attr("formaction", formaction);

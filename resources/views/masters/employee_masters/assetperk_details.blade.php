@@ -52,16 +52,44 @@
                                         @csrf
                                         <div class="row" style="padding: 10px;">
                                             <input type="hidden" name="id" id="id">
-                                 
+                                            <div class="col-md-6 form-group">
+                                                <label>Employee Name<span class="required">*</span></label>
+                                                <input name="employee_name" id="employee_name" class="form-control "
+                                                    placeholder="Enter employee name" autocomplete="off">
+                                                <input type="hidden" name="employee_id" id="employee_id">
+    
+                                            </div>
+                                            @php
+                                                $company = get_company_name_and_id();
+                                            @endphp
+                                            <div class="col-md-6 form-group">
+                                                <label>Company <span class="required">*</span></label>
+                                                <select name="company_id" id="company_id" class="form-control selectpicker"
+                                                    data-live-search="true" data-live-search-style="begins"
+                                                    title='Select Company Type...'>
+                                                    <option value="" disabled selected>Company Type</option>
+                                                    @foreach ($company as $c)
+                                                        <option value="{{ $c->id }}">{{ $c->company_name }}</option>
+                                                    @endforeach
+    
+                                                </select>
+                                            </div>
+    
+                                            <div class="col-md-6 form-group">
+                                                <label>Employee code<span class="required">*</span></label>
+                                                <input type="text" name="emp_code" id="emp_code" required
+                                                    class="form-control" placeholder="">
+                                            </div>
+
                                         <div class="col-md-6 form-group">
-                                            <label>Assets Orb Perk Name</label>
-                                            <input type="text" name="perk_name" id="perk_name" required
+                                            <label>Assets Or Perk Name</label>
+                                            <input type="text" name="perk_name" id="perk_name"
                                                 class="form-control" placeholder="">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>Assets Sr No.</label>
-                                            <input type="number" name="sr_no" id="sr_no" required
+                                            <input type="number" name="sr_no" id="sr_no"
                                                 class="form-control" placeholder="">
                                         </div>
 
@@ -79,12 +107,12 @@
                                      
                                         <div class="col-md-6 form-group">
                                             <label>Perk Value</label>
-                                            <input type="text" name="value" id="value" required
+                                            <input type="text" name="value" id="value"
                                                 class="form-control" placeholder="">
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label>Perk Validity</label>
-                                            <input type="text" name="validity" id="validity" required
+                                            <input type="text" name="validity" id="validity"
                                                 class="form-control" placeholder="">
                                         </div>
                                       
@@ -173,6 +201,9 @@
                                         <thead>
                                             <tr>
                                                 <th>Sr.No.</th>
+                                                <th>Employee Name </th>
+                                                <th>Employee Code </th>
+    
                                                 <th>Asset  or Perk Name </th>
                                                 <th>Asset Sr No</th>
                                                 <th>Date of Issue </th>
@@ -210,45 +241,66 @@
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
-                    perk_name: {
+                    employee_name: {
                         required: true,
                     },
-                    sr_no: {
+                    emp_code: {
                         required: true,
                     },
-                    issue_date: {
-                        required: true,
-                    },
-                    return_date: {
-                        required: true,
-                    },
-                    value: {
-                        required: true,
-                    },
-                    validity: {
+                    company_id: {
                         required: true,
                     },
 
+                    // perk_name: {
+                    //     required: true,
+                    // },
+                    // sr_no: {
+                    //     required: true,
+                    // },
+                    // issue_date: {
+                    //     required: true,
+                    // },
+                    // return_date: {
+                    //     required: true,
+                    // },
+                    // value: {
+                    //     required: true,
+                    // },
+                    // validity: {
+                    //     required: true,
+                    // },
+
                 },
                 messages: {
-                    perk_name: {
+                    employee_name: {
                         required: "This field is required.",
                     },
-                    sr_no: {
+                    emp_code: {
                         required: "This field is required.",
                     },
-                    issue_date: {
-                        required: "Please select issue date.",
+                    company_id:{
+                        required: "This field is required.",
+
+
                     },
-                    return_date: {
-                        required: 'Please select return date.',
-                    },
-                    value: {
-                        required: 'This field is required.',
-                    },
-                    validity: {
-                        required: 'This field is required.',
-                    },
+                    // perk_name: {
+                    //     required: "This field is required.",
+                    // },
+                    // sr_no: {
+                    //     required: "This field is required.",
+                    // },
+                    // issue_date: {
+                    //     required: "Please select issue date.",
+                    // },
+                    // return_date: {
+                    //     required: 'Please select return date.',
+                    // },
+                    // value: {
+                    //     required: 'This field is required.',
+                    // },
+                    // validity: {
+                    //     required: 'This field is required.',
+                    // },
 
                 },
                 errorElement: 'label',
@@ -257,6 +309,8 @@
 
                 },
                 submitHandler: function(form) {
+                    $("#add-edit-btn").addClass('disabled');
+
                     // $("#load_screen").show();
                     return true;
                 }
@@ -389,6 +443,14 @@
                         width: "5%"
                     },
                     {
+                        data: "employee_name",
+                        orderable: true,
+                        name: "employee_name" /*,width:"20%"*/
+                    }, {
+                        data: "emp_code",
+                        orderable: true,
+                        name: "emp_code" /*,width:"20%"*/
+                    }, {
                         data: "perk_name",
                         orderable: true,
                         name: "perk_name" /*,width:"20%"*/

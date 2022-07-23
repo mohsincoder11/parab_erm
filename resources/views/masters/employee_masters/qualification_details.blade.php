@@ -49,7 +49,29 @@
                                     @csrf
                                     <div class="row" style="padding: 10px;">
                                         <input type="hidden" id="id" name="id">
+                                        <div class="col-md-6 form-group">
+                                            <label>Employee Name<span class="required">*</span></label>
+                                            <input name="employee_name" id="employee_name" class="form-control "
+                                                placeholder="Enter employee name" autocomplete="off">
+                                            <input type="hidden" name="employee_id" id="employee_id">
 
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Employee code<span class="required">*</span></label>
+                                            <input type="text" name="emp_code" id="emp_code" required
+                                                class="form-control" placeholder="">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Basic Educational Qualification<span class="required">*</span></label>
+                                            <select name="basic_qualification" id="basic_qualification" class="form-control selectpicker"
+                                                data-live-search="true" data-live-search-style="begins"
+                                                title='Select Company Type...'>
+                                                <option value="" disabled selected> Select Graduation</option>
+                                                <option value="ba">BA</option>
+                                                <option value="bsc">BSC</option>
+
+                                            </select>
+                                        </div>
                                         <div class="col-md-6 form-group">
                                             <label>Graduation</label>
                                             <select name="graduation" id="graduation" class="form-control selectpicker"
@@ -329,6 +351,10 @@
                                     <thead>
                                         <tr>
                                             <th>Sr.No.</th>
+                                            <th>Employee Name </th>
+                                            <th>Employee Code </th>
+                                            <th>Basic Qualification </th>
+
                                             <th>Graduation </th>
                                             <th>Graduation Year</th>
                                             <th>Post Graduation </th>
@@ -368,45 +394,63 @@
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
-                    graduation: {
+                      employee_name: {
                         required: true,
                     },
-                    graduation_year: {
+                    emp_code: {
                         required: true,
                     },
-                    post_graduation: {
+                    basic_qualification:{
                         required: true,
                     },
-                    post_graduation_year: {
-                        required: true,
-                    },
-                    professional_qualification: {
-                        required: true,
-                    },
-                    university: {
-                        required: true,
-                    },
+                    // graduation: {
+                    //     required: true,
+                    // },
+                    // graduation_year: {
+                    //     required: true,
+                    // },
+                    // post_graduation: {
+                    //     required: true,
+                    // },
+                    // post_graduation_year: {
+                    //     required: true,
+                    // },
+                    // professional_qualification: {
+                    //     required: true,
+                    // },
+                    // university: {
+                    //     required: true,
+                    // },
 
                 },
                 messages: {
-                    graduation: {
+                     employee_name: {
+                        required: "This field is required.",
+                    },
+                    emp_code: {
+                        required: "This field is required.",
+                    },
+                    basic_qualification: {
                         required: "Please select a option.",
                     },
-                    graduation_year: {
-                        required: "Please select a option.",
-                    },
-                    post_graduation: {
-                        required: "Please select a option.",
-                    },
-                    post_graduation_year: {
-                        required: 'Please select a option.',
-                    },
-                    professional_qualification: {
-                        required: 'Please select a option.',
-                    },
-                    university: {
-                        required: 'Please select a option.',
-                    },
+                    // graduation: {
+                    //     required: "Please select a option.",
+                    // },
+                    // graduation_year: {
+                    //     required: "Please select a option.",
+                    // },
+                    // post_graduation: {
+                    //     required: "Please select a option.",
+                    // },
+                    // post_graduation_year: {
+                    //     required: 'Please select a option.',
+                    // },
+                    // professional_qualification: {
+                    //     required: 'Please select a option.',
+                    // },
+                    // university: {
+                    //     required: 'Please select a option.',
+                    // },
 
                 },
                 errorElement: 'label',
@@ -415,6 +459,8 @@
 
                 },
                 submitHandler: function(form) {
+                    $("#add-edit-btn").addClass('disabled');
+
                     // $("#load_screen").show();
                     return true;
                 }
@@ -432,7 +478,10 @@
                     success: function(result) {
 
                         $("#id").val(result.id);
+                        $("#emp_code").val(result.emp_code);
+
                         $("#graduation").val(result.graduation);
+                        $("#basic_qualification").val(result.basic_qualification);
                         $("#graduation_year").val(result.graduation_year);
                         $("#post_graduation").val(result.post_graduation);
                         $("#post_graduation_year").val(result.post_graduation_year);
@@ -546,6 +595,22 @@
                         orderable: true,
                         name: "DT_RowIndex",
                         width: "5%"
+                    },
+                    {
+                        data: "employee_name",
+                        orderable: true,
+                        name: "employee_name" /*,width:"20%"*/
+                    },
+                    {
+                        data: "emp_code",
+                        orderable: true,
+                        name: "emp_code" /*,width:"20%"*/
+                    },
+                    
+                    {
+                        data: "basic_qualification",
+                        orderable: true,
+                        name: "basic_qualification" /*,width:"20%"*/
                     },
                     {
                         data: "graduation",

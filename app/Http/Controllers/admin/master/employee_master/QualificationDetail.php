@@ -18,6 +18,11 @@ class QualificationDetail extends Controller
     public function store_qualification_details(Request $request)
     {
         QualificationDetailModel::create([
+            'employee_id'=>$request->employee_id,
+            'emp_code' => $request->emp_code,
+           
+            'basic_qualification' => $request->basic_qualification,
+
             'graduation' => $request->graduation,
             'graduation_year' => $request->graduation_year,
             'post_graduation' => $request->post_graduation,
@@ -37,6 +42,11 @@ class QualificationDetail extends Controller
     public function update_qualification_details(Request $request)
     {
         QualificationDetailModel::where('id', $request->id)->update([
+            'employee_id'=>$request->employee_id,
+            'emp_code' => $request->emp_code,
+            'basic_qualification' => $request->basic_qualification,
+           
+        
             'graduation' => $request->graduation,
             'graduation_year' => $request->graduation_year,
             'post_graduation' => $request->post_graduation,
@@ -56,30 +66,43 @@ class QualificationDetail extends Controller
     public function get_qualification_details(Request $request)
     {
         $data = DB::table('qualification_detail')
+        ->join('personal_detail', 'personal_detail.id', '=', 'qualification_detail.employee_id')
+        ->select('qualification_detail.*','personal_detail.employee_name')
+
             ->get();
 
         return DataTables::of($data)
             ->addIndexColumn()
             ->rawColumns([
-                'graduation', 'graduation_year', 'post_graduation', 'post_graduation_year', 'professional_qualification', 'university', 'action'
+                'employee_name','emp_code', 'graduation', 'graduation_year', 'post_graduation', 'post_graduation_year', 'professional_qualification', 'university', 'action'
             ])
+            ->addColumn('employee_name', function ($data) {
+                return $data->employee_name;
+            })
+            ->addColumn('emp_code', function ($data) {
+                return $data->emp_code ?? 'N/A';
+            })
+            ->addColumn('basic_qualification', function ($data) {
+                return $data->basic_qualification ?? 'N/A';
+            })
+            
             ->addColumn('graduation', function ($data) {
-                return $data->graduation;
+                return $data->graduation ?? 'N/A';
             })
             ->addColumn('graduation_year', function ($data) {
-                return $data->graduation_year;
+                return $data->graduation_year ?? 'N/A';
             })
             ->addColumn('post_graduation', function ($data) {
-                return $data->post_graduation;
+                return $data->post_graduation ?? 'N/A';
             })
             ->addColumn('post_graduation_year', function ($data) {
-                return $data->post_graduation_year;
+                return $data->post_graduation_year ?? 'N/A';
             })
             ->addColumn('professional_qualification', function ($data) {
-                return $data->professional_qualification;
+                return $data->professional_qualification ?? 'N/A';
             })
             ->addColumn('university', function ($data) {
-                return $data->university;
+                return $data->university ?? 'N/A';
             })
 
             ->addColumn('action', function ($data) {

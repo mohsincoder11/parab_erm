@@ -126,5 +126,9 @@ class EmployeeController extends Controller
     public function get_employee_by_company(Request $request){
         $employee=get_employee_name_and_id($request->company_id);
         return response()->json($employee);
-    }
+    }  
+
+   
+    
+
 }

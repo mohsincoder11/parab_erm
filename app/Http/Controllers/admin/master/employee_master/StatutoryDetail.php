@@ -19,10 +19,12 @@ class StatutoryDetail extends Controller
     public function store_statutory_details(Request $request)
     {
         StatutoryDetailModel::create([
+            'employee_id'=>$request->employee_id,
+            'emp_code' => $request->emp_code,
+           
               'uan_no' => $request->uan_no,
             'esic_no' => $request->esic_no,
-            'is_pf' => $request->is_pf,
-            'is_esic' => $request->is_esic,
+            
             'is_pt' => $request->is_pt,
            
         ]);
@@ -39,10 +41,12 @@ class StatutoryDetail extends Controller
     public function update_statutory_details(Request $request)
     {
         StatutoryDetailModel::where('id', $request->id)->update([
+            'employee_id'=>$request->employee_id,
+            'emp_code' => $request->emp_code,
+           
             'uan_no' => $request->uan_no,
             'esic_no' => $request->esic_no,
-            'is_pf' => $request->is_pf,
-            'is_esic' => $request->is_esic,
+            
             'is_pt' => $request->is_pt,
 
         ]);
@@ -59,26 +63,30 @@ class StatutoryDetail extends Controller
     public function get_statutory_details(Request $request)
     {
         $data = DB::table('statutory_detail')
+        ->join('personal_detail', 'personal_detail.id', '=', 'statutory_detail.employee_id')
+        ->select('statutory_detail.*','personal_detail.employee_name')
+
                ->get();
 
 
         return DataTables::of($data)
             ->addIndexColumn()
             ->rawColumns([
-                'uan_no', 'esic_no', 'is_pf', 'is_esic', 'is_pt','action'
+                'employee_name','emp_code','uan_no', 'esic_no',  'is_pt','action'
             ])
+            ->addColumn('employee_name', function ($data) {
+                return $data->employee_name;
+            })
+            ->addColumn('emp_code', function ($data) {
+                return $data->emp_code ?? 'N/A';
+            })
             ->addColumn('uan_no', function ($data) {
-                return $data->uan_no;
+                return $data->uan_no ?? 'N/A';
             })
             ->addColumn('esic_no', function ($data) {
-                return $data->esic_no;
+                return $data->esic_no ?? 'N/A';
             })
-            ->addColumn('is_pf', function ($data) {
-                return $data->is_pf;
-            })
-            ->addColumn('is_esic', function ($data) {
-                return $data->is_esic;
-            })
+          
             ->addColumn('is_pt', function ($data) {
                 return $data->is_pt;
             })        

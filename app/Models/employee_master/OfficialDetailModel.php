@@ -8,6 +8,8 @@ class OfficialDetailModel extends Model
 {
     protected $table = 'employee_official_details';
     protected $fillable = [
+        'employee_id',
+        'company_id',
         'emp_code',
         'emp_status_id',
         'date_joining',

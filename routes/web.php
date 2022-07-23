@@ -145,6 +145,13 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     //Employee Status
     Route::get('employee-status', 'EmployeeStatus@employee_status')->name('employee-status');
 
+    Route::get('get-employee-status', 'EmployeeStatus@get_employee_status')->name('get-employee-status');
+    Route::post('store-employee-status', 'EmployeeStatus@store_employee_status')->name('store-employee-status');
+    Route::get('delete-employee-status', 'EmployeeStatus@delete_employee_status')->name('delete-employee-status');
+    Route::get('edit-employee-status', 'EmployeeStatus@edit_employee_status')->name('edit-employee-status');
+    Route::post('update-employee-status', 'EmployeeStatus@update_employee_status')->name('update-employee-status');
+
+
     //master/hr-document
     Route::namespace("admin\master\hr_document")->name('hr_document.')->prefix('masters/document')->group(function () {
         Route::get('/offer-letter', 'OfferLetter@offer_letter')->name('offer-letter');
@@ -188,6 +195,27 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/edit-expenses-category', 'ExpenseCategory@edit_expenses_category')->name('edit-expenses-category');
         Route::get('/delete-expenses-category', 'ExpenseCategory@delete_expenses_category')->name('delete-expenses-category');
         Route::get('/get-expenses-category-record', 'ExpenseCategory@get_expenses_category_record')->name('get-expenses-category-record');
+
+        Route::get('/vendor-category', 'VendorCategory@vendor_category')->name('vendor-category');
+        Route::post('/store-vendor-category', 'VendorCategory@store_vendor_category')->name('store-vendor-category');
+        Route::post('/update-vendor-category', 'VendorCategory@update_vendor_category')->name('update-vendor-category');
+        Route::get('/edit-vendor-category', 'VendorCategory@edit_vendor_category')->name('edit-vendor-category');
+        Route::get('/delete-vendor-category', 'VendorCategory@delete_vendor_category')->name('delete-vendor-category');
+        Route::get('/get-vendor-category-record', 'VendorCategory@get_vendor_category_record')->name('get-vendor-category-record');
+
+        Route::get('/vendor-details', 'VendorDetails@vendor_details')->name('vendor-details');
+        Route::post('/store-vendor-details', 'VendorDetails@store_vendor_details')->name('store-vendor-details');
+        Route::post('/update-vendor-details', 'VendorDetails@update_vendor_details')->name('update-vendor-details');
+        Route::get('/edit-vendor-details', 'VendorDetails@edit_vendor_details')->name('edit-vendor-details');
+        Route::get('/delete-vendor-details', 'VendorDetails@delete_vendor_details')->name('delete-vendor-details');
+        Route::get('/get-vendor-details-record', 'VendorDetails@get_vendor_details_record')->name('get-vendor-details-record');
+
+        Route::get('/admin-documents', 'AdminDocuments@admin_documents')->name('admin-documents');
+        Route::post('/store-admin-documents', 'AdminDocuments@store_admin_documents')->name('store-admin-documents');
+        Route::post('/update-admin-documents', 'AdminDocuments@update_admin_documents')->name('update-admin-documents');
+        Route::get('/edit-admin-documents', 'AdminDocuments@edit_admin_documents')->name('edit-admin-documents');
+        Route::get('/delete-admin-documents', 'AdminDocuments@delete_admin_documents')->name('delete-admin-documents');
+        Route::get('/get-admin-documents-record', 'AdminDocuments@get_admin_documents_record')->name('get-admin-documents-record');
     });
 
     //master/assets_masters
@@ -448,6 +476,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     //ajax call to get data
     Route::get('/get_department_by_company', 'DepartmentController@get_department_by_company')->name('get_department_by_company');
+    Route::post('/get_employee_id', 'admin\master\employee_master\PersonalDetail@get_employee_id')->name('get_employee_id');
+    Route::post('/search_employee', 'admin\master\employee_master\PersonalDetail@search_employee')->name('search_employee');
+    
     Route::get('/get_location_by_company', 'LocationController@get_location_by_company')->name('get_location_by_company');
     Route::get('/get_employee_by_company', 'EmployeeController@get_employee_by_company')->name('get_employee_by_company');
     Route::get('/get_department_location_by_company', 'admin\master\admin_master\ExpenseCategory@get_department_location_by_company')->name('get_department_location_by_company');

@@ -222,7 +222,7 @@
                                                     </div>
                                             </div>
                                     </div>
-                                    <div class="form-group"  style="margin-top: 5%;margin-left: 50%;">
+                                    <div class="col-md-12 form-group text-center" >
                                         <input type="submit" class="btn btn-warning" id="create"/>
                                     </div>
 
@@ -433,7 +433,7 @@
                                             </div>
                                     </div>
 
-                                    <div class="form-group"  style="margin-top: 5%;margin-left: 40%;">
+                                    <div class="col-md-12 form-group text-center" >
                                         <input type="submit" class="btn btn-warning" id="create" value="Update"/>
                                     </div>
 
@@ -730,7 +730,7 @@
                                         <input type="file" name="document[]"   class="form-control" >
                                     </div>
                                     <div class="col-md-2 form-group " align="center" style="padding-top: 4%;">
-                                                <input type="button" class="btn btn-danger deletedocument  w-100" value=" x" id="adddocument"/>
+                                                <input type="button" class="btn btn-danger deletedocument  w-40" value="x" id="adddocument"/>
                                             </div>
                                                    
                                                 </div>
@@ -822,9 +822,14 @@
                         $('#view_person_mobile').html(html.company.person_mobile);
                         $('#view_contact_no').html(html.company.contact_no);
                         $('#view_website').html(html.company.website);
-                        $('#view_company_logo').html(`<img src="{{asset('public/companyimg/`+html.company.company_logo+`')}}" style="height:50px; width:200px;" />`);
+                       // console.log(html.company.company_logo);
+                        let logo=html.company.company_logo;
+                        if(logo)
+                        $('#view_company_logo').html(`<a target="_blank" href="{{asset('public/companyimg/`+html.company.company_logo+`')}}"> <img src="{{asset('public/companyimg/`+html.company.company_logo+`')}}" style="height:50px; width:auto;" /></a>`);
+                        else
+                        $('#view_company_logo').html(`<img src="{{asset('public/no-image.png')}}" style="height:50px; width:auto;" /`);
+
                         var doc='';
-                        console.log(html.docs)
                         for(var i=0;i<html.docs.length;i++){
                             doc += `<a href="{{asset('public/companydocs/`+html.docs[i].document+`')}}" target="_blank" style="color:red;">` + html.docs[i].document_name + ` , </a>` ;
                         }

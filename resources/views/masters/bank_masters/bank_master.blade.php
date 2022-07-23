@@ -58,7 +58,7 @@
                                             <label>Bank Name *</label>
                                             <select name="bank_id" id="bank_id" class="form-control selectpicker"
                                                 data-live-search="true" data-live-search-style="begins"
-                                                title='Select Company Type...'>
+                                                title='Select Bank Name...'>
                                                 <option value="" disabled selected> Select Bank</option>
                                                 @foreach ($banks as $b)
                                                     <option value="{{ $b->id }}">{{ $b->bank_name }}</option>
