@@ -165,7 +165,7 @@
                                         <div class="col-md-6 form-group">
                                             <label>PAN No.<span class="required">*</span></label>
                                             <input type="text" name="pan_no" id="pan_no" required
-                                                class="form-control" placeholder="PAN No.">
+                                                class="form-control text-uppercase" placeholder="PAN No.">
                                         </div>
 
                                         <div class="col-md-6 form-group">
@@ -306,7 +306,10 @@
 @section('js')
     <script>
         $(document).ready(function() {
-
+jQuery.validator.addMethod("noSpace", function(value, element) { 
+    var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/; 
+    return regex.test(value); 
+}, "No space allowed.");
             $('#personal_detail_form').validate({
 
                 //debug:true,
@@ -367,7 +370,7 @@
                     pan_no: {
                         required: true,
                         minlength: 10,
-                        maxlength: 10
+                        maxlength: 10,
                     },
                     adhar_no: {
                         required: true,
@@ -458,6 +461,7 @@
 
                 },
                 submitHandler: function(form) {
+                    $("#add-edit-btn").addClass('disabled');
                     // $("#load_screen").show();
                     return true;
                 }

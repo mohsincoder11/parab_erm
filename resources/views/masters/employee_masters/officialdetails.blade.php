@@ -203,7 +203,7 @@
                                         </div>
 
 
-                                        <div class="form-group" align="center" style="margin-top: 5%; padding-left:45%;">
+                                        <div class="col-md-12 form-group text-center" >
 
                                             <button formaction="{{ route('employees_masters.store-official-details') }}"
                                                 type="submit" id="add-edit-btn" name="action_button"
@@ -233,9 +233,9 @@
                                 <div class="modal-content">
                                     <div class="modal-header" id="exampleModalPopoversLabel">
                                         <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                                                            </button>
-                                                                                          </div> -->
+                                                                                                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                                                                </button>
+                                                                                              </div> -->
                                         <div class="modal-body">
                                             <p class="modal-text">Parberp.com says<br>
                                                 Please select atleast one Checkbox
@@ -363,13 +363,13 @@
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
-                    employee_name: {
+                    employee_id: {
                         required: true,
                     },
                     emp_code: {
                         required: true,
                     },
-                    company_id:{
+                    company_id: {
                         required: true,
 
 
@@ -418,13 +418,11 @@
 
                 },
                 messages: {
-                    company_id:{
+                    company_id: {
                         required: "This field is required.",
-
-
                     },
-                    employee_name: {
-                        required: "This field is required.",
+                    employee_id: {
+                        required: "Please type employee name and select.",
                     },
                     emp_code: {
                         required: "This field is required.",
@@ -480,6 +478,8 @@
 
                 },
                 submitHandler: function(form) {
+                    $("#add-edit-btn").addClass('disabled');
+
                     // $("#load_screen").show();
                     return true;
                 }

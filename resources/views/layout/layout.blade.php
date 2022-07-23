@@ -26,7 +26,7 @@
     <!-- toastr -->
     <link href="{{ asset('public/plugins/notification/snackbar/snackbar.min.css') }}" rel="stylesheet"
         type="text/css" />
-        <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
 
     <style>
         .error {
@@ -36,14 +36,16 @@
             font-weight: 700;
             letter-spacing: 1px;
         }
-        .ui-autocomplete {
-z-index: 9999;
-}
-.ui-menu .ui-menu-item :hover{
-    background:#007bff !important;
-    color:#FFF !important;
 
-}
+        .ui-autocomplete {
+            z-index: 9999;
+        }
+
+        .ui-menu .ui-menu-item :hover {
+            background: #007bff !important;
+            color: #FFF !important;
+
+        }
     </style>
 
     <!-- END Snackbar PLUGINS -->
@@ -80,9 +82,9 @@ z-index: 9999;
                 <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-user-check">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-user-check">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                             <circle cx="8.5" cy="7" r="4"></circle>
                             <polyline points="17 11 19 13 23 9"></polyline>
@@ -102,9 +104,9 @@ z-index: 9999;
                         </div>
                         <div class="dropdown-item">
                             <a href="{{ url('profile') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-user">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                     <circle cx="12" cy="7" r="4"></circle>
                                 </svg> <span>My Profile</span>
@@ -112,9 +114,9 @@ z-index: 9999;
                         </div>
                         <div class="dropdown-item">
                             <a href="{{ url('logout') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-log-out">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                     <polyline points="16 17 21 12 16 7"></polyline>
                                     <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -137,7 +139,7 @@ z-index: 9999;
 
         <!--  BEGIN SIDEBAR  -->
         @include('layout.sidebar')
-       
+
         <!--  END SIDEBAR  -->
 
         <!--  BEGIN CONTENT AREA  -->
@@ -150,15 +152,15 @@ z-index: 9999;
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
     <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
-    
+
     <script src="{{ asset('public/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('public/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('public/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{ asset('public/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 
     <script src="{{ asset('public/assets/js/app.js') }}"></script>
     <script>
         $(document).ready(function() {
-                App.init();
+            App.init();
         });
     </script>
     <script src="{{ asset('public/assets/js/custom.js') }}"></script>
@@ -223,48 +225,49 @@ z-index: 9999;
 
     <script>
         $(document).ready(function() {
+
             $("#employee_name").autocomplete({
-        source: function(request, response) {
-            $.ajax({
-                type: "POST",
-                url: "{{ route('search_employee') }}",
-                dataType: "json",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    search_keyword: request.term
-                },
-                success: function(data) {
-                    var resp = $.map(data, function(obj) {
-                            return obj.employee_name;
-                        
+                source: function(request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('search_employee') }}",
+                        dataType: "json",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            search_keyword: request.term
+                        },
+                        success: function(data) {
+                            var resp = $.map(data, function(obj) {
+                                return obj.employee_name;
+
+                            });
+                            console.log(resp);
+                            response(resp);
+                        }
                     });
-                    console.log(resp);
-                    response(resp);
+                },
+                minLength: 2,
+                select: function(event, ui) {
+                    var value_data = ui.item.label;
+                    console.log(ui.item.value)
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('get_employee_id') }}",
+                        dataType: "json",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            search_keyword: ui.item.value
+                        },
+                        success: function(data) {
+                            $('#employee_id').val(data.id);
+                        }
+                    });
                 }
             });
-        },
-        minLength: 2,
-        select: function(event, ui) {
-            var value_data = ui.item.label;
-            console.log(ui.item.value)
-                 $.ajax({
-                type: "POST",
-                url: "{{ route('get_employee_id') }}",
-                dataType: "json",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    search_keyword: ui.item.value
-                },
-                success: function(data) {
-                    $('#employee_id').val(data.id);
-                }
-            });
-        }
-    });
         })
     </script>
     @yield('js')

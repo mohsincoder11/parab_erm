@@ -145,6 +145,13 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     //Employee Status
     Route::get('employee-status', 'EmployeeStatus@employee_status')->name('employee-status');
 
+    Route::get('get-employee-status', 'EmployeeStatus@get_employee_status')->name('get-employee-status');
+    Route::post('store-employee-status', 'EmployeeStatus@store_employee_status')->name('store-employee-status');
+    Route::get('delete-employee-status', 'EmployeeStatus@delete_employee_status')->name('delete-employee-status');
+    Route::get('edit-employee-status', 'EmployeeStatus@edit_employee_status')->name('edit-employee-status');
+    Route::post('update-employee-status', 'EmployeeStatus@update_employee_status')->name('update-employee-status');
+
+
     //master/hr-document
     Route::namespace("admin\master\hr_document")->name('hr_document.')->prefix('masters/document')->group(function () {
         Route::get('/offer-letter', 'OfferLetter@offer_letter')->name('offer-letter');

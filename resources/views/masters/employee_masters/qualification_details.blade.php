@@ -459,6 +459,8 @@
 
                 },
                 submitHandler: function(form) {
+                    $("#add-edit-btn").addClass('disabled');
+
                     // $("#load_screen").show();
                     return true;
                 }

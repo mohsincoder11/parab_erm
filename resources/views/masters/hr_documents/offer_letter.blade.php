@@ -295,8 +295,7 @@
                 errorPlacement: function(error, element) {
                     element.closest('.form-group').append(error);
 
-                },
-                submitHandler: function(form) {
+                },           
                     // $("#load_screen").show();
                     return true;
                 }
