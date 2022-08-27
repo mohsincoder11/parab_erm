@@ -267,12 +267,12 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/get-qualification-details', 'QualificationDetail@get_qualification_details')->name('get-qualification-details');
 
 
-        Route::get('/salary-details', 'salaryDetail@salary_details')->name('salary-details');
-        Route::post('/store-salary-details', 'salaryDetail@store_salary_details')->name('store-salary-details');
-        Route::get('/edit-salary-details', 'salaryDetail@edit_salary_details')->name('edit-salary-details');
-        Route::post('/update-salary-details', 'salaryDetail@update_salary_details')->name('update-salary-details');
-        Route::get('/delete-salary-details', 'salaryDetail@delete_salary_details')->name('delete-salary-details');
-        Route::get('/get-salary-details', 'salaryDetail@get_salary_details')->name('get-salary-details');
+        Route::get('/salary-details', 'SalaryDetail@salary_details')->name('salary-details');
+        Route::post('/store-salary-details', 'SalaryDetail@store_salary_details')->name('store-salary-details');
+        Route::get('/edit-salary-details', 'SalaryDetail@edit_salary_details')->name('edit-salary-details');
+        Route::post('/update-salary-details', 'SalaryDetail@update_salary_details')->name('update-salary-details');
+        Route::get('/delete-salary-details', 'SalaryDetail@delete_salary_details')->name('delete-salary-details');
+        Route::get('/get-salary-details', 'SalaryDetail@get_salary_details')->name('get-salary-details');
 
 
         Route::get('/statutory-details', 'StatutoryDetail@statutory_details')->name('statutory-details');

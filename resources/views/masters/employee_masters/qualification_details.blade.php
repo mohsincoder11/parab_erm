@@ -63,9 +63,9 @@
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label>Basic Educational Qualification<span class="required">*</span></label>
-                                            <select name="basic_qualification" id="basic_qualification" class="form-control selectpicker"
-                                                data-live-search="true" data-live-search-style="begins"
-                                                title='Select Company Type...'>
+                                            <select name="basic_qualification" id="basic_qualification"
+                                                class="form-control selectpicker" data-live-search="true"
+                                                data-live-search-style="begins" title='Select Company Type...'>
                                                 <option value="" disabled selected> Select Graduation</option>
                                                 <option value="ba">BA</option>
                                                 <option value="bsc">BSC</option>
@@ -394,13 +394,16 @@
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
-                      employee_name: {
+                    employee_id: {
                         required: true,
                     },
+                    // employee_name: {
+                    //     required: true,
+                    // },
                     emp_code: {
                         required: true,
                     },
-                    basic_qualification:{
+                    basic_qualification: {
                         required: true,
                     },
                     // graduation: {
@@ -424,9 +427,12 @@
 
                 },
                 messages: {
-                     employee_name: {
-                        required: "This field is required.",
+                    employee_id: {
+                        required: "Please type employee name and select.",
                     },
+                    // employee_name: {
+                    //     required: "This field is required.",
+                    // },
                     emp_code: {
                         required: "This field is required.",
                     },
@@ -606,7 +612,7 @@
                         orderable: true,
                         name: "emp_code" /*,width:"20%"*/
                     },
-                    
+
                     {
                         data: "basic_qualification",
                         orderable: true,

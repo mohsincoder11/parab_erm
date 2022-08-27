@@ -17,26 +17,26 @@ class SalaryDetail extends Controller
     public function store_salary_details(Request $request)
     {
         SalaryDetailModel::create([
-            'basic_salary'=>$request->basic_salary,
-            'allowance1'=>$request->allowance1,
-            'allowance2'=>$request->allowance2,
-            'allowance3'=>$request->allowance3,
-            'allowance4'=>$request->allowance4,
-            'areas'=>$request->areas,
-            'incentive'=>$request->incentive,
-            'gross_salary'=>$request->gross_salary,
-            'pf'=>$request->pf,
-            'esic'=>$request->esic,
-            'pt'=>$request->pt,
-            'it'=>$request->it,
-            'advance'=>$request->advance,
-            'total_deduction'=>$request->total_deduction,
-            'net_salary'=>$request->net_salary,
-            'ctc'=>$request->ctc,
-            'bank_name'=>$request->bank_name,
-            'branch_name'=>$request->branch_name,
-            'ifsc_code'=>$request->ifsc_code,
-            'account_no'=>$request->account_no,
+            'basic_salary' => $request->basic_salary,
+            'allowance1' => $request->allowance1,
+            'allowance2' => $request->allowance2,
+            'allowance3' => $request->allowance3,
+            'allowance4' => $request->allowance4,
+            'areas' => $request->areas,
+            'incentive' => $request->incentive,
+            'gross_salary' => $request->gross_salary,
+            'pf' => $request->pf,
+            'esic' => $request->esic,
+            'pt' => $request->pt,
+            'it' => $request->it,
+            'advance' => $request->advance,
+            'total_deduction' => $request->total_deduction,
+            'net_salary' => $request->net_salary,
+            'ctc' => $request->ctc,
+            'bank_name' => $request->bank_name,
+            'branch_name' => $request->branch_name,
+            'ifsc_code' => $request->ifsc_code,
+            'account_no' => $request->account_no,
 
         ]);
 
@@ -44,32 +44,32 @@ class SalaryDetail extends Controller
     }
     public function edit_salary_details(Request $request)
     {
-        $official_detail=SalaryDetailModel::where('id', $request->id)->first();
+        $official_detail = SalaryDetailModel::where('id', $request->id)->first();
         return response()->json($official_detail);
     }
     public function update_salary_details(Request $request)
     {
         SalaryDetailModel::where('id', $request->id)->update([
-            'basic_salary'=>$request->basic_salary,
-            'allowance1'=>$request->allowance1,
-            'allowance2'=>$request->allowance2,
-            'allowance3'=>$request->allowance3,
-            'allowance4'=>$request->allowance4,
-            'areas'=>$request->areas,
-            'incentive'=>$request->incentive,
-            'gross_salary'=>$request->gross_salary,
-            'pf'=>$request->pf,
-            'esic'=>$request->esic,
-            'pt'=>$request->pt,
-            'it'=>$request->it,
-            'advance'=>$request->advance,
-            'total_deduction'=>$request->total_deduction,
-            'net_salary'=>$request->net_salary,
-            'ctc'=>$request->ctc,
-            'bank_name'=>$request->bank_name,
-            'branch_name'=>$request->branch_name,
-            'ifsc_code'=>$request->ifsc_code,
-            'account_no'=>$request->account_no,
+            'basic_salary' => $request->basic_salary,
+            'allowance1' => $request->allowance1,
+            'allowance2' => $request->allowance2,
+            'allowance3' => $request->allowance3,
+            'allowance4' => $request->allowance4,
+            'areas' => $request->areas,
+            'incentive' => $request->incentive,
+            'gross_salary' => $request->gross_salary,
+            'pf' => $request->pf,
+            'esic' => $request->esic,
+            'pt' => $request->pt,
+            'it' => $request->it,
+            'advance' => $request->advance,
+            'total_deduction' => $request->total_deduction,
+            'net_salary' => $request->net_salary,
+            'ctc' => $request->ctc,
+            'bank_name' => $request->bank_name,
+            'branch_name' => $request->branch_name,
+            'ifsc_code' => $request->ifsc_code,
+            'account_no' => $request->account_no,
 
 
         ]);
@@ -84,14 +84,14 @@ class SalaryDetail extends Controller
     public function get_salary_details(Request $request)
     {
         $data = DB::table('salary_detail')
-                ->orderby('id', 'desc')
+            ->orderby('id', 'desc')
             ->get();
 
 
         return DataTables::of($data)
             ->addIndexColumn()
             ->rawColumns([
-                'basic_salary', 'allowance1', 'allowance2', 'allowance3', 'allowance4', 'areas', 'incentive', 'gross_salary', 'pf', 'esic',                
+                'basic_salary', 'allowance1', 'allowance2', 'allowance3', 'allowance4', 'areas', 'incentive', 'gross_salary', 'pf', 'esic',
                 'pt', 'it', 'advance', 'total_deduction', 'net_salary', 'ctc', 'bank_name', 'branch_name', 'ifsc_code', 'account_no',
                 'action'
 
@@ -127,7 +127,7 @@ class SalaryDetail extends Controller
             ->addColumn('esic', function ($data) {
                 return $data->esic;
             })
-            
+
             ->addColumn('pt', function ($data) {
                 return $data->pt;
             })
@@ -191,4 +191,3 @@ class SalaryDetail extends Controller
         return response()->json(1);
     }
 }
-
