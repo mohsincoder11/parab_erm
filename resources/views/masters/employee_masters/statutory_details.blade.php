@@ -231,8 +231,8 @@
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
-                    employee_name: {
-                        required: true,
+                    employee_id: {
+                        required:true,
                     },
                     emp_code: {
                         required: true,
@@ -263,8 +263,8 @@
 
                 },
                 messages: {
-                    employee_name: {
-                        required: "This field is required.",
+                    employee_id: {
+                        required: "Please type employee name and select.",
                     },
                     emp_code: {
                         required: "This field is required.",

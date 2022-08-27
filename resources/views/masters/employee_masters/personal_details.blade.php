@@ -260,7 +260,7 @@
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-6">
                             <div class="table-responsive mb-4 mt-4">
-                                <table class="table table-hover non-hover datatable_server" style="width:100%">
+                                <table class="table table-hover non-hover datatable_server nowrap" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
                                             <th>Sr.No.</th>
@@ -613,7 +613,14 @@ jQuery.validator.addMethod("noSpace", function(value, element) {
                     type: "get",
                     data: function(d) {}
                 },
-                columns: [{
+                columns: [
+                    {
+                "className":      'details-control',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            },
+                    {
                         data: "DT_RowIndex",
                         orderable: true,
                         name: "DT_RowIndex",
