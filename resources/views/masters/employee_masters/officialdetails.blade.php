@@ -65,7 +65,7 @@
                                             <select name="company_id" id="company_id" class="form-control selectpicker"
                                                 data-live-search="true" data-live-search-style="begins"
                                                 title='Select Company Type...'>
-                                                <option value="" disabled selected>Company Type</option>
+                                                <option value="" disabled selected>Select Company</option>
                                                 @foreach ($company as $c)
                                                     <option value="{{ $c->id }}">{{ $c->company_name }}</option>
                                                 @endforeach
@@ -76,7 +76,7 @@
                                         <div class="col-md-6 form-group">
                                             <label>Employee code<span class="required">*</span></label>
                                             <input type="text" name="emp_code" id="emp_code" required
-                                                class="form-control" placeholder="">
+                                                class="form-control" placeholder="Enter employee code">
                                         </div>
 
                                         <div class="col-md-6 form-group">
@@ -371,8 +371,6 @@
                     },
                     company_id: {
                         required: true,
-
-
                     },
                     // emp_status_id: {
                     //     required: true,

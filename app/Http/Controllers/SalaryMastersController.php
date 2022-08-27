@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Company;
 use App\Allowances;
+use App\Models\bank_master\SalaryBankModel;
 
 class SalaryMastersController extends Controller
 {
@@ -66,4 +67,28 @@ class SalaryMastersController extends Controller
             return response()->json(['errors' => 'Something wents Wrong !']);
         }
     }
+
+    function get_allowance_by_company(Request $request){
+        $allowances = Allowances::where('company_id', $request->company_id)->get();
+        $fields='';
+        foreach ($allowances as $allowance){
+            $Percent='';
+            if($allowance->type=='Percent'){
+                $Percent='readonly parcentage="'.$allowance->percent.'"';
+            }
+            $fields.='
+            <div class="col-md-6 form-group apeended_element">
+                                            <label>Allowance-'.$allowance->title.'</label>
+                                            <input type="hidden" name="fields[]" value="'.$allowance->title.'">
+                                            <input type="number" name="fields_value[]" allowance_type="'.$allowance->type.'" '.$Percent.' step="0.1"
+                                                class="form-control gross_salary_cal_field" value="0" placeholder="0">
+                                        </div>';
+        }
+        $bank_name=SalaryBankModel::
+        join('banks','banks.id','=','salary_bank.bank_id')
+        ->select('salary_bank.*','banks.bank_name')
+        ->where('company_id', $request->company_id)->get();
+        return response()->json(['fields'=>$fields,'bank_name'=>$bank_name]);
+    }
+    
 }

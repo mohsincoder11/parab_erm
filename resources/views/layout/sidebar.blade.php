@@ -17,7 +17,7 @@
                 <ul class="list-unstyled menu-categories" id="accordionExample">
 
 
-                    <li class="menu {{ request()->is('dashboard') ? 'active' : '' }}">
+                    <li class="menu @if(areActiveRoutes(['dashboard']) == 'active') {{'active'}} @endif">
                         <a href="{{ url('dashboard') }}"
                             aria-expanded="true"
                             class="dropdown-toggle">
@@ -33,9 +33,9 @@
                         </a>
                     </li>
 
-                    <li class="menu {{ request()->is('organization/companies') ? 'active' : '' }}">
+                    <li class="menu ">
                         <a href="#components" data-toggle="collapse"
-                            aria-expanded="{{ request()->is('organization/companies') ? 'true' : 'false' }}"
+                            aria-expanded="false"
                             class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -59,17 +59,21 @@
                         </a>
                         <ul class="collapse submenu submenu recent-submenu mini-recent-submenu list-unstyled"
                             id="components" data-parent="#accordionExample">
-                            <li class="{{ request()->is('organization/companies') ? 'active' : '' }}">
+                            <li class="">
                                 <a href="{{ route('organization.companies') }}"> Company </a>
                             </li>
 
                         </ul>
                     </li>
 
-                    <li
-                        class="menu {{ request()->is('company_masters/location') || request()->is('company_masters/projects') || request()->is('masters/company_masters/department') || request()->is('masters/company_masters/grade') || request()->is('masters/company_masters/designation') || request()->is('employee') || request()->is('masters/hr_masters/officeshift') || request()->is('Holiday') || request()->is('masters/salary_masters/allowances') || request()->is('masters/salary_masters/deduction') || request()->is('LeaveType') || request()->is('employee-status') ? 'active' : '' }}">
+                    <li class="menu @if(areActiveRoutes(['company_masters.location']) == 'active' ||
+                        areActiveRoutes(['company_masters.editlocation']) == 'active' 
+                         )  {{'active'}} @endif">
+                       
                         <a href="#elements" data-toggle="collapse"
-                            aria-expanded="{{ request()->is('company_masters/location') || request()->is('company_masters/projects') || request()->is('masters/company_masters/department') || request()->is('masters/company_masters/grade') || request()->is('masters/company_masters/designation') || request()->is('employee') || request()->is('masters/hr_masters/officeshift') || request()->is('Holiday') || request()->is('masters/salary_masters/allowances') || request()->is('masters/salary_masters/deduction') || request()->is('LeaveType') ? 'true' : 'false' }}"
+                            aria-expanded="@if(areActiveRoutes(['company_masters.location']) == 'active' ||
+                            areActiveRoutes(['company_masters.editlocation']) == 'active'
+                             )  {{'true'}} @endif"
                             class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -92,7 +96,9 @@
                         <ul class="collapse submenu list-unstyled" id="elements" data-parent="#accordionExample">
 
                             <li
-                                class=" {{ request()->is('company_masters/location') || request()->is('company_masters/projects') || request()->is('masters/company_masters/department') || request()->is('masters/company_masters/grade') || request()->is('masters/company_masters/designation') ? 'active' : '' }}">
+                                class=" @if(areActiveRoutes(['company_masters.location']) == 'active' ||
+                                areActiveRoutes(['company_masters.editlocation']) == 'active'
+                                 )  {{'active'}} @endif">
                                 <a href="#pages-error2" data-toggle="collapse" aria-expanded="false"
                                     class="dropdown-toggle"> Company Masters <svg xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -101,7 +107,8 @@
                                         <polyline points="9 18 15 12 9 6"></polyline>
                                     </svg> </a>
                                 <ul class="collapse list-unstyled sub-submenu" id="pages-error2" data-parent="#pages">
-                                    <li class=" {{ request()->is('company_masters/location') ? 'active' : '' }}">
+                                    <li class=" @if(areActiveRoutes(['company_masters.location']) == 'active' ||
+                                    areActiveRoutes(['company_masters.editlocation']) == 'active')  {{'active'}} @endif">
                                         <a href="{{ route('company_masters.location') }}"> Location / Branch </a>
                                     </li>
                                     <li class=" {{ request()->is('company_masters/projects') ? 'active' : '' }}">
