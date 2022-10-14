@@ -95,6 +95,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('salary_masters/allowaces/edit/{id}', 'SalaryMastersController@edit')->name('salary_masters.editallowances');
     Route::post('salary_masters/allowances/update', 'SalaryMastersController@update')->name('salary_masters.updateallowances');
     Route::get('salary_masters/allowaces/delete/{id}', 'SalaryMastersController@delete')->name('salary_masters.deleteallowances');
+    Route::get('/get-allowance-by-company', 'SalaryMastersController@get_allowance_by_company')->name('get-allowance-by-company');
 
     //Deduction
     Route::get('masters/salary_masters/deduction', 'DeductionController@deduction')->name('salary_masters.deduction');
@@ -482,6 +483,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/get_location_by_company', 'LocationController@get_location_by_company')->name('get_location_by_company');
     Route::get('/get_employee_by_company', 'EmployeeController@get_employee_by_company')->name('get_employee_by_company');
     Route::get('/get_department_location_by_company', 'admin\master\admin_master\ExpenseCategory@get_department_location_by_company')->name('get_department_location_by_company');
+    
+
 });
 
 

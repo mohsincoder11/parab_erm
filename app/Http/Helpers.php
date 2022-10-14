@@ -651,5 +651,28 @@ if (! function_exists('get_asset_category')) {
     }
 }
 
+if (!function_exists('areActiveRoutes')) {
+    function areActiveRoutes(array $routes, $output = "active")
+    {
+        foreach ($routes as $route) {
+            if (Route::currentRouteName() == $route) return $output;
+        }
+    }
+}
+
+
+if (!function_exists('check_actice_or_show')) {
+    function check_actice_or_show(array $routes,$type)
+    {
+
+        $current_route=Route::currentRouteName();     
+       
+        if(in_array($current_route,$routes)){
+            echo $type;
+        }
+        
+    }
+}
+
 
 

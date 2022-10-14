@@ -60,7 +60,7 @@
                                        >
                                        <option value="" disabled selected>Select Type</option>
                                         <option value="Lumsum">Lumsum</option>
-                                        <option value="%">%</option>
+                                        <option value="Percent">%</option>
                                     </select>
                                 </div>
 
@@ -129,7 +129,7 @@
                                        >
                                        <option value="" disabled selected>Select Type</option>
                                         <option value="Lumsum">Lumsum</option>
-                                        <option value="%">%</option>
+                                        <option value="Percent">%</option>
                                     </select>
                                 </div>
 
@@ -232,7 +232,7 @@
 @section('js')
 <script>
     $('.allowance_type').change(function () {
-        if ($(this).val() == '%') {
+        if ($(this).val() == 'Percent') {
             $('.allowence').append(` <label>Allowances %*</label>
                                     <input type="text" required name="percent" class="form-control allowance_edit" placeholder="%">`);
             $('.apply_to').append(`<label>Apply To *</label>
@@ -310,8 +310,8 @@
                 $('#type1').val(html.type);
                 $('#title1').val(html.title);
                 console.log()
-                console.log(html.type== '%');
-                if ( html.type== '%') {
+                console.log(html.type== 'Percent');
+                if ( html.type== 'Percent') {
                     $('.allowence').append(` <label>Allowances %*</label>
                                     <input type="text" required name="percent" class="form-control allowance_edit" placeholder="%">`);
             $('.apply_to').append(`<label>Apply To *</label>

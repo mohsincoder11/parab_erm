@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\employee_master\SalaryDetailModel;
 use DB;
 use Yajra\DataTables\DataTables;
-
+use App\Models\employee_master\SalaryDetailFields;
 class SalaryDetail extends Controller
 {
     public function salary_details()
@@ -16,12 +16,14 @@ class SalaryDetail extends Controller
     }
     public function store_salary_details(Request $request)
     {
-        SalaryDetailModel::create([
+       // dd(count($request->fields));
+$key=0;
+        
+        $insert=SalaryDetailModel::create([
+            'employee_id'=>$request->employee_id,
+            'emp_code' => $request->emp_code,
+            'company_id' => $request->company_id,          
             'basic_salary' => $request->basic_salary,
-            'allowance1' => $request->allowance1,
-            'allowance2' => $request->allowance2,
-            'allowance3' => $request->allowance3,
-            'allowance4' => $request->allowance4,
             'areas' => $request->areas,
             'incentive' => $request->incentive,
             'gross_salary' => $request->gross_salary,
@@ -37,8 +39,17 @@ class SalaryDetail extends Controller
             'branch_name' => $request->branch_name,
             'ifsc_code' => $request->ifsc_code,
             'account_no' => $request->account_no,
-
         ]);
+        foreach ($request->fields as $field){
+            SalaryDetailFields::create([
+                'salary_detail_id'=> $insert->id,
+                'field'=>$field,
+                'value'=>$request->fields_value[$key],            
+            ]);
+            $key++;
+        }
+        
+        
 
         return back()->with('success', 'Record added successfully.');
     }
@@ -84,6 +95,9 @@ class SalaryDetail extends Controller
     public function get_salary_details(Request $request)
     {
         $data = DB::table('salary_detail')
+        ->join('personal_detail', 'personal_detail.id', '=', 'salary_detail.employee_id')
+        ->select('salary_detail.*','personal_detail.employee_name')
+
             ->orderby('id', 'desc')
             ->get();
 
@@ -91,26 +105,18 @@ class SalaryDetail extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->rawColumns([
-                'basic_salary', 'allowance1', 'allowance2', 'allowance3', 'allowance4', 'areas', 'incentive', 'gross_salary', 'pf', 'esic',
+                'employee_name','basic_salary', 'areas', 'incentive', 'gross_salary', 'pf', 'esic',
                 'pt', 'it', 'advance', 'total_deduction', 'net_salary', 'ctc', 'bank_name', 'branch_name', 'ifsc_code', 'account_no',
                 'action'
 
             ])
+            ->addColumn('employee_name', function ($data) {
+                return $data->employee_name;
+            })
             ->addColumn('basic_salary', function ($data) {
                 return $data->basic_salary;
             })
-            ->addColumn('allowance1', function ($data) {
-                return $data->allowance1;
-            })
-            ->addColumn('allowance2', function ($data) {
-                return $data->allowance2;
-            })
-            ->addColumn('allowance3', function ($data) {
-                return $data->allowance3;
-            })
-            ->addColumn('allowance4', function ($data) {
-                return $data->allowance4;
-            })
+           
             ->addColumn('areas', function ($data) {
                 return $data->areas;
             })
@@ -164,15 +170,16 @@ class SalaryDetail extends Controller
 
 
             ->addColumn('action', function ($data) {
-                return '<a class="edit" id="' . $data->id . '" data-toggle="modal" data-placement="top"
-            title="Edit" data-toggle="modal" data-target=".add-edit_modal" ><svg
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-edit-2 text-success">
-            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
-            </path>
-        </svg></a>
+        //         <a class="edit" id="' . $data->id . '" data-toggle="modal" data-placement="top"
+        //     title="Edit" data-toggle="modal" data-target=".add-edit_modal" ><svg
+        //     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+        //     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        //     stroke-linecap="round" stroke-linejoin="round"
+        //     class="feather feather-edit-2 text-success">
+        //     <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
+        //     </path>
+        // </svg></a>
+                return '
 
     <a class="delete" id="' . $data->id . '" data-toggle="tooltip" data-placement="top"
         title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24"

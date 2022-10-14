@@ -28,8 +28,8 @@
 
                     </div>
                     <!-- Model Start -->
-                    <div class="modal fade add-edit_modal" tabindex="-1" role="dialog"
-                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal fade add-edit_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                        aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -49,13 +49,44 @@
                                     @csrf
                                     <div class="row" style="padding: 10px;">
                                         <input type="hidden" id="id" name="id">
+
                                         <div class="col-md-6 form-group">
-                                            <label>Basic Salary</label>
-                                            <input type="number" step="0.1" name="basic_salary" id="basic_salary" required
-                                                class="form-control" placeholder=" Basic Salary">
+                                            <label>Employee Name<span class="required">*</span></label>
+                                            <input name="employee_name" id="employee_name" class="form-control "
+                                                placeholder="Enter employee name" autocomplete="off">
+                                            <input type="hidden" name="employee_id" id="employee_id">
+
+                                        </div>
+                                        @php
+                                            $company = get_company_name_and_id();
+                                        @endphp
+                                        <div class="col-md-6 form-group">
+                                            <label>Company <span class="required">*</span></label>
+                                            <select name="company_id" id="company_id" class="form-control selectpicker"
+                                                data-live-search="true" data-live-search-style="begins"
+                                                title='Select Company Type...'>
+                                                <option value="" disabled selected>Select Company</option>
+                                                @foreach ($company as $c)
+                                                    <option value="{{ $c->id }}">{{ $c->company_name }}</option>
+                                                @endforeach
+
+                                            </select>
                                         </div>
 
                                         <div class="col-md-6 form-group">
+                                            <label>Employee code<span class="required">*</span></label>
+                                            <input type="text" name="emp_code" id="emp_code" required
+                                                class="form-control" placeholder="Enter employee code">
+                                        </div>
+                                        <div class="col-md-6 form-group" id="allowance_area">
+                                            <label>Basic Salary</label>
+                                            <input type="number" step="0.1" name="basic_salary" id="basic_salary"
+                                                required class="form-control gross_salary_cal_field"
+                                                placeholder=" Basic Salary" value="0">
+                                        </div>
+                                        {{-- <span id="allowance_area"></span> --}}
+
+                                        {{-- <div class="col-md-6 form-group">
                                             <label>Allowance 1</label>
                                             <input type="number" step="0.1" name="allowance1" id="allowance1" required
                                                 class="form-control" placeholder="Allowance1">
@@ -77,77 +108,92 @@
                                             <label>Allowance 4</label>
                                             <input type="number" step="0.1" name="allowance4" id="allowance4" required
                                                 class="form-control" placeholder="Allowance 4">
-                                        </div>
+                                        </div> --}}
 
                                         <div class="col-md-6 form-group">
                                             <label>Areas</label>
-                                            <input type="text" name="areas" id="areas" required
-                                                class="form-control" placeholder="Areas">
+                                            <input type="number" step="0.1" name="areas" id="areas" required
+                                                class="form-control gross_salary_cal_field" placeholder="Areas"
+                                                value="0">
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label>Incentive</label>
-                                            <input type="number" step="0.1" name="incentive" id="incentive" required
-                                                class="form-control" placeholder="Insentive">
+                                            <input type="number" step="0.1" name="incentive" id="incentive"
+                                                required class="form-control gross_salary_cal_field"
+                                                placeholder="Insentive" value="0">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>Gross Salary</label>
-                                            <input type="number" step="0.1" name="gross_salary" id="gross_salary" required
-                                                class="form-control" placeholder=" Gross Salary">
+                                            <input type="number" step="0.1" name="gross_salary" readonly
+                                                id="gross_salary" required class="form-control"
+                                                placeholder=" Gross Salary" value="0">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>PF</label>
                                             <input type="number" step="0.1" name="pf" id="pf" required
-                                                class="form-control" placeholder="PF">
+                                                class="form-control total_deduction_cal_field" placeholder="PF"
+                                                value="0">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>ESIC </label>
                                             <input type="number" step="0.1" name="esic" id="esic" required
-                                                class="form-control" placeholder="ESIC">
+                                                class="form-control total_deduction_cal_field" placeholder="ESIC"
+                                                value="0">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>PT</label>
                                             <input type="number" step="0.1" name="pt" id="pt" required
-                                                class="form-control" placeholder="PT">
+                                                class="form-control total_deduction_cal_field" placeholder="PT"
+                                                value="0">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>IT</label>
                                             <input type="number" step="0.1" name="it" id="it" required
-                                                class="form-control" placeholder="IT">
+                                                class="form-control total_deduction_cal_field" placeholder="IT"
+                                                value="0">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>Advance</label>
                                             <input type="number" step="0.1" name="advance" id="advance" required
-                                                class="form-control" placeholder="Advance">
+                                                class="form-control total_deduction_cal_field" placeholder="Advance"
+                                                value="0">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>Total Deducation</label>
-                                            <input type="number" step="0.1" name="total_deduction" id="total_deduction" required
-                                                class="form-control" placeholder=" Total Deducation">
+                                            <input type="number" step="0.1" name="total_deduction" readonly
+                                                id="total_deduction" required class="form-control"
+                                                placeholder=" Total Deducation" value="0">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>Net Salary</label>
-                                            <input type="number" step="0.1" name="net_salary" id="net_salary" required
-                                                class="form-control" placeholder="Net Salary">
+                                            <input type="number" step="0.1" name="net_salary" readonly
+                                                id="net_salary" required class="form-control" placeholder="Net Salary"
+                                                value="0">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>CTC</label>
                                             <input type="number" step="0.1" name="ctc" id="ctc" required
-                                                class="form-control" placeholder="CTC">
+                                                class="form-control" placeholder="CTC" value="0">
                                         </div>
 
                                         <div class="col-md-6 form-group">
                                             <label>Bank Name</label>
-                                            <input type="text" name="bank_name" id="bank_name" required
-                                                class="form-control" placeholder=" Bank Name">
+                                            <select name="bank_name" id="bank_name" class="form-control selectpicker"
+                                                data-live-search="true" data-live-search-style="begins"
+                                                title='Select Bank'>
+                                                <option value="" disabled selected>Select Bank</option>
+
+
+                                            </select>
                                         </div>
 
                                         <div class="col-md-6 form-group">
@@ -254,11 +300,9 @@
                                     <thead>
                                         <tr>
                                             <th>Sr.No.</th>
+                                            <th>Sr.No.</th>
                                             <th>Basic Sallary</th>
-                                            <th>Allowance 1</th>
-                                            <th>Allowance 2 </th>
-                                            <th>Allowance 3</th>
-                                            <th>Allowance 4</th>
+                                          
                                             <th>Arrears</th>
                                             <th>Incentive</th>
                                             <th>Gross Salary</th>
@@ -302,11 +346,87 @@
     <script>
         $(document).ready(function() {
 
+            $(document).on('change', '#company_id', function() {
+                $.ajax({
+                    url: "{{ route('get-allowance-by-company') }}",
+                    method: "GET",
+                    dataType: 'json',
+                    data: {
+                        company_id: $(this).val(),
+                    },
+                    success: function(result) {
+                        $(".apeended_element").remove();
+                        $(result['fields']).insertAfter("#allowance_area");
+                        $("#bank_name").empty();
+                        $("#bank_name").append('<option value="">Select Bank</option>');
+                        $.each(result['bank_name'], function(a, b) {
+                            $("#bank_name").append('<option value="'+b.bank_name+'" bank_acc_no="'+b.bank_acc_no+'" ifsc_code="'+b.bank_ifsc_code+'">' + b.bank_name +
+                                '</option>');
+                        })
+                    }
+                })
+            })
+
+          
+
+            $(document).on('change', '#bank_name', function() {
+                $("#ifsc_code").val($("#bank_name option:selected").attr('ifsc_code'));
+                $("#account_no").val($("#bank_name option:selected").attr('bank_acc_no'));
+            })
+
+            $(document).on('keyup', '.gross_salary_cal_field', function() {
+                gross_salary = 0;
+                var totalfields = $(".gross_salary_cal_field");
+                $.each(totalfields, function() {
+                    if (!isNaN(parseInt($(this).val())) && $(this).attr('allowance_type') !=
+                        'Percent') {
+                        gross_salary = gross_salary + parseInt($(this).val());
+                    } else if ($(this).attr('allowance_type') == 'Percent') {
+                        let percentage_value = (($("#basic_salary").val() / 100) * $(this).attr(
+                            'parcentage')).toFixed(2);
+                        $(this).val(parseFloat(percentage_value));
+                        gross_salary = gross_salary + parseFloat(percentage_value);
+                    }
+                })
+                $("#gross_salary").val(gross_salary);
+                calculate_net_salary();
+            })
+
+            $(document).on('keyup', '.total_deduction_cal_field', function() {
+                let total_deduction = 0;
+                var totalfields = $(".total_deduction_cal_field");
+                $.each(totalfields, function() {
+                    if (!isNaN(parseInt($(this).val()))) {
+                        total_deduction = total_deduction + parseInt($(this).val());
+                    }
+                })
+                $("#total_deduction").val(total_deduction);
+                calculate_net_salary();
+
+            })
+
+            function calculate_net_salary() {
+                let net_salary = parseFloat($("#gross_salary").val()) - parseFloat($("#total_deduction").val());
+                $("#net_salary").val(net_salary);
+
+            }
+
+
+
             $('#salary_detail_form').validate({
 
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
+                    employee_id: {
+                        required: true,
+                    },
+                    emp_code: {
+                        required: true,
+                    },
+                    company_id: {
+                        required: true,
+                    },
                     basic_salary: {
                         required: true,
                     },
@@ -371,6 +491,15 @@
 
                 },
                 messages: {
+                    company_id: {
+                        required: "This field is required.",
+                    },
+                    employee_id: {
+                        required: "Please type employee name and select.",
+                    },
+                    emp_code: {
+                        required: "This field is required.",
+                    },
                     basic_salary: {
                         required: "This field is required.",
                     },
@@ -465,24 +594,24 @@
                         $("#allowance3").val(result.allowance3);
                         $("#allowance4").val(result.allowance4);
                         $("#areas").val(result.areas);
-                      
+
                         $("#incentive").val(result.incentive);
                         $("#gross_salary").val(result.gross_salary);
                         $("#pf").val(result.pf);
                         $("#esic").val(result.esic);
                         $("#pt").val(result.pt);
                         $("#it").val(result.it);
-                      
+
                         $("#advance").val(result.advance);
                         $("#total_deduction").val(result.total_deduction);
                         $("#net_salary").val(result.net_salary);
                         $("#ctc").val(result.ctc);
                         $("#bank_name").val(result.bank_name);
                         $("#branch_name").val(result.branch_name);
-                      
+
                         $("#ifsc_code").val(result.ifsc_code);
                         $("#account_no").val(result.account_no);
-                      
+
                         $("#myLargeModalLabel").text("Edit Salary Details");
                         $("#add-edit-btn").text("Update");
                         let formaction =
@@ -592,36 +721,18 @@
                         name: "DT_RowIndex",
                         width: "5%"
                     },
+                    
+                    {
+                        data: "employee_name",
+                        orderable: true,
+                        name: "employee_name" /*,width:"20%"*/
+                    },
                     {
                         data: "basic_salary",
                         orderable: true,
                         name: "basic_salary" /*,width:"20%"*/
                     },
-                    {
-                        data: "allowance1",
-                        orderable: true,
-                        name: "allowance1",
-                        width: "15%"
-                    },
-                    {
-                        data: "allowance2",
-                        orderable: true,
-                        name: "allowance2" /*,width:"20%"*/ ,
-                        width: "25%"
-
-                    },
-                    {
-                        data: "allowance3",
-                        orderable: true,
-                        name: "allowance3" /*,width:"20%"*/ ,
-                        width: "25%"
-
-                    },
-                    {
-                        data: "allowance4",
-                        orderable: true,
-                        name: "allowance4" /*,width:"20%"*/
-                    },
+                    
                     {
                         data: "areas",
                         orderable: true,

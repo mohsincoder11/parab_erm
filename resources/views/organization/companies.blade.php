@@ -9,7 +9,7 @@
                         data-target=".bd-example-modal-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>Add New Company</button>
+                        </svg> @php check_actice_or_show(['organization.companies'],'active') @endphp  Add New Company</button>
                     <!-- <button type="button" class="btn btn-danger mb-2 mr-2" data-toggle="modal" id="bulk_delete"><svg
                             xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
@@ -25,7 +25,7 @@
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="myLargeModalLabel">Add New Company</h5>
+                                <h5 class="modal-title" id="myLargeModalLabel"> Add New Company</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
