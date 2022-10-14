@@ -661,3 +661,18 @@ if (!function_exists('areActiveRoutes')) {
 }
 
 
+if (!function_exists('check_actice_or_show')) {
+    function check_actice_or_show(array $routes,$type)
+    {
+
+        $current_route=Route::currentRouteName();     
+       
+        if(in_array($current_route,$routes)){
+            echo $type;
+        }
+        
+    }
+}
+
+
+
