@@ -40,6 +40,7 @@ class VendorDetails extends Controller
             'contact_person' => $request->contact_person,
             'unit_of_supply' => $request->unit_of_supply,
             'vendor_code' => $request->vendor_code,
+            'remark' => $request->remark,
         ]);
         return back()->with('success', 'Record added successfully.');
     }
@@ -66,6 +67,8 @@ class VendorDetails extends Controller
             'contact_person' => $request->contact_person,
             'unit_of_supply' => $request->unit_of_supply,
             'vendor_code' => $request->vendor_code,
+            'remark' => $request->remark,
+
         ]);
         return back()->with('success', 'Record updated successfully.');
     }
@@ -82,8 +85,8 @@ class VendorDetails extends Controller
     {
         $data = DB::table('vendor_details')
             ->join('companies', 'companies.id', '=', 'vendor_details.company_id')
-            ->join('locations', 'locations.id', '=', 'vendor_details.location_id')
-            ->join('departments', 'departments.id', '=', 'vendor_details.department_id')
+            ->leftjoin('locations', 'locations.id', '=', 'vendor_details.location_id')
+            ->leftjoin('departments', 'departments.id', '=', 'vendor_details.department_id')
             ->join('expenses_category', 'expenses_category.id', '=', 'vendor_details.expense_category_id')
             ->join('vendor_category', 'vendor_category.id', '=', 'vendor_details.vendor_category_id')
             ->select('vendor_details.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'expenses_category.category', 'vendor_category.vendor_category_name')
@@ -94,7 +97,7 @@ class VendorDetails extends Controller
             ->addIndexColumn()
             ->rawColumns([
                 'vendor_name', 'company_name', 'location_name', 'department', 'category', 'vendor_category_name', 'address',
-                'pan', 'gst_no', 'contact_no', 'contact_person', 'unit_of_supply', 'vendor_code', 'action'
+                'pan', 'gst_no', 'contact_no', 'contact_person', 'unit_of_supply', 'vendor_code','remark', 'action'
             ])
             ->addColumn('vendor_name', function ($data) {
                 return $data->vendor_name;
@@ -103,10 +106,10 @@ class VendorDetails extends Controller
                 return $data->company_name;
             })
             ->addColumn('location_name', function ($data) {
-                return $data->location_name;
+                return $data->location_name ?? 'N/A';
             })
             ->addColumn('department', function ($data) {
-                return $data->department;
+                return $data->department ?? 'N/A';
             })
             ->addColumn('category', function ($data) {
                 return $data->category;
@@ -115,25 +118,28 @@ class VendorDetails extends Controller
                 return $data->vendor_category_name;
             })
             ->addColumn('address', function ($data) {
-                return $data->address;
+                return $data->address ?? 'N/A';
             })
             ->addColumn('pan', function ($data) {
                 return $data->pan;
             })
             ->addColumn('gst_no', function ($data) {
-                return $data->gst_no;
+                return $data->gst_no ?? 'N/A';
             })
             ->addColumn('contact_no', function ($data) {
                 return $data->contact_no;
             })
             ->addColumn('contact_person', function ($data) {
-                return $data->contact_person;
+                return $data->contact_person ?? 'N/A';
             })
             ->addColumn('unit_of_supply', function ($data) {
-                return $data->unit_of_supply;
+                return $data->unit_of_supply ?? 'N/A';
             })
             ->addColumn('vendor_code', function ($data) {
                 return $data->vendor_code;
+            })
+             ->addColumn('remark', function ($data) {
+                return $data->remark ?? 'N/A';
             })
 
 

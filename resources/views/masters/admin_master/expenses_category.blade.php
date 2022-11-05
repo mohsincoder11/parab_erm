@@ -76,7 +76,7 @@
 
 
                                         <div class="col-md-6 form-group">
-                                            <label>Location*</label>
+                                            <label>Location</label>
                                             <select name="location_id" id="location_id" class="form-control selectpicker"
                                                 data-live-search="true" data-live-search-style="begins"
                                                 title='Select location...'>
@@ -86,7 +86,7 @@
 
 
 
-                                        <div class="col-md-6 form-group">
+                                        {{-- <div class="col-md-6 form-group">
                                             <label>Select Department *</label>
                                             <select name="department_id" id="department_id"
                                                 class="form-control selectpicker" data-live-search="true"
@@ -95,7 +95,7 @@
                                                 </option>
 
                                             </select>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="form-group" align="center" style="margin-top: 5%;  margin-left: 45%;">
 
@@ -318,7 +318,6 @@
                         company_id: $(this).val(),
                     },
                     success: function(result) {
-                        console.log(result);
 
                         $("#department_id").empty();
                         $("#location_id").empty();
@@ -348,10 +347,10 @@
                     category: {
                         required: true,
                     },
-                    location_id: {
-                        required: true,
-                        // notEqual:'complaint_from',
-                    },
+                    // location_id: {
+                    //     required: true,
+                    //     // notEqual:'complaint_from',
+                    // },
                     department_id: {
                         required: true,
                     },

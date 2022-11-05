@@ -75,7 +75,7 @@
 
 
                                         <div class="col-md-6 form-group">
-                                            <label>Location*</label>
+                                            <label>Location</label>
                                             <select name="location_id" id="location_id"
                                                 class="form-control selectpicker" data-live-search="true"
                                                 data-live-search-style="begins" title='Select location...'>
@@ -85,7 +85,7 @@
 
 
 
-                                        <div class="col-md-6 form-group">
+                                        {{-- <div class="col-md-6 form-group">
                                             <label>Select Department *</label>
                                             <select name="department_id" id="department_id" class="form-control selectpicker"
                                                 data-live-search="true" data-live-search-style="begins"
@@ -94,15 +94,15 @@
                                                 </option>
 
                                             </select>
-                                        </div>
+                                        </div> --}}
 
                                         
 
                                     <div class="col-md-6 form-group">
-                                        <label>Select Expenses Category*</label>
+                                        <label>Select Expenses Category</label>
                                         <select name="expense_category_id" id="expense_category_id" class="form-control selectpicker"
                                             data-live-search="true" data-live-search-style="begins"
-                                            title='Select Company Type...'>
+                                            title='Select Expenses Category'>
                                             <option value="" disabled selected>Select Expenses Category </option>
                                             @foreach ($expense_category as $expense_category)
                                             <option value="{{ $expense_category->id }}">{{ $expense_category->category }}
@@ -114,9 +114,21 @@
                                     </div>
 
                                     <div class="col-md-6 form-group">
-                                        <label>Unit Of Supply</label>
-                                        <input type="text" name="unit_of_supply" id="unit_of_supply" class="form-control"
-                                            placeholder="">
+                                        <label>Unit Of Supply</label> 
+                                       
+                                            <select name="unit_of_supply" id="unit_of_supply" class="form-control selectpicker"
+                                            data-live-search="true" data-live-search-style="begins"
+                                            title='Select Unit Supply...'>
+                                            <option value="" disabled selected>Select Unit Supply</option>
+                                            <option value="Qty">Qty</option>
+                                            <option value="Pack">Pack</option>
+                                            <option value="Box">Box</option>
+                                            <option value="Sqft">Sqft</option>
+                                            <option value="Rft">Rft</option>
+                                            <option value="Set">Set</option>
+
+
+                                        </select>
                                     </div>
 
 
@@ -186,7 +198,7 @@
                                             <th>Category</th>
                                             <th>Company</th>
                                             <th>Location</th>
-                                            <th>Department</th>
+                                            {{-- <th>Department</th> --}}
                                             <th>Expense Category Name</th>
                                             <th>Unit Of Supply</th>
                                             <th>Action</th>
@@ -231,7 +243,7 @@
                         $("#department_id").empty();
                         $("#location_id").empty();
                         $("#location_id").append(
-                            '<option value="" disabled selected>Select Department</option>');
+                            '<option value="" disabled selected>Select Location</option>');
                         $("#department_id").append(
                             '<option value="" disabled selected>Select Department</option>');
                         $.each(result['department'], function(a, b) {
@@ -255,20 +267,20 @@
                     vendor_category_name: {
                         required: true,
                     },
-                    location_id: {
-                        required: true,
-                        // notEqual:'complaint_from',
-                    },
-                    department_id: {
-                        required: true,
-                    },
-                    expense_category_id: {
-                        required: true,
-                        // notEqual:'complaint_from',
-                    },
-                    unit_of_supply: {
-                        required: true,
-                    },
+                    // location_id: {
+                    //     required: true,
+                    //     // notEqual:'complaint_from',
+                    // },
+                    // department_id: {
+                    //     required: true,
+                    // },
+                    // expense_category_id: {
+                    //     required: true,
+                    //     // notEqual:'complaint_from',
+                    // },
+                    // unit_of_supply: {
+                    //     required: true,
+                    // },
                    
 
 
@@ -292,7 +304,7 @@
                         // notEqual:"Please select other employee."
                     },
                     unit_of_supply: {
-                        required: 'This field is required.',
+                        required: 'Select unit supply.',
                     },
                    
                 },
@@ -458,11 +470,11 @@
                         orderable: true,
                         name: "location_name" /*,width:"20%"*/
                     },
-                    {
-                        data: "department",
-                        orderable: true,
-                        name: "department" /*,width:"20%"*/
-                    },
+                    // {
+                    //     data: "department",
+                    //     orderable: true,
+                    //     name: "department" /*,width:"20%"*/
+                    // },
                     {
                         data: "category",
                         orderable: true,

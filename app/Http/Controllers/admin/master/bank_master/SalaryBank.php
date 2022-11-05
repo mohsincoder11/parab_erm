@@ -19,7 +19,7 @@ class SalaryBank extends Controller
        // dd($request->all());
         if ($request->hasFile('salary_format')) {
             $image = $request->file('salary_format');
-            $file_name = rand() . '.' . $image->getClientOriginalExtension();
+            $file_name ='B'.time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/salary_format'), $file_name);
 
             SalaryBankModel::create([
@@ -46,7 +46,7 @@ class SalaryBank extends Controller
     {
         if ($request->hasFile('salary_format')) {
             $image = $request->file('salary_format');
-            $file_name = rand() . '.' . $image->getClientOriginalExtension();
+            $file_name ='B'.time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/appointment_letter'), $file_name);
         } else {
             $file_name = $request->old_file;

@@ -15,6 +15,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link href="{{ asset('public/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
+
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
     <link rel="stylesheet" type="text/css" href="{{ asset('public/plugins/table/datatable/datatables.css') }}">
@@ -27,6 +29,7 @@
     <link href="{{ asset('public/plugins/notification/snackbar/snackbar.min.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/plugins/select2/select2.min.css')}}">
 
     <style>
         .error {
@@ -219,10 +222,11 @@
     <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
 
     <script src="{{ asset('public/plugins/notification/snackbar/snackbar.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/scrollspyNav.js')}}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
-
+   
     <script>
         $(document).ready(function() {
 
