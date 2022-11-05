@@ -13,7 +13,8 @@ class AdminDocumentsModel extends Model
         'location_id',
         'department_id',
         'project_id',
-        'document_type'
+        'document_type',
+        'remark'
 
     ];
 }

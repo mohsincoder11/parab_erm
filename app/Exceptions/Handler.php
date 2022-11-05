@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Support\Str;
+
 
 class Handler extends ExceptionHandler
 {
@@ -26,6 +28,17 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+    /**
+     * Register the exception handling callbacks for the application.
+     *
+     * @return void
+     */
+    /*
+    public function register()
+    {
+        //
+    }
+    */
     /**
      * Report or log an exception.
      *
@@ -50,16 +63,32 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        
-        // if ($exception instanceof \Exception) {
-        //     if ($exception->getCode() == '500') {
-        //         return response()->view('errors.500', [], 500);
-        //     }
-        // }
+        if ($exception instanceof \Exception) {
+           
+
+            // if ($exception->getCode() == '500' || $exception->getCode() == '23000') {
+            //     return response()->view('errors.500', [], 500);
+            // }
+
+            // if ($exception->getCode() == '0' && $exception->getmessage() == 'CSRF token mismatch.') {
+            //     if (request()->segment(1) . request()->segment(2) == 'adminlogin') {
+            //         return redirect()->route('admin.login')->with('error', 'Token expired. Please try again.');
+            //     } elseif (request()->segment(1) == 'login') {
+            //         $prev = url()->previous();
+            //         if (Str::contains($prev, ['customer-login'])) {
+            //             return redirect()->route('customerLogin')->with('error', 'Token expired. Please try again.');
+            //         } else {
+            //             return redirect()->route('login')->with('error', 'Token expired. Please try again.');
+            //         }
+            //     }
+            //     return response()->view('errors.500', [], 500);
+            // }
+        }
 
         // if ($exception instanceof \ErrorException) {
         //     return response()->view('errors.custom', [], 500);
         // }
+
         return parent::render($request, $exception);
     }
 }

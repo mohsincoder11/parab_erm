@@ -68,33 +68,33 @@ class VendorCategory extends Controller
     {
         $data = DB::table('vendor_category')
             ->join('companies', 'companies.id', '=', 'vendor_category.company_id')
-            ->join('locations', 'locations.id', '=', 'vendor_category.location_id')
-            ->join('departments', 'departments.id', '=', 'vendor_category.department_id')
-            ->join('expenses_category', 'expenses_category.id', '=', 'vendor_category.expense_category_id')
+            ->leftjoin('locations', 'locations.id', '=', 'vendor_category.location_id')
+            ->leftjoin('departments', 'departments.id', '=', 'vendor_category.department_id')
+            ->leftjoin('expenses_category', 'expenses_category.id', '=', 'vendor_category.expense_category_id')
             ->select('vendor_category.*','locations.location_name', 'departments.department', 'companies.company_name','expenses_category.category')
             ->orderby('vendor_category.id', 'desc')
             ->get();
 
         return DataTables::of($data)
             ->addIndexColumn()
-            ->rawColumns(['vendor_category_name','category','company_name', 'location_name', 'department', 'unit_of_supply','action'])
+            ->rawColumns(['vendor_category_name','category','company_name', 'location_name', 'department', 'unit_of_supply','exp_category','action'])
             ->addColumn('vendor_category_name', function ($data) {
                 return $data->vendor_category_name;
             })
             ->addColumn('category', function ($data) {
-                return $data->category;
+                return $data->category ?? 'N/A';
             })
             ->addColumn('company_name', function ($data) {
                 return $data->company_name;
             })
             ->addColumn('location_name', function ($data) {
-                return $data->location_name;
+                return $data->location_name ?? 'N/A';
             })
-            ->addColumn('department', function ($data) {
-                return $data->department;
-            })
+            // ->addColumn('department', function ($data) {
+            //     return $data->department ?? 'N/A';
+            // })
              ->addColumn('unit_of_supply', function ($data) {
-                return $data->unit_of_supply;
+                return $data->unit_of_supply ?? 'N/A';
             })
          
 

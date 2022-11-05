@@ -60,8 +60,8 @@ class ExpenseCategory extends Controller
     {
         $data = DB::table('expenses_category')
             ->join('companies', 'companies.id', '=', 'expenses_category.company_id')
-            ->join('locations', 'locations.id', '=', 'expenses_category.location_id')
-            ->join('departments', 'departments.id', '=', 'expenses_category.department_id')
+            ->leftjoin('locations', 'locations.id', '=', 'expenses_category.location_id')
+            ->leftjoin('departments', 'departments.id', '=', 'expenses_category.department_id')
             ->select('expenses_category.*','expenses_category.category', 'locations.location_name', 'departments.department', 'companies.company_name')
             ->orderby('expenses_category.id', 'desc')
             ->get();
@@ -76,10 +76,10 @@ class ExpenseCategory extends Controller
                 return $data->company_name;
             })
             ->addColumn('location_name', function ($data) {
-                return $data->location_name;
+                return $data->location_name ?? 'N/A';
             })
             ->addColumn('department', function ($data) {
-                return $data->department;
+                return $data->department ?? 'N/A';
             })
          
 

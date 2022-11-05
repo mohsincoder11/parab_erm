@@ -217,6 +217,13 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/edit-admin-documents', 'AdminDocuments@edit_admin_documents')->name('edit-admin-documents');
         Route::get('/delete-admin-documents', 'AdminDocuments@delete_admin_documents')->name('delete-admin-documents');
         Route::get('/get-admin-documents-record', 'AdminDocuments@get_admin_documents_record')->name('get-admin-documents-record');
+
+        Route::get('/trainee-program', 'TraineeProgram@trainee_program')->name('trainee-program');
+        Route::post('/store-trainee-program', 'TraineeProgram@store_trainee_program')->name('store-trainee-program');
+        Route::post('/update-trainee-program', 'TraineeProgram@update_trainee_program')->name('update-trainee-program');
+        Route::get('/edit-trainee-program', 'TraineeProgram@edit_trainee_program')->name('edit-trainee-program');
+        Route::get('/delete-trainee-program', 'TraineeProgram@delete_trainee_program')->name('delete-trainee-program');
+        Route::get('/get-trainee-program-record', 'TraineeProgram@get_trainee_program_record')->name('get-trainee-program-record');
     });
 
     //master/assets_masters
@@ -228,7 +235,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/delete-assets', 'Assets@delete_assets')->name('delete-assets');
         Route::get('/get-assets', 'Assets@get_assets')->name('get-assets');
 
-    
+
 
         Route::get('/category', 'Category@category')->name('category');
         Route::post('/store-category', 'Category@store_category')->name('store-category');
@@ -397,7 +404,6 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/delete-salary-bank', 'SalaryBank@delete_salary_bank')->name('delete-salary_bank');
         Route::get('/edit-salary-bank', 'SalaryBank@edit_salary_bank')->name('edit-salary_bank');
         Route::get('/get-salary-bank', 'SalaryBank@get_salary_bank')->name('get-salary_bank');
-
     });
 
     //master/statutory_master
@@ -439,7 +445,6 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/delete-profession-tax', 'ProfessionTaxMaster@delete_profession_tax')->name('delete-profession-tax');
         Route::get('/edit-profession-tax', 'ProfessionTaxMaster@edit_profession_tax')->name('edit-profession-tax');
         Route::get('/get-profession-tax', 'ProfessionTaxMaster@get_profession_tax')->name('get-profession-tax');
-
     });
 
     //Statutory Reports/Event-Meeting
@@ -448,6 +453,117 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/meeting', 'Meetings@meeting')->name('meeting');
     });
 
+    //Admin Process/Inward-Outward
+    Route::namespace('admin\admin_process\inward_outward')->name('admin_process.inward_outward.')->prefix('admin-process')->group(function () {
+        Route::get('/inward', 'Inward@inward')->name('inward');
+        Route::post('/store-inward', 'Inward@store_inward')->name('store-inward');
+        Route::post('/update-inward', 'Inward@update_inward')->name('update-inward');
+        Route::get('/delete-inward', 'Inward@delete_inward')->name('delete-inward');
+        Route::get('/edit-inward', 'Inward@edit_inward')->name('edit-inward');
+        Route::get('/get-inward', 'Inward@get_inward')->name('get-inward');
+   
+        Route::get('/outward', 'Outward@outward')->name('outward');
+        Route::post('/store-outward', 'Outward@store_outward')->name('store-outward');
+        Route::post('/update-outward', 'Outward@update_outward')->name('update-outward');
+        Route::get('/delete-outward', 'Outward@delete_outward')->name('delete-outward');
+        Route::get('/edit-outward', 'Outward@edit_outward')->name('edit-outward');
+        Route::get('/get-outward', 'Outward@get_outward')->name('get-outward');
+   
+    });
+
+    Route::namespace('admin\admin_process\event_meeting')->name('admin_process.event_meeting.')->prefix('admin-process')->group(function () {
+        Route::get('/events', 'Event@events')->name('events');
+        Route::post('/store-events', 'Event@store_events')->name('store-events');
+        Route::post('/update-events', 'Event@update_events')->name('update-events');
+        Route::get('/delete-events', 'Event@delete_events')->name('delete-events');
+        Route::get('/edit-events', 'Event@edit_events')->name('edit-events');
+        Route::get('/get-events', 'Event@get_events')->name('get-events');
+ 
+        
+        Route::get('/meeting', 'Meeting@meeting')->name('meeting');
+        Route::post('/store-meeting', 'Meeting@store_meeting')->name('store-meeting');
+        Route::post('/update-meeting', 'Meeting@update_meeting')->name('update-meeting');
+        Route::get('/delete-meeting', 'Meeting@delete_meeting')->name('delete-meeting');
+        Route::get('/edit-meeting', 'Meeting@edit_meeting')->name('edit-meeting');
+        Route::get('/get-meeting', 'Meeting@get_meeting')->name('get-meeting');
+ 
+    });
+
+    Route::namespace('admin\admin_process\training')->name('admin_process.training.')->prefix('admin-process')->group(function () {
+        Route::get('/training-calendar', 'TrainingCalendar@training_calendar')->name('training-calendar');
+        Route::post('/store-training-calendar', 'TrainingCalendar@store_training_calendar')->name('store-training-calendar');
+        Route::post('/update-training-calendar', 'TrainingCalendar@update_training_calendar')->name('update-training-calendar');
+        Route::get('/delete-training-calendar', 'TrainingCalendar@delete_training_calendar')->name('delete-training-calendar');
+        Route::get('/edit-training-calendar', 'TrainingCalendar@edit_training_calendar')->name('edit-training-calendar');
+        Route::get('/get-training-calendar', 'TrainingCalendar@get_training_calendar')->name('get-training-calendar');
+ 
+        Route::get('/training-feedback', 'TrainingFeedback@training_feedback')->name('training-feedback');
+        Route::post('/store-training-feedback', 'TrainingFeedback@store_training_feedback')->name('store-training-feedback');
+        Route::post('/update-training-feedback', 'TrainingFeedback@update_training_feedback')->name('update-training-feedback');
+        Route::get('/delete-training-feedback', 'TrainingFeedback@delete_training_feedback')->name('delete-training-feedback');
+        Route::get('/edit-training-feedback', 'TrainingFeedback@edit_training_feedback')->name('edit-training-feedback');
+        Route::get('/get-training-feedback', 'TrainingFeedback@get_training_feedback')->name('get-training-feedback');
+ 
+    });
+
+    Route::namespace('admin\admin_process\admin_documents')->name('admin_process.admin_documents.')->prefix('admin-process')->group(function () {
+        Route::get('/purchase-order', 'PurchaseWorkOrder@purchase_order')->name('purchase-order');
+        Route::get('/agreement', 'Agreement@agreement')->name('agreement');
+        Route::get('/purchase-invoice', 'PurchaseInvoice@purchase_invoice')->name('purchase-invoice');
+        Route::get('/payment-order', 'PaymentOrder@payment_order')->name('payment-order');
+    });
+    Route::namespace('admin\admin_process\activity_documents')->name('admin_process.activity_documents.')->prefix('admin-process')->group(function () {
+        Route::get('/training-certificate', 'TrainingCertificate@training_certificate')->name('training-certificate');
+        Route::post('/store-training-certificate', 'TrainingCertificate@store_training_certificate')->name('store-training-certificate');
+        Route::post('/update-training-certificate', 'TrainingCertificate@update_training_certificate')->name('update-training-certificate');
+        Route::get('/delete-training-certificate', 'TrainingCertificate@delete_training_certificate')->name('delete-training-certificate');
+        Route::get('/edit-training-certificate', 'TrainingCertificate@edit_training_certificate')->name('edit-training-certificate');
+        Route::get('/get-training-certificate', 'TrainingCertificate@get_training_certificate')->name('get-training-certificate');
+ 
+        Route::get('/travel-allowance', 'TravelAllowance@travel_allowance')->name('travel-allowance');
+        Route::post('/store-travel-allowance', 'TravelAllowance@store_travel_allowance')->name('store-travel-allowance');
+        Route::post('/update-travel-allowance', 'TravelAllowance@update_travel_allowance')->name('update-travel-allowance');
+        Route::get('/delete-travel-allowance', 'TravelAllowance@delete_travel_allowance')->name('delete-travel-allowance');
+        Route::get('/edit-travel-allowance', 'TravelAllowance@edit_travel_allowance')->name('edit-travel-allowance');
+        Route::get('/get-travel-allowance', 'TravelAllowance@get_travel_allowance')->name('get-travel-allowance');
+ 
+        Route::get('/event-meeting', 'EventMeeting@event_meeting')->name('event-meeting');
+        Route::post('/store-event-meeting', 'EventMeeting@store_event_meeting')->name('store-event-meeting');
+        Route::post('/update-event-meeting', 'EventMeeting@update_event_meeting')->name('update-event-meeting');
+        Route::get('/delete-event-meeting', 'EventMeeting@delete_event_meeting')->name('delete-event-meeting');
+        Route::get('/edit-event-meeting', 'EventMeeting@edit_event_meeting')->name('edit-event-meeting');
+        Route::get('/get-event-meeting', 'EventMeeting@get_event_meeting')->name('get-event-meeting');
+ 
+    });
+
+    Route::namespace('admin\admin_report')->name('admin_report.')->prefix('admin-report')->group(function () {
+        Route::get('/purchase-work-order-agreement', 'PurchaseWorkAgreementReport@purchase_work_order_agreement')->name('purchase-work-order-agreement');
+
+        Route::get('/vendor-report', 'VendorReport@vendor_report')->name('vendor-report');
+        Route::get('/get_vendor_category_by_company', 'VendorReport@get_vendor_category_by_company')->name('get_vendor_category_by_company');
+        Route::get('/get_vendor_details_by_vendor_category', 'VendorReport@get_vendor_details_by_vendor_category')->name('get_vendor_details_by_vendor_category');
+        
+        
+        Route::get('/event-report', 'event_meeting\EventReport@event_report')->name('event-report');
+        Route::get('/meeting-report', 'event_meeting\MeetingReport@meeting_report')->name('meeting-report');
+
+        Route::get('/training-report', 'training\TrainingReport@training_report')->name('training-report');
+        Route::get('/training-certificate-report', 'training\TrainingCertificateReport@training_certificate_report')->name('training-certificate-report');
+
+        Route::get('/inward-report', 'inward_outward\InwardReport@inward_report')->name('inward-report');
+        Route::get('/outward-report', 'inward_outward\OutwardReport@outward_report')->name('outward-report');
+
+
+      
+        Route::get('/expenses-report', 'ExpensesReport@expenses_report')->name('expenses-report');
+        Route::get('/get_expense_category_by_location_company', 'ExpensesReport@get_expense_category_by_location_company')->name('get_expense_category_by_location_company');
+        Route::get('/get_vendor_category_by_location_company_expense_category', 'ExpensesReport@get_vendor_category_by_location_company_expense_category')->name('get_vendor_category_by_location_company_expense_category');
+        
+        
+
+    });
+
+
     //Statutory Reports/Training
     Route::namespace('admin\statutory_reports\training')->name('training.')->prefix('statutory-reports/training')->group(function () {
         Route::get('/trainer', 'Trainer@trainer')->name('trainer');
@@ -455,10 +571,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     });
 
     //Admin Reports
-    Route::namespace('admin\admin_reports')->name('admin-reports.')->prefix('admin-reports/')->group(function () {
-        Route::get('/expence-report', 'ExpenceReport@expence_report')->name('expence-report');
-        Route::get('/job-post', 'JobPost@job_post')->name('job-post');
-    });
+    // Route::namespace('admin\admin_reports')->name('admin-reports.')->prefix('admin-reports/')->group(function () {
+    //     Route::get('/expence-report', 'ExpenceReport@expence_report')->name('expence-report');
+    //     Route::get('/job-post', 'JobPost@job_post')->name('job-post');
+    // });
 
     //admin\general_master
     Route::namespace('admin\general_master')->name('general-master.')->prefix('general-master')->group(function () {
@@ -479,12 +595,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/get_department_by_company', 'DepartmentController@get_department_by_company')->name('get_department_by_company');
     Route::post('/get_employee_id', 'admin\master\employee_master\PersonalDetail@get_employee_id')->name('get_employee_id');
     Route::post('/search_employee', 'admin\master\employee_master\PersonalDetail@search_employee')->name('search_employee');
-    
+
     Route::get('/get_location_by_company', 'LocationController@get_location_by_company')->name('get_location_by_company');
     Route::get('/get_employee_by_company', 'EmployeeController@get_employee_by_company')->name('get_employee_by_company');
     Route::get('/get_department_location_by_company', 'admin\master\admin_master\ExpenseCategory@get_department_location_by_company')->name('get_department_location_by_company');
-    
-
 });
 
 

@@ -143,7 +143,7 @@
                                         </div>
 
 
-                                         <div class="col-md-6 form-group hide_show_div">
+                                        <div class="col-md-6 form-group hide_show_div">
                                             <label>Spouse or Souse Name</label>
                                             <input type="text" name="spouse_name" id="spouse_name"
                                                 class="form-control" placeholder=" Name">
@@ -155,7 +155,7 @@
                                         </div>
 
 
-                                       
+
                                         <div class="col-md-6 form-group hide_show_div">
                                             <label>Spouse or Emergency Mobile No. </label>
                                             <input type="number" name="emergency_contact_no" id="emergency_contact_no"
@@ -260,14 +260,15 @@
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-6">
                             <div class="table-responsive mb-4 mt-4">
-                                <table class="table table-hover non-hover datatable_server nowrap" cellspacing="0" width="100%">
+                                <table class="table table-hover non-hover datatable_server nowrap" cellspacing="0"
+                                    width="100%">
                                     <thead>
                                         <tr>
                                             <th>Sr.No.</th>
                                             <th>Employee Name </th>
                                             <th>Date of Birth </th>
-                                            <th>Locality  </th>
-                                            <th>Address  </th>
+                                            <th>Locality </th>
+                                            <th>Address </th>
                                             <th>Mobile No</th>
                                             <th>Gender</th>
                                             <th>Blood Group</th>
@@ -306,10 +307,10 @@
 @section('js')
     <script>
         $(document).ready(function() {
-jQuery.validator.addMethod("noSpace", function(value, element) { 
-    var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/; 
-    return regex.test(value); 
-}, "No space allowed.");
+            jQuery.validator.addMethod("noSpace", function(value, element) {
+                var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+                return regex.test(value);
+            }, "No space allowed.");
             $('#personal_detail_form').validate({
 
                 //debug:true,
@@ -469,7 +470,7 @@ jQuery.validator.addMethod("noSpace", function(value, element) {
 
             $(document).on('change', '#marital_status', function() {
                 if ($(this).val() == 'Single') {
-                    $(".hide_show_div").hide();                 
+                    $(".hide_show_div").hide();
 
                 } else {
                     $(".hide_show_div").show();
@@ -608,19 +609,13 @@ jQuery.validator.addMethod("noSpace", function(value, element) {
                     "processing": '<div class="loader_box sub_loader" > <div class="site_loader"><i class="fas fa-sync-alt fa-spin"></i></div> </div>'
                 },
 
+
                 "ajax": {
                     url: "{{ route('employees_masters.get-personal-details') }}",
                     type: "get",
                     data: function(d) {}
                 },
-                columns: [
-                    {
-                "className":      'details-control',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ''
-            },
-                    {
+                columns: [{
                         data: "DT_RowIndex",
                         orderable: true,
                         name: "DT_RowIndex",
@@ -652,8 +647,7 @@ jQuery.validator.addMethod("noSpace", function(value, element) {
                         width: "25%"
 
                     },
-                   
-                    
+
                     {
                         data: "contact_no",
                         orderable: true,
