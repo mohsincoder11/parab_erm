@@ -1529,7 +1529,6 @@
                     <li>
                         <a href="#">Permission Management </a>
                     </li>
-
                 </ul>
             </li>
 
