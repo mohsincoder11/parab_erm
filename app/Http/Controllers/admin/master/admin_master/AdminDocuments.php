@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\admin_master\AdminDocumentsModel;
 use DB;
 use Yajra\DataTables\DataTables;
-use App\Department;
-use App\Location;
+
+n;
 
 class AdminDocuments extends Controller
 {
@@ -25,19 +25,20 @@ class AdminDocuments extends Controller
             $image = $request->file('file');
             $file_name = rand() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/admin_document'), $file_name);
-      
-        AdminDocumentsModel::create([
-            'company_id' => $request->company_id,
-            'location_id' => $request->location_id,
-            'department_id' => $request->department_id,
-            'project_id' => $request->project_id,
-            'document_type' => $request->document_type,
-            'file'=>$file_name
-   ]);
-        return back()->with('success', 'Record added successfully.');
-    } else
-    return back()->with('error', 'Please fill all details.');
 
+            AdminDocumentsModel::create([
+                'company_id' => $request->company_id,
+                'location_id' => $request->location_id,
+                'department_id' => $request->department_id,
+                'project_id' => $request->project_id,
+                'document_type' => $request->document_type,
+                'file' => $file_name,
+                'remark' => $request->remark,
+
+            ]);
+            return back()->with('success', 'Record added successfully.');
+        } else
+            return back()->with('error', 'Please fill all details.');
     }
 
     public function delete_admin_documents(Request $request)
@@ -61,7 +62,9 @@ class AdminDocuments extends Controller
             'department_id' => $request->department_id,
             'project_id' => $request->project_id,
             'document_type' => $request->document_type,
-            'file'=>$file_name  
+            'file' => $file_name,
+            'remark' => $request->remark,
+
 
         ]);
         return back()->with('success', 'Record updated successfully.');
@@ -79,16 +82,16 @@ class AdminDocuments extends Controller
     {
         $data = DB::table('admin_documents')
             ->join('companies', 'companies.id', '=', 'admin_documents.company_id')
-            ->join('locations', 'locations.id', '=', 'admin_documents.location_id')
-            ->join('departments', 'departments.id', '=', 'admin_documents.department_id')
-            ->join('projects', 'projects.id', '=', 'admin_documents.project_id')
-            ->select('admin_documents.*','locations.location_name', 'departments.department', 'companies.company_name','projects.project')
+            ->leftjoin('locations', 'locations.id', '=', 'admin_documents.location_id')
+            ->leftjoin('departments', 'departments.id', '=', 'admin_documents.department_id')
+            ->leftjoin('projects', 'projects.id', '=', 'admin_documents.project_id')
+            ->select('admin_documents.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'projects.project')
             ->orderby('admin_documents.id', 'desc')
             ->get();
 
         return DataTables::of($data)
             ->addIndexColumn()
-            ->rawColumns(['file','company_name', 'location_name', 'department','project','document_type', 'action'])
+            ->rawColumns(['file', 'company_name', 'location_name', 'department', 'project', 'document_type', 'action'])
             ->addColumn('file', function ($data) {
                 return '<a target="_blank" href="' . asset('public/uploads/admin_document/' . $data->file) . '"><label class="text-primary">' . $data->file . '</label></a>';
             })
@@ -96,19 +99,22 @@ class AdminDocuments extends Controller
                 return $data->company_name;
             })
             ->addColumn('location_name', function ($data) {
-                return $data->location_name;
+                return $data->location_name ?? 'N/A';
             })
             ->addColumn('department', function ($data) {
-                return $data->department;
+                return $data->department ?? 'N/A';
             })
-         
+
             ->addColumn('project', function ($data) {
-                return $data->project;
+                return $data->project ?? 'N/A';
             })
             ->addColumn('document_type', function ($data) {
-                return $data->document_type;
+                return $data->document_type ?? 'N/A';
             })
-         
+            ->addColumn('remark', function ($data) {
+                return $data->remark ?? 'N/A';
+            })
+
 
             ->addColumn('action', function ($data) {
                 return '<a class="edit" id="' . $data->id . '" data-toggle="modal" data-placement="top"
@@ -137,6 +143,4 @@ class AdminDocuments extends Controller
             ->make(true);
         return response()->json(1);
     }
-
-    
 }

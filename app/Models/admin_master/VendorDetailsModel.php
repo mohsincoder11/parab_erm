@@ -21,6 +21,7 @@ class VendorDetailsModel extends Model
         'contact_person',
         'unit_of_supply',
         'vendor_code',
+        'remark'
 
     ];
 }

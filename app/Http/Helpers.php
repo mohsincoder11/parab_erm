@@ -17,6 +17,7 @@ use App\Grade;
 use App\Models\employee_master\master\EmployeeStatusModel;
 use App\Models\bank_master\Bank;
 use App\Models\asset_master\AssetCategoryModel;
+use App\Models\admin_master\VendorDetailsModel;
 
 
 
@@ -604,10 +605,43 @@ if (! function_exists('get_project_name_and_id')) {
 }
 
 if (! function_exists('get_employee_name_and_id')) {  
-    function get_employee_name_and_id($company_id)
+    function get_employee_name_and_id($company_id=null)
     {
-        $employee_data=Employee::select('full_name','id')->where('company_id',$company_id)->orderby('full_name','asc')->get();       
+        $employee_data=Employee::select('full_name','id');
+        $employee_data=$employee_data->when($company_id, function ($q, $company_id) {
+            return $q->where('company_id', $company_id);
+        });
+        $employee_data=$employee_data->get();       
         return $employee_data;
+    }
+}
+
+if (! function_exists('get_employee_name')) {  
+    function get_employee_name($id=null)
+    {
+        $full_name=Employee::select('full_name')->where('id',$id)->first();         
+        return $full_name->full_name;
+    }
+}
+
+
+if (! function_exists('get_vendor_name_and_id')) {  
+    function get_vendor_name_and_id($company_id=null)
+    {
+        $vendor_data=VendorDetailsModel::select('vendor_name','id');
+        $vendor_data=$vendor_data->when($company_id, function ($q, $company_id) {
+            return $q->where('company_id', $company_id);
+        });
+        $vendor_data=$vendor_data->get();       
+        return $vendor_data;
+    }
+}
+
+if (! function_exists('get_vendor_name')) {  
+    function get_vendor_name($id=null)
+    {
+        $full_name=VendorDetailsModel::select('vendor_name')->where('id',$id)->first();         
+        return $full_name->vendor_name;
     }
 }
 
@@ -664,7 +698,6 @@ if (!function_exists('areActiveRoutes')) {
 if (!function_exists('check_actice_or_show')) {
     function check_actice_or_show(array $routes,$type)
     {
-
         $current_route=Route::currentRouteName();     
        
         if(in_array($current_route,$routes)){

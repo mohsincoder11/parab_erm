@@ -50,9 +50,9 @@
                                     <input type="hidden" id="id" name="id">
                                     <div class="row" style="padding: 10px;">
                                         <div class="col-md-6 form-group">
-                                            <label> Vendor Name</label>
+                                            <label> Vendor Name *</label>
                                             <input type="text" name="vendor_name" id="vendor_name" class="form-control"
-                                                placeholder=Category Name>
+                                                placeholder="Vendor Name">
                                         </div>
 
                                         <div class="col-md-6 form-group">
@@ -71,7 +71,7 @@
 
 
                                         <div class="col-md-6 form-group">
-                                            <label>Location*</label>
+                                            <label>Location</label>
                                             <select name="location_id" id="location_id" class="form-control selectpicker"
                                                 data-live-search="true" data-live-search-style="begins"
                                                 title='Select location...'>
@@ -82,7 +82,7 @@
 
 
                                         <div class="col-md-6 form-group">
-                                            <label>Select Department *</label>
+                                            <label>Select Department </label>
                                             <select name="department_id" id="department_id"
                                                 class="form-control selectpicker" data-live-search="true"
                                                 data-live-search-style="begins" title='Select Department'>
@@ -133,7 +133,7 @@
                                         </div>
 
                                         <div class="col-md-6 form-group">
-                                            <label>Vendor PAN </label>
+                                            <label>Vendor PAN * </label>
                                             <input type="text" name="pan" id="pan" class="form-control"
                                                 placeholder="">
                                         </div>
@@ -144,7 +144,7 @@
                                                 placeholder="">
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label>Vendor Contact No </label>
+                                            <label>Vendor Contact No *</label>
                                             <input type="number" name="contact_no" id="contact_no" class="form-control"
                                                 placeholder="">
                                         </div>
@@ -156,14 +156,31 @@
 
                                         <div class="col-md-6 form-group">
                                             <label>Unit Of Supply</label>
-                                            <input type="text" name="unit_of_supply" id="unit_of_supply"
-                                                class="form-control" placeholder="">
+
+                                            <select name="unit_of_supply" id="unit_of_supply"
+                                                class="form-control selectpicker" data-live-search="true"
+                                                data-live-search-style="begins" title='Select Unit Supply...'>
+                                                <option value="" disabled selected>Select Unit Supply</option>
+                                                <option value="Qty">Qty</option>
+                                                <option value="Pack">Pack</option>
+                                                <option value="Box">Box</option>
+                                                <option value="Sqft">Sqft</option>
+                                                <option value="Rft">Rft</option>
+                                                <option value="Set">Set</option>
+
+
+                                            </select>
                                         </div>
 
                                         <div class="col-md-6 form-group">
-                                            <label>Vendor Code </label>
-                                            <input type="text" name="vendor_code" id="vendor_code"
+                                            <label>Vendor Code *</label>
+                                            <input type="text" name="vendor_code" id="vendor_code" value="V-{{date('dmyhis')}}" readonly
                                                 class="form-control" placeholder="">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Remark</label>
+                                            <input type="text" name="remark" id="remark" class="form-control"
+                                                placeholder="">
                                         </div>
 
                                         <div class="form-group" align="center"
@@ -200,9 +217,9 @@
                             <div class="modal-content">
                                 <div class="modal-header" id="exampleModalPopoversLabel">
                                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                    </button>
-                                                  </div> -->
+                                                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                        </button>
+                                                      </div> -->
                                     <div class="modal-body">
                                         <p class="modal-text">Parberp.com says<br>
                                             Please select atleast one Checkbox
@@ -226,7 +243,7 @@
                 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                     <div class="widget-content widget-content-area br-6">
                         <div class="table-responsive mb-4 mt-4">
-                            <table  class="table table-hover non-hover datatable_server" style="width:100%">
+                            <table class="table table-hover non-hover datatable_server" style="width:100%">
                                 <thead>
                                     <tr>
                                     <tr>
@@ -244,6 +261,7 @@
                                         <th>Contact Person</th>
                                         <th>Unit of Supply</th>
                                         <th>Vendor Code</th>
+                                        <th>Remark</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -310,13 +328,13 @@
                     company_id: {
                         required: true,
                     },
-                    location_id: {
-                        required: true,
-                        // notEqual:'complaint_from',
-                    },
-                    department_id: {
-                        required: true,
-                    },
+                    // location_id: {
+                    //     required: true,
+                    //     // notEqual:'complaint_from',
+                    // },
+                    // department_id: {
+                    //     required: true,
+                    // },
                     expense_category_id: {
                         required: true,
                         // notEqual:'complaint_from',
@@ -324,31 +342,31 @@
                     vendor_category_id: {
                         required: true,
                     },
-                    address: {
-                        required: true,
-                    },
+                    // address: {
+                    //     required: true,
+                    // },
                     pan: {
                         required: true,
                         minlength: 10,
                         maxlength: 10
                     },
-                    gst_no: {
-                        required: true,
-                        minlength: 15,
-                        maxlength: 15
-                    },
+                    // gst_no: {
+                    //     required: true,
+                    //     minlength: 15,
+                    //     maxlength: 15
+                    // },
                     contact_no: {
                         required: true,
                         minlength: 10,
                         maxlength: 10
                     },
-                    contact_person: {
-                        required: true,
-                        // notEqual:'complaint_from',
-                    },
-                    unit_of_supply: {
-                        required: true,
-                    },
+                    // contact_person: {
+                    //     required: true,
+                    //     // notEqual:'complaint_from',
+                    // },
+                    // unit_of_supply: {
+                    //     required: true,
+                    // },
                     vendor_code: {
                         required: true,
                     },
@@ -374,7 +392,7 @@
                         required: "Please select expense category.",
                         // notEqual:"Please select other employee."
                     },
-                    vendor_details_id: {
+                    vendor_category_id: {
                         required: 'Please select vendor category.',
                     },
                     address: {
@@ -382,8 +400,8 @@
                     },
                     pan: {
                         required: "This field is required.",
-                        minlength: "Please enter 10 digit number.",
-                        maxlength: "Please enter 10 digit number.",
+                        minlength: "Please enter 10 digit PAN number.",
+                        maxlength: "Please enter 10 digit PAN number.",
                     },
                     gst_no: {
                         required: "This field is required.",
@@ -401,7 +419,7 @@
                         // notEqual:"Please select other employee."
                     },
                     unit_of_supply: {
-                        required: 'This field is required.',
+                        required: 'Select unit supply.',
                     },
                     vendor_code: {
                         required: 'This field is required.',
@@ -471,14 +489,15 @@
                         $("#expense_category_id").val(result.expense_category_id);
                         $("#vendor_category_id").val(result.vendor_category_id);
                         $("#unit_of_supply").val(result.unit_of_supply);
-                     
+
                         $("#address").val(result.address);
                         $("#pan").val(result.pan);
                         $("#gst_no").val(result.gst_no);
                         $("#contact_no").val(result.contact_no);
                         $("#contact_person").val(result.contact_person);
                         $("#vendor_code").val(result.vendor_code);
-                        
+                        $("#remark").val(result.remark);
+
                         $("#company_id").change();
                         setTimeout(function() {
                             $("#location_id").val(result.location_id);
@@ -626,6 +645,11 @@
                         data: "vendor_code",
                         orderable: true,
                         name: "vendor_code" /*,width:"20%"*/
+                    },
+                    {
+                        data: "remark",
+                        orderable: true,
+                        name: "remark" /*,width:"20%"*/
                     },
 
 

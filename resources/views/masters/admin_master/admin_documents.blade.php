@@ -77,7 +77,7 @@
 
 
                                         <div class="col-md-6 form-group">
-                                            <label>Location*</label>
+                                            <label>Location</label>
                                             <select name="location_id" id="location_id" class="form-control selectpicker"
                                                 data-live-search="true" data-live-search-style="begins"
                                                 title='Select location...'>
@@ -88,7 +88,7 @@
 
 
                                         <div class="col-md-6 form-group">
-                                            <label>Select Department *</label>
+                                            <label>Select Department </label>
                                             <select name="department_id" id="department_id"
                                                 class="form-control selectpicker" data-live-search="true"
                                                 data-live-search-style="begins" title='Select Department'>
@@ -103,7 +103,7 @@
                                             $project = get_project_name_and_id();
                                         @endphp
                                         <div class="col-md-6 form-group">
-                                            <label>Select Project*</label>
+                                            <label>Select Project</label>
                                             <select name="project_id" id="project_id" class="form-control selectpicker"
                                                 data-live-search="true" data-live-search-style="begins"
                                                 title='Select Company Type...'>
@@ -120,7 +120,7 @@
 
 
                                         <div class="col-md-6 form-group">
-                                            <label>Select Document Type*</label>
+                                            <label>Select Document Type</label>
                                             <select name="document_type" id="document_type"
                                                 class="form-control selectpicker" data-live-search="true"
                                                 data-live-search-style="begins" title='Select Company Type...'>
@@ -133,6 +133,11 @@
                                                 </option>
 
                                             </select>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Remark</label>
+                                            <input type="text" name="remark" id="remark" class="form-control"
+                                                placeholder="">
                                         </div>
 
 
@@ -208,6 +213,7 @@
                                         <th> Department </th>
                                         <th>Project</th>
                                         <th>Document</th>
+                                        <th>Remark</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -274,20 +280,20 @@
                     file: {
                         required: true,
                     },
-                    location_id: {
-                        required: true,
-                        // notEqual:'complaint_from',
-                    },
-                    department_id: {
-                        required: true,
-                    },
-                    project_id: {
-                        required: true,
-                        // notEqual:'complaint_from',
-                    },
-                    document_type: {
-                        required: true,
-                    },
+                    // location_id: {
+                    //     required: true,
+                    //     // notEqual:'complaint_from',
+                    // },
+                    // department_id: {
+                    //     required: true,
+                    // },
+                    // project_id: {
+                    //     required: true,
+                    //     // notEqual:'complaint_from',
+                    // },
+                    // document_type: {
+                    //     required: true,
+                    // },
 
 
 
@@ -380,6 +386,7 @@
                         $("#admin_document_name").val(result.admin_document_name);
                         $("#project_id").val(result.project_id);
                         $("#document_type").val(result.document_type);
+                        $("#remark").val(result.remark);
 
 
                         $("#company_id").change();
@@ -494,6 +501,11 @@
                         data: "document_type",
                         orderable: true,
                         name: "document_type" /*,width:"20%"*/
+                    },
+                    {
+                        data: "remark",
+                        orderable: true,
+                        name: "remark" /*,width:"20%"*/
                     },
 
 
