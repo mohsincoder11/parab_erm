@@ -778,6 +778,11 @@
                 'admin_process.activity_documents.training-certificate',
                 'admin_process.activity_documents.travel-allowance',
                 'admin_process.activity_documents.event-meeting',
+                'admin_process.admin_documents.purchase_work_order',
+                'admin_process.admin_documents.agreement',
+                'admin_process.admin_documents.purchase-invoice',
+                'admin_process.admin_documents.payment-order',
+
               
                 ],'active') @endphp">
                 <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -895,9 +900,9 @@
                     </li>
                     <li
                         class="@php check_actice_or_show([                
-                        'admin_process.admin_documents.purchase-order',
+                        'admin_process.admin_documents.purchase_work_order',
                         'admin_process.admin_documents.agreement',
-                        'admin_process.admin_documents.ppurchase-invoice',
+                        'admin_process.admin_documents.purchase-invoice',
                         'admin_process.admin_documents.payment-order',
     ],'active') @endphp">
                         <a href="#pages-error03" data-toggle="collapse" aria-expanded="false"
@@ -910,32 +915,33 @@
                         <ul class="collapse list-unstyled sub-submenu" id="pages-error03" data-parent="#pages">
                             <li
                                 class="@php check_actice_or_show([                
-                        'admin_process.admin_documents.purchase-order',
+                        'admin_process.admin_documents.purchase_work_order',
                        
     ],'active') @endphp">
-                                <a href="#"> Purhchase Order / Work Order</a>
+                                <a href="{{ route('admin_process.admin_documents.purchase_work_order') }}"> Purhchase Order / Work Order</a>
                             </li>
                             <li
                                 class="@php check_actice_or_show([                
-                        'admin_process.admin_documents.agreement',
+                'admin_process.admin_documents.agreement',
                        
     ],'active') @endphp">
-                                <a href="#"> Agreements </a>
+                                <a href="{{ route('admin_process.admin_documents.agreement') }}"> Agreements </a>
                             </li>
-                            <li
-                                class="@php check_actice_or_show([                
-                        'admin_process.admin_documents.agreement',
-                       
-    ],'active') @endphp">
-                                <a href="#"> Payment Order </a>
-                            </li>
-                            <li
+                             <li
                                 class="@php check_actice_or_show([            
                       
-                        'admin_process.admin_documents.payment-order',
+                        'admin_process.admin_documents.purchase-invoice',
     ],'active') @endphp">
-                                <a href="#"> Purhchase Invoice Entry</a>
+                                <a href="{{ route('admin_process.admin_documents.purchase-invoice') }}"> Purhchase Invoice</a>
                             </li>
+                            <li
+                                class="@php check_actice_or_show([                
+                        'admin_process.admin_documents.payment-order',
+                       
+    ],'active') @endphp">
+                                <a href="{{ route('admin_process.admin_documents.purchase-invoice') }}"> Payment Order </a>
+                            </li>
+                           
                         </ul>
                     </li>
 
@@ -1529,6 +1535,7 @@
                     <li>
                         <a href="#">Permission Management </a>
                     </li>
+
                 </ul>
             </li>
 

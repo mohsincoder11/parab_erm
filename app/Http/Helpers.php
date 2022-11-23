@@ -17,6 +17,8 @@ use App\Grade;
 use App\Models\employee_master\master\EmployeeStatusModel;
 use App\Models\bank_master\Bank;
 use App\Models\asset_master\AssetCategoryModel;
+use App\Models\admin_master\VendorCategoryModel;
+use App\Models\admin_master\ExpenseCategoryModel;
 use App\Models\admin_master\VendorDetailsModel;
 
 
@@ -704,6 +706,31 @@ if (!function_exists('check_actice_or_show')) {
             echo $type;
         }
         
+    }
+}
+
+
+if (! function_exists('get_vendor_category_name_and_id')) {  
+    function get_vendor_category_name_and_id($company_id=null)
+    {
+        $vendor_category_data=VendorCategoryModel::select('vendor_category_name','id');
+        $vendor_category_data=$vendor_category_data->when($company_id, function ($q, $company_id) {
+            return $q->where('company_id', $company_id);
+        });
+        $vendor_category_data=$vendor_category_data->get();       
+        return $vendor_category_data;
+    }
+}
+
+if (! function_exists('get_expense_category_name_and_id')) {  
+    function get_expense_category_name_and_id($company_id=null)
+    {
+        $expense_category_data=ExpenseCategoryModel::select('category','id');
+        $expense_category_data=$expense_category_data->when($company_id, function ($q, $company_id) {
+            return $q->where('company_id', $company_id);
+        });
+        $expense_category_data=$expense_category_data->get();       
+        return $expense_category_data;
     }
 }
 
