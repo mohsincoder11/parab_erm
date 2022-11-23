@@ -158,7 +158,7 @@
                                         <div class="col-md-6 form-group">
                                             <label> outward number *</label>
                                             <input type="text" name="outward_number" id="outward_number"
-                                                value="O-{{ date('Ymdhis') }}" readonly class="form-control"
+                                                value="O-{{ time() }}" readonly class="form-control"
                                                 placeholder="">
                                         </div>
 

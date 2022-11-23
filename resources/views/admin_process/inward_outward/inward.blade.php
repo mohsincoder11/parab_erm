@@ -134,7 +134,7 @@
                                         <div class="col-md-6 form-group">
                                             <label> Inward number *</label>
                                             <input type="text" name="inward_number" id="inward_number"
-                                                value="I-{{ date('Ymdhis') }}" readonly class="form-control"
+                                                value="I-{{ time() }}" readonly class="form-control"
                                                 placeholder="">
                                         </div>
 

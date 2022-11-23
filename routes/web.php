@@ -24,6 +24,7 @@ Route::post('checkLogin', 'LoginController@checkLogin')->name('checkLogin');
 Route::get('logout', 'LoginController@logout')->name('logout');
 
 
+
 Route::group(['middleware' => ['AuthCheck']], function () {
 
     //organization company
@@ -507,11 +508,37 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     });
 
     Route::namespace('admin\admin_process\admin_documents')->name('admin_process.admin_documents.')->prefix('admin-process')->group(function () {
-        Route::get('/purchase-order', 'PurchaseWorkOrder@purchase_order')->name('purchase-order');
+        // Route::get('/purchase-order', 'PurchaseWorkOrder@purchase_order')->name('purchase-order');
+        // Route::get('/agreement', 'Agreement@agreement')->name('agreement');
+        // Route::get('/purchase-invoice', 'PurchaseInvoice@purchase_invoice')->name('purchase-invoice');
+        // Route::get('/payment-order', 'PaymentOrder@payment_order')->name('payment-order');
+        // //Admin Process/Admin Documents/Purchase Work order
+      
+            Route::get('/purchase_work_order', 'PurchaseWorkOrder@purchase_work_order')->name('purchase_work_order');
+            Route::post('/store_purchase_work', 'PurchaseWorkOrder@store_purchase_work')->name('store_purchase_work');
+            Route::post('/update-inward', 'Inward@update_inward')->name('update-inward');
+            Route::get('/delete_purchase_work_order', 'PurchaseWorkOrder@delete_purchase_work_order')->name('delete_purchase_work_order');
+            Route::get('/edit_purchase_work_order', 'PurchaseWorkOrder@edit_purchase_work_order')->name('edit_purchase_work_order');
+            Route::get('/get-inward', 'Inward@get_inward')->name('get-inward');
+
+        //Admin Process/Admin Documents/Agreement      
         Route::get('/agreement', 'Agreement@agreement')->name('agreement');
+        Route::post('/store_agreement', 'Agreement@store_agreement')->name('store_agreement');
+        Route::get('/delete_agreement', 'Agreement@delete_agreement')->name('delete_agreement');
+        Route::get('/vendor_name_designation', 'Agreement@vendor_name_designation')->name('vendor_name_designation');
+
         Route::get('/purchase-invoice', 'PurchaseInvoice@purchase_invoice')->name('purchase-invoice');
+        Route::post('/store_purchase_invoice', 'PurchaseInvoice@store_purchase_invoice')->name('store_purchase_invoice');
+        Route::get('/delete_purchase_invoice', 'PurchaseInvoice@delete_purchase_invoice')->name('delete_purchase_invoice');
+
         Route::get('/payment-order', 'PaymentOrder@payment_order')->name('payment-order');
+        Route::post('/store_payment_order', 'PaymentOrder@store_payment_order')->name('store_payment_order');
+        Route::get('/delete_payment_order', 'PaymentOrder@delete_payment_order')->name('delete_payment_order');
+        Route::get('/fetch_purchase_invoice_detail', 'PaymentOrder@fetch_purchase_invoice_detail')->name('fetch_purchase_invoice_detail');
+        
+
     });
+
     Route::namespace('admin\admin_process\activity_documents')->name('admin_process.activity_documents.')->prefix('admin-process')->group(function () {
         Route::get('/training-certificate', 'TrainingCertificate@training_certificate')->name('training-certificate');
         Route::post('/store-training-certificate', 'TrainingCertificate@store_training_certificate')->name('store-training-certificate');
@@ -599,6 +626,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/get_location_by_company', 'LocationController@get_location_by_company')->name('get_location_by_company');
     Route::get('/get_employee_by_company', 'EmployeeController@get_employee_by_company')->name('get_employee_by_company');
     Route::get('/get_department_location_by_company', 'admin\master\admin_master\ExpenseCategory@get_department_location_by_company')->name('get_department_location_by_company');
+    Route::get('/get_vendor_name', 'admin\master\admin_master\VendorDetails@get_vendor_name')->name('get_vendor_name');
+
 });
 
 
@@ -610,3 +639,5 @@ Route::get('/clear-cache', function () {
     return redirect()->back();
     //return "All cache cleared!";
 });
+
+

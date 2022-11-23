@@ -177,7 +177,7 @@
                                         <div class="col-md-6 form-group">
                                             <label> Meeting ID *</label>
                                             <input type="text" name="meeting_id" id="meeting_id"
-                                                value="M-{{ date('Ymdhis') }}" readonly class="form-control"
+                                                value="M-{{ time() }}" readonly class="form-control"
                                                 placeholder="">
                                         </div>
 

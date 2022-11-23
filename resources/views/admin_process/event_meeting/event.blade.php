@@ -181,7 +181,7 @@
                                         <div class="col-md-6 form-group">
                                             <label> Events ID *</label>
                                             <input type="text" name="event_id" id="event_id"
-                                                value="E-{{ date('Ymdhis') }}" readonly class="form-control"
+                                                value="E-{{ time() }}" readonly class="form-control"
                                                 placeholder="">
                                         </div>
 

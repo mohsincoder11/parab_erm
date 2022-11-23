@@ -170,4 +170,9 @@ class VendorDetails extends Controller
             ->make(true);
         return response()->json(1);
     }
+
+    public function get_vendor_name(Request $request){
+        $vendor_details=VendorDetailsModel::select('vendor_name')->where('id',$request->id)->first();         
+        return response()->json(['vendor_details' => $vendor_details]);
+    }
 }

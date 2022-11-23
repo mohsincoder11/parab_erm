@@ -170,7 +170,7 @@
                                         <div class="col-md-6 form-group">
                                             <label> Training Code *</label>
                                             <input type="text" name="training_code" id="training_code"
-                                                value="T-{{ date('Ymdhis') }}" readonly class="form-control"
+                                                value="T-{{ time() }}" readonly class="form-control"
                                                 placeholder="">
                                         </div>
 
