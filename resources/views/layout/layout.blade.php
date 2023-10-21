@@ -240,14 +240,16 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         data: {
-                            search_keyword: request.term
+                            search_keyword: request.term,
+                            company_id:$('#company_id').val()
                         },
                         success: function(data) {
                             var resp = $.map(data, function(obj) {
                                 return obj.employee_name;
 
                             });
-                            console.log(resp);
+                            $('#employee_id').val('');
+
                             response(resp);
                         }
                     });

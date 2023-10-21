@@ -108,7 +108,7 @@ class TrainingCalendar extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->rawColumns([
-                'company_name', 'location_name', 'department', 'training_start_time', 'training_end_time',  'trainer_name', 'training_participant_employee', 'vendor_id', 'estimate_training_cost', 'file',  'training_code', 'action'
+                'company_name', 'location_name', 'department', 'training_start_time', 'training_end_time',  'trainer_name', 'proposer_employee','training_participant_employee', 'vendor_id', 'estimate_training_cost', 'file',  'training_code', 'action'
             ])
 
             ->addColumn('company_name', function ($data) {
@@ -130,7 +130,7 @@ class TrainingCalendar extends Controller
                 return $data->trainer_name;
             })
 
-            ->addColumn('training_proposer_employee', function ($data) {
+            ->addColumn('proposer_employee', function ($data) {
                 return $data->proposer_employee;
             })
             ->addColumn('training_participant_employee', function ($data) {

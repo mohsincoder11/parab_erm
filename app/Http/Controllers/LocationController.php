@@ -56,14 +56,14 @@ class LocationController extends Controller
         $data['address1'] = $request->address11;
         $data['city'] = $request->city1;
         $data['state'] = $request->state1;
-        Location::whereId($request->hidden_id)->update($data);
+        Location::where('id',$request->hidden_id)->update($data);
 
         return response()->json(['success' => 'Data Updated successfully.']);
     }
 
     public function delete(Request $request)
     {
-        Location::whereId($request->id)->delete();
+        Location::where('id',$request->id)->delete();
         return response()->json(['success' => __('Data is successfully deleted')]);
     }
 }

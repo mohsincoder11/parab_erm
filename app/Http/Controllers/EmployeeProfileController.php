@@ -22,7 +22,7 @@ class EmployeeProfileController extends Controller
        $file_name=null;
     }
 
-    $result=Employee::whereId($request->hidden_id)
+    $result=Employee::where('id',$request->hidden_id)
                     ->update([
                         'profile'=>$file_name
                     ]);

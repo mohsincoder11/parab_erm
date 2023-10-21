@@ -63,6 +63,19 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6 form-group">
+                                            <label>Company *</label>
+                                            <select name="company_id" id="company_id" class="form-control selectpicker"
+                                                data-live-search="true" data-live-search-style="begins"
+                                                title='Select Company Type...'>
+                                                <option value="">Please select company
+                                                </option>
+                                                @foreach ($company as $company)
+                                                    <option value="{{ $company->id }}">{{ $company->company_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 form-group">
                                             <label>Employee Name<span class="required">*</span></label>
                                             <input type="text" name="employee_name" id="employee_name" required
                                                 class="form-control" placeholder=" Employee Name">
@@ -265,6 +278,8 @@
                                     <thead>
                                         <tr>
                                             <th>Sr.No.</th>
+                                        <th>Company</th>
+
                                             <th>Employee Name </th>
                                             <th>Date of Birth </th>
                                             <th>Locality </th>
@@ -316,6 +331,9 @@
                 //debug:true,
                 ignore: ".ignore",
                 rules: {
+                    company_id: {
+                        required: true,
+                    },
                     salutation: {
                         required: true,
                     },
@@ -385,6 +403,9 @@
 
                 },
                 messages: {
+                    company_id: {
+                        required: "Please select company.",
+                    },
                     salutation: {
                         required: "Please select a option.",
                     },
@@ -489,29 +510,26 @@
                     },
                     success: function(result) {
                         $("#id").val(result.id);
-
                         $("#employee_name").val(result.employee_name);
                         $("#salutation").val(result.salutation);
-
                         $("#dob").val(result.dob);
                         $("#address").val(result.address);
                         $("#city").val(result.city);
                         $("#pincode").val(result.pincode);
                         $("#contact_no").val(result.contact_no);
-
                         $("#gender").val(result.gender);
                         $("#blood_group").val(result.blood_group);
                         $("#marital_status").val(result.marital_status);
                         $("#spouse_name").val(result.spouse_name);
                         $("#marriage_date").val(result.marriage_date);
                         $("#personal_email").val(result.personal_email);
-
                         $("#emergency_contact_no").val(result.emergency_contact_no);
                         $("#pan_no").val(result.pan_no);
                         $("#adhar_no").val(result.adhar_no);
                         $("#driving_license_no").val(result.driving_license_no);
-
-                        $("#myLargeModalLabel").text("Edit Salary Details");
+                        $("#company_id").val(result.company_id);
+                        $("#company_id").change();
+                        $("#myLargeModalLabel").text("Edit Personal Details");
                         $("#add-edit-btn").text("Update");
                         let formaction =
                             '{{ route('employees_masters.update-personal-details') }}';
@@ -522,7 +540,7 @@
             })
 
             $('.add-edit_modal').on('hidden.bs.modal', function() {
-                $("#myLargeModalLabel").text("Add Salary Details");
+                $("#myLargeModalLabel").text("Add Personal Details");
                 $("#add-edit-btn").text("Add");
                 $('#personal_detail_form').trigger("reset");
                 let formaction = '{{ route('employees_masters.store-personal-details') }}';
@@ -621,7 +639,11 @@
                         name: "DT_RowIndex",
                         width: "5%"
                     },
-
+                    {
+                        data: "company_name",
+                        orderable: true,
+                        name: "company_name" /*,width:"20%"*/
+                    },
                     {
                         data: "employee_name",
                         orderable: true,

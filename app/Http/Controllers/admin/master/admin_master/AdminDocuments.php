@@ -8,7 +8,6 @@ use App\Models\admin_master\AdminDocumentsModel;
 use DB;
 use Yajra\DataTables\DataTables;
 
-n;
 
 class AdminDocuments extends Controller
 {

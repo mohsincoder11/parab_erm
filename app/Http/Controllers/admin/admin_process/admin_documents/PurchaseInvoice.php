@@ -14,9 +14,6 @@ class PurchaseInvoice extends Controller
     //
     public function purchase_invoice (){
         $company = get_company_name_and_id();
-        $expense_category = get_expense_category_name_and_id();
-        $vendor_category = get_vendor_category_name_and_id();
-        $vendor = get_vendor_name_and_id();
         $purchase_invoice = DB::table('purchase_invoice')
         ->join('companies', 'companies.id', '=', 'purchase_invoice.company_id')
         ->leftjoin('locations', 'locations.id', '=', 'purchase_invoice.location_id')
@@ -28,7 +25,7 @@ class PurchaseInvoice extends Controller
         ->get();
         // echo json_encode($purchase_invoice);
         // dd(1);
-        return view('admin_process.admin_documents.purchase_invoice',compact('vendor','company','vendor_category','expense_category','purchase_invoice'));
+        return view('admin_process.admin_documents.purchase_invoice',compact('company','purchase_invoice'));
     }
 
    

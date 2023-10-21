@@ -8,6 +8,7 @@ class PersonalDetailModel extends Model
 {
     protected $table = 'personal_detail';
     protected $fillable = [
+        'company_id',
         'salutation',
         'employee_name',
         'dob',
@@ -22,9 +23,9 @@ class PersonalDetailModel extends Model
         'marriage_date',
         'personal_email',
         'emergency_contact_no',
-        'pan_no',
-        'adhar_no',
-        'driving_license_no',
+        'pahar_no',
+        'drn_no',
+        'adiving_license_no',
        
     ];
 }

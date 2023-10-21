@@ -13,20 +13,17 @@ class Agreement extends Controller
 {
     public function agreement(){
         $company = get_company_name_and_id();
-        $expense_category = get_expense_category_name_and_id();
-        $vendor_category = get_vendor_category_name_and_id();
-        $vendor = get_vendor_name_and_id();
-        $purchase_work_order_data = DB::table('purchase_work_order')
-        ->join('companies', 'companies.id', '=', 'purchase_work_order.company_id')
-        ->leftjoin('locations', 'locations.id', '=', 'purchase_work_order.location_id')
-        ->leftjoin('departments', 'departments.id', '=', 'purchase_work_order.department_id')
-        ->leftjoin('vendor_category', 'vendor_category.id', '=', 'purchase_work_order.vendor_category_id')
-        ->leftjoin('expenses_category', 'expenses_category.id', '=', 'purchase_work_order.expense_category_id')
-        ->leftjoin('vendor_details', 'vendor_details.id', '=', 'purchase_work_order.vendor_id')
-        ->select('purchase_work_order.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'vendor_category.vendor_category_name','expenses_category.category as expenses_category','vendor_details.vendor_name')
-        ->orderby('purchase_work_order.id', 'desc')
+        $agreement = DB::table('agreements')
+        ->join('companies', 'companies.id', '=', 'agreements.company_id')
+        ->leftjoin('locations', 'locations.id', '=', 'agreements.location_id')
+        ->leftjoin('departments', 'departments.id', '=', 'agreements.department_id')
+        ->leftjoin('vendor_category', 'vendor_category.id', '=', 'agreements.vendor_category_id')
+        ->leftjoin('expenses_category', 'expenses_category.id', '=', 'agreements.expense_category_id')
+        ->leftjoin('vendor_details', 'vendor_details.id', '=', 'agreements.vendor_id')
+        ->select('agreements.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'vendor_category.vendor_category_name','expenses_category.category as expenses_category','vendor_details.vendor_name')
+        ->orderby('agreements.id', 'desc')
         ->get();
-        return view('admin_process.admin_documents.agreement',compact('vendor','company','vendor_category','expense_category','purchase_work_order_data'));
+        return view('admin_process.admin_documents.agreement',compact('company','agreement'));
     }
 
     public function get_vendor_name(Request $request){

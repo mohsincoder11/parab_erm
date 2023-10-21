@@ -11,7 +11,7 @@ use Yajra\DataTables\DataTables;
 class ESICMaster extends Controller
 {
     public function esic(){
-        return view('masters.statutory_masters.ESIC');
+        return view('masters.statutory_masters.esic');
     }
 
     public function store_employee_esic(Request $request)

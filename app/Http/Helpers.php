@@ -20,6 +20,7 @@ use App\Models\asset_master\AssetCategoryModel;
 use App\Models\admin_master\VendorCategoryModel;
 use App\Models\admin_master\ExpenseCategoryModel;
 use App\Models\admin_master\VendorDetailsModel;
+use App\User;
 
 
 
@@ -598,6 +599,15 @@ if (! function_exists('get_company_name_and_id')) {
     }
 }
 
+if (! function_exists('get_approval_authority')) {  
+    function get_approval_authority()
+    {
+        $company_data=User::select('name','id')->orderby('name','asc')->where('role',4)->get();       
+        return $company_data;
+    }
+}
+
+
 if (! function_exists('get_project_name_and_id')) {  
     function get_project_name_and_id()
     {
@@ -622,7 +632,7 @@ if (! function_exists('get_employee_name')) {
     function get_employee_name($id=null)
     {
         $full_name=Employee::select('full_name')->where('id',$id)->first();         
-        return $full_name->full_name;
+        return $full_name->full_name ?? 'N/A';
     }
 }
 

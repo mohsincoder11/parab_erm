@@ -80,7 +80,7 @@ class OfficeshiftController extends Controller
       $data['friday_week_off']=$request->friday_week_off;
       $data['saturday_week_off']=$request->saturday_week_off;
      
-      $result=Officeshift::whereId($request->hidden_id)->update($data);
+      $result=Officeshift::where('id',$request->hidden_id)->update($data);
      
       return response()->json(['success' => 'Data Updated successfully.']);
    }

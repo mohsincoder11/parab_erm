@@ -12,9 +12,8 @@ class PurchaseWorkOrder extends Controller
 {
     public function purchase_work_order(){
         $company = get_company_name_and_id();
-        $expense_category = get_expense_category_name_and_id();
-        $vendor_category = get_vendor_category_name_and_id();
-        $vendor = get_vendor_name_and_id();
+        $approval_authority = get_approval_authority();//how it will cme. who is gonna create this user
+       
         $purchase_work_order_data = DB::table('purchase_work_order')
         ->join('companies', 'companies.id', '=', 'purchase_work_order.company_id')
         ->leftjoin('locations', 'locations.id', '=', 'purchase_work_order.location_id')
@@ -25,7 +24,7 @@ class PurchaseWorkOrder extends Controller
         ->select('purchase_work_order.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'vendor_category.vendor_category_name','expenses_category.category as expenses_category','vendor_details.vendor_name')
         ->orderby('purchase_work_order.id', 'desc')
         ->get();
-        return view('admin_process.admin_documents.purchase_work_order',compact('vendor','company','vendor_category','expense_category','purchase_work_order_data'));
+        return view('admin_process.admin_documents.purchase_work_order',compact('company','purchase_work_order_data','approval_authority'));
     }
 
     public function store_purchase_work(Request $request){

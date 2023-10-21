@@ -295,10 +295,9 @@
                 errorPlacement: function(error, element) {
                     element.closest('.form-group').append(error);
 
-                },           
+                }        
                     // $("#load_screen").show();
-                    return true;
-                }
+                    //return true;
             });
 
             $(document).on('click', '.delete', function() {

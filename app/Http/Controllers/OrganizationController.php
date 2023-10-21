@@ -165,7 +165,7 @@ class OrganizationController extends Controller
             }
         }
 
-        Company::whereId($request->hidden_id)->update($data);
+        Company::where('id',$request->hidden_id)->update($data);
 
         $doc = $request->document;
         $name = $request->document_type;
@@ -191,7 +191,7 @@ class OrganizationController extends Controller
 
     public function delete(Request $request)
     {
-        Company::whereId($request->id)->delete();
+        Company::where('id',$request->id)->delete();
         return response()->json(['success' => __('Data is successfully deleted')]);
     }
 
@@ -200,7 +200,7 @@ class OrganizationController extends Controller
 
         $bulk = explode(',', $request->arr);
         foreach ($bulk as $data) {
-            Company::whereId($data)->delete();
+            Company::where('id',$data)->delete();
         }
 
         return response()->json(['success' => __('Data is successfully deleted')]);

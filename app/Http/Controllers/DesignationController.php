@@ -44,14 +44,14 @@ class DesignationController extends Controller
         $data ['company_id'] = $request->company_id;
        
      
-        Designation::whereId($request->hidden_id)->update($data);
+        Designation::where('id',$request->hidden_id)->update($data);
 
         return response()->json(['success' => 'Data Updated successfully.']);
         
     }
     
     public function delete(Request $request){
-        Designation::whereId($request->id)->delete();
+        Designation::where('id',$request->id)->delete();
         return response()->json(['success' => __('Data is successfully deleted')]);
     }
 

@@ -432,26 +432,20 @@
                                         <div class="col-md-3 form-group">
                                             <label>Select Vendor Category*</label>
                                             <select name="vendor_category_id" id="vendor_category_id" class="form-control selectpicker" data-live-search="true" data-live-search-style="begins" title='Select Employee...'>
-                                            <option disabled>Select Vendor Category</option>
-                                                @foreach ($vendor_category as $vendor_category)
-                                                    <option value="{{ $vendor_category->id }}">{{ $vendor_category->vendor_category_name }}
-                                                    </option>
-                                                @endforeach
+                                            <option >Select Vendor Category</option>
+                                               
                                            
                                         </select>
                                         </div>
-                                     
+
                                         <div class="col-md-3 form-group">
                                             <label>Select Vendor*</label>
                                             <select name="vendor_id" id="vendor_id" class="form-control selectpicker" data-live-search="true" data-live-search-style="begins" title='Select Employee...'>
-                                            <option disabled>Select Vendor</option>
-                                                @foreach ($vendor as $vendor)
-                                                    <option value="{{ $vendor->id }}">{{ $vendor->vendor_name }}
-                                                    </option>
-                                                @endforeach
+                                            <option >Select Vendor Name</option>                                          
 
                                             </select>
                                         </div>
+
                                         <div class="col-md-3 form-group">
                                             <label>Select Purchase Invoice No*</label>
                                             <select name="purchase_invoice_id" id="purchase_invoice_id" class="form-control selectpicker" data-live-search="true" data-live-search-style="begins" >
@@ -741,6 +735,7 @@
             })
 
             $(document).on('change', '#company_id', function() {
+                var company_id=$(this).val();
                 $.ajax({
                     url: "{{ route('get_department_location_by_company') }}",
                     method: "GET",
@@ -764,6 +759,8 @@
                             $("#location_id").append('<option value="' + b.id + '">' + b
                                 .location_name + '</option>');
                         });
+                        get_vendor_category_by_company(company_id);
+
                     }
                 })
             })
@@ -790,28 +787,31 @@
                 })
             })
             
-            $(document).on('change', '#company_id', function() {
+           
+
+            
+           function get_vendor_category_by_company(company_id) {
                 $.ajax({
                     url: "{{ route('admin_report.get_vendor_category_by_company') }}",
                     method: "GET",
                     dataType: 'json',
                     data: {
-                        company_id: $(this).val(),
+                        company_id: company_id,
                     },
                     success: function(result) {
 
-                        $("#vendor_category").empty();
-                        $("#vendor_category").append(
+                        $("#vendor_category_id").empty();
+                        $("#vendor_category_id").append(
                             '<option value="" disabled selected>Select Vendor Category</option>');
                            $.each(result, function(a, b) {
-                            $("#vendor_category").append('<option value="' + b.id + '">' + b
+                            $("#vendor_category_id").append('<option value="' + b.id + '">' + b
                                 .vendor_category_name + '</option>');
                         });
                     }
                 })
-            })
+            }
 
-            $(document).on('change', '#vendor_category', function() {
+            $(document).on('change', '#vendor_category_id', function() {
                 $.ajax({
                     url: "{{ route('admin_report.get_vendor_details_by_vendor_category') }}",
                     method: "GET",
@@ -822,16 +822,17 @@
                     },
                     success: function(result) {
 
-                        $("#vendor_name").empty();
-                        $("#vendor_name").append(
+                        $("#vendor_id").empty();
+                        $("#vendor_id").append(
                             '<option value="" disabled selected>Select Vendor Name</option>');
                            $.each(result, function(a, b) {
-                            $("#vendor_name").append('<option value="' + b.id + '">' + b
+                            $("#vendor_id").append('<option value="' + b.id + '">' + b
                                 .vendor_name + '</option>');
                         });
                     }
                 })
             })
+            
             
             
             $(document).on('click', '.delete_stored', function() {

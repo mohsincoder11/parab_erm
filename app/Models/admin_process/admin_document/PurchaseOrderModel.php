@@ -19,6 +19,7 @@ class PurchaseOrderModel extends Model
         'delivery_date',
         'po_wo_validity_days',
         'approved_by',
+        'approve_by_status',
         'approved_date',
         'template_id',
         'generate_po_wo_number',

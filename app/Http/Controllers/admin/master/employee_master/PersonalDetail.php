@@ -13,18 +13,20 @@ class PersonalDetail extends Controller
 {
     public function personal_details()
     {
-        return view('masters.employee_masters.personal_details');
+        $company = get_company_name_and_id();
+
+        return view('masters.employee_masters.personal_details',compact('company'));
     }
 
     public function store_personal_details(Request $request)
     {
         PersonalDetailModel::create([
+            'company_id' => $request->company_id,
             'salutation'=>$request->salutation,
             'employee_name'=>$request->employee_name,
             'dob'=>$request->dob,
             'address'=>$request->address,
             'locality'=>$request->locality,
-
             'city'=>$request->city,
             'pincode'=>$request->pincode,
             'contact_no'=>$request->contact_no,
@@ -51,13 +53,12 @@ class PersonalDetail extends Controller
     public function update_personal_details(Request $request)
     {
         PersonalDetailModel::where('id', $request->id)->update([
+            'company_id' => $request->company_id,
             'salutation'=>$request->salutation,
-
             'employee_name'=>$request->employee_name,
             'dob'=>date('Y-m-d', strtotime($request->dob)),
             'address'=>$request->address,
-            'locality'=>$request->locality,
-            
+            'locality'=>$request->locality,            
             'city'=>$request->city,
             'pincode'=>$request->pincode,
             'contact_no'=>$request->contact_no,
@@ -85,18 +86,22 @@ class PersonalDetail extends Controller
     public function get_personal_details(Request $request)
     {
         $data = DB::table('personal_detail')
-                ->orderby('id', 'desc')
-            ->get();
-
+                ->leftjoin('companies', 'companies.id', '=', 'personal_detail.company_id')
+                ->orderby('personal_detail.id', 'desc')
+                ->select('personal_detail.*','companies.company_name')
+                ->get();
 
         return DataTables::of($data)
             ->addIndexColumn()
             ->rawColumns([
-                'employee_name', 'dob', 'locality','address', 'contact_no', 'gender', 'blood_group', 'marital_status', 'spouse_name',                
+                'company_name','employee_name', 'dob', 'locality','address', 'contact_no', 'gender', 'blood_group', 'marital_status', 'spouse_name',                
                 'marriage_date', 'personal_email', 'emergency_contact_no', 'pan_no', 'adhar_no', 'driving_license_no', 
                 'action'
 
             ])
+            ->addColumn('company_name', function ($data) {
+                return $data->company_name ?? 'N/A';
+            })
          
             ->addColumn('employee_name', function ($data) {
                 return $data->salutation.' '.$data->employee_name;
@@ -181,7 +186,10 @@ class PersonalDetail extends Controller
         $employee=PersonalDetailModel::where(function ($query) use ($search_keyword) {
             $query->where('employee_name', 'LIKE', "%$search_keyword%");
         })
-        ->select('employee_name')
+        ->when($request->company_id, function($query) use ($request) {
+           $query->where('company_id', $request->company_id);
+        })
+      ->select('employee_name')
         ->get();
         return response()->json($employee);
     } 

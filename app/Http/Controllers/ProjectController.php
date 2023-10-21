@@ -74,14 +74,14 @@ class ProjectController extends Controller
         
        
       
-       $result= Project::whereId($request->hidden_id)->update($data);
+       $result= Project::where('id',$request->hidden_id)->update($data);
     
         return response()->json(['success' => 'Data Updated successfully.']);
     }
 
     
 public function delete(Request $request){
-    Project::whereId($request->id)->delete();
+    Project::where('id',$request->id)->delete();
     return response()->json(['success' => __('Data is successfully deleted')]);
 }
 

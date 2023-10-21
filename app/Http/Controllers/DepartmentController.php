@@ -86,13 +86,13 @@ class DepartmentController extends Controller
             $data['icon'] = $request->previous_icon;
         }
         
-        Department::whereId($request->hidden_id)->update($data);
+        Department::where('id',$request->hidden_id)->update($data);
 
         return response()->json(['success' => 'Data Updated successfully.']);
     }
 
     public function delete(Request $request){
-        Department::whereId($request->id)->delete();
+        Department::where('id',$request->id)->delete();
         return response()->json(['success' => __('Data is successfully deleted')]);
     }
 

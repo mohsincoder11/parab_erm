@@ -4,12 +4,12 @@
 
         <ul class="navbar-nav theme-brand flex-row  text-center">
             <li class="nav-item theme-logo">
-                <a href="index.html">
+                <a href="{{ url('dashboard') }}">
                     <img src="{{ asset('public/assets/img/favicon.png') }}" class="navbar-logo" alt="logo">
                 </a>
             </li>
             <li class="nav-item theme-text">
-                <a href="index.html" class="nav-link"> {{ env('PROJECT_NAME') }} </a>
+                <a href="{{ url('dashboard') }}" class="nav-link"> {{ env('PROJECT_NAME') }} </a>
             </li>
         </ul>
 
@@ -939,7 +939,7 @@
                         'admin_process.admin_documents.payment-order',
                        
     ],'active') @endphp">
-                                <a href="{{ route('admin_process.admin_documents.purchase-invoice') }}"> Payment Order </a>
+                                <a href="{{ route('admin_process.admin_documents.payment-order') }}"> Payment Order </a>
                             </li>
                            
                         </ul>
@@ -1278,6 +1278,7 @@
                         'admin_report.expenses-report',
                         'admin_report.vendor-report',
                         'admin_report.purchase-work-order-agreement',
+                        'admin_report.fetch-work-purchase-work-order-agreement',
                         'admin_report.event-report',
                         'admin_report.meeting-report',
                         'admin_report.training-report',
@@ -1310,8 +1311,9 @@
                     
                     <li class="@php check_actice_or_show([
                         'admin_report.purchase-work-order-agreement',
+                        'admin_report.fetch-work-purchase-work-order-agreement',
                         ],'active') @endphp">
-                        <a href="{{route('admin_report.purchase-work-order-agreement')}}"> Purchase order/work order/ conttract report </a>
+                        <a href="{{route('admin_report.purchase-work-order-agreement')}}"> Purchase order/work order/ contract report </a>
                     </li>
                     <li class="@php check_actice_or_show([
                         'admin_report.vendor-report',

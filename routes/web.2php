@@ -76,7 +76,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('company_masters/grade/delete/{id}', 'GradeController@delete')->name('company_masters.deletegrade');
 
     //employees masters
-    //Route::get('masters/hr_masters/employeelist', 'EmployeelistCotroller@employeelist')->name('hr_masters.employeelist');
+    Route::get('masters/hr_masters/employeelist', 'EmployeelistCotroller@employeelist')->name('hr_masters.employeelist');
 
 
     //officeshift master
@@ -516,10 +516,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       
             Route::get('/purchase_work_order', 'PurchaseWorkOrder@purchase_work_order')->name('purchase_work_order');
             Route::post('/store_purchase_work', 'PurchaseWorkOrder@store_purchase_work')->name('store_purchase_work');
-            //Route::post('/update-inward', 'Inward@update_inward')->name('update-inward');
+            Route::post('/update-inward', 'Inward@update_inward')->name('update-inward');
             Route::get('/delete_purchase_work_order', 'PurchaseWorkOrder@delete_purchase_work_order')->name('delete_purchase_work_order');
             Route::get('/edit_purchase_work_order', 'PurchaseWorkOrder@edit_purchase_work_order')->name('edit_purchase_work_order');
-            //Route::get('/get-inward', 'Inward@get_inward')->name('get-inward');
+            Route::get('/get-inward', 'Inward@get_inward')->name('get-inward');
 
         //Admin Process/Admin Documents/Agreement      
         Route::get('/agreement', 'Agreement@agreement')->name('agreement');
@@ -565,14 +565,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::namespace('admin\admin_report')->name('admin_report.')->prefix('admin-report')->group(function () {
         Route::get('/purchase-work-order-agreement', 'PurchaseWorkAgreementReport@purchase_work_order_agreement')->name('purchase-work-order-agreement');
-        Route::get('/get_po_wo_by_company_id', 'PurchaseWorkAgreementReport@get_po_wo_by_company_id')->name('get_po_wo_by_company_id');
-        Route::get('/fetch-work-purchase-work-order-agreement/{id}', 'PurchaseWorkAgreementReport@fetch_work_purchase_work_order_agreement')->name('fetch-work-purchase-work-order-agreement');
 
         Route::get('/vendor-report', 'VendorReport@vendor_report')->name('vendor-report');
         Route::get('/get_vendor_category_by_company', 'VendorReport@get_vendor_category_by_company')->name('get_vendor_category_by_company');
-        Route::get('/get_vendor_category_by_expense_category', 'VendorReport@get_vendor_category_by_expense_category')->name('get_vendor_category_by_expense_category');
         Route::get('/get_vendor_details_by_vendor_category', 'VendorReport@get_vendor_details_by_vendor_category')->name('get_vendor_details_by_vendor_category');
-        Route::get('/get_expense_category_by_company', 'VendorReport@get_expense_category_by_company')->name('get_expense_category_by_company');
         
         
         Route::get('/event-report', 'event_meeting\EventReport@event_report')->name('event-report');

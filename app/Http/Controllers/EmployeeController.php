@@ -95,7 +95,7 @@ class EmployeeController extends Controller
 
     public function updatebasicinfo(Request $request)
     {
-        $result = Employee::whereId($request->hidden_id)->update([
+        $result = Employee::where('id',$request->hidden_id)->update([
             'employeeID' => $request->employeeID,
             'full_name' => $request->full_name,
             'fathers_name' => $request->fathers_name,

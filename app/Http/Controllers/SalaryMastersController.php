@@ -43,7 +43,7 @@ class SalaryMastersController extends Controller
 
     public function update(Request $request)
     {
-        $result = Allowances::whereId($request->hidden_id)->update([
+        $result = Allowances::where('id',$request->hidden_id)->update([
             'company_id' => $request->company_id,
             'title' => $request->title,
             'type' => $request->type,

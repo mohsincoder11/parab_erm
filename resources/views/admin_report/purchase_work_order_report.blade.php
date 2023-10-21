@@ -12,14 +12,13 @@
                 </div>
 
                 <div class="layout-px-spacing">
-
+                <form action="{{route('admin_report.purchase-work-order-agreement')}}" method="get">
                     <div class="row">
-
                         <div class="col-md-3 form-group">
                             <label>Company *</label>
                             <select name="company_id" id="company_id" class="form-control selectpicker"
                                 data-live-search="true" data-live-search-style="begins" title='Select Company Type...'>
-                                <option value="">Please select company
+                                <option value="">Please Select Company
                                 </option>
                                 @foreach ($company as $company)
                                     <option value="{{ $company->id }}">{{ $company->company_name }}
@@ -29,19 +28,20 @@
                         </div>
                         <div class="col-md-3 form-group">
                             <label>Select PO or WO or Agreement No</label>
-                            <select name="vendor_category" id="vendor_category" class="form-control selectpicker"
+                            <select name="po_wo_number" id="po_wo_number" class="form-control selectpicker"
                             data-live-search="true" data-live-search-style="begins" title='Select option...'>
+                            <option value="">Please Select Option
+                            </option>
+                           
                         </select>
                         </div>
                        
-
-
                         <div class="col-lg-2" style="margin-top:29px ;">
-                            <button class="btn btn-primary mb-2">Preview Report</button>
+                            <button type="submit" class="btn btn-primary mb-2">Fetch Details </button>
                         </div>
-
-
+                    
                     </div>
+                </form>
                 </div>
             </div>
 
@@ -58,51 +58,53 @@
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Sr.no</th>
-                                        <th>Company</th>
-                                        <th>Agreement No</th>
+                                        <th>sr</th>
+                                        <th>Company </th>
+                                        <th>Location </th>
+                                        <th>Department</th>
+                                        <th>Date</th>
+                                        <th>Vendor category</th>
+                                        <th>Expenses category</th>
+                                        <th>Selected Vendor</th>
+                                        <th>Total Amt.</th>
                                         
                                         <th>Action</th>
-
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    @foreach ($purchase_work_order_data as $purchase_work_order)
+                                            <tr>
+                                                <td>{{ $loop->index + 1 }}</td>
+                                                <td>{{ $purchase_work_order->company_name }}</td>
+                                                <td>{{ $purchase_work_order->location_name }}</td>
+                                                <td>{{ $purchase_work_order->department }}</td>
+                                                <td>{{ $purchase_work_order->date }}</td>
+                                                <td>{{ $purchase_work_order->vendor_category_name }}</td>
+                                                <td>{{ $purchase_work_order->expenses_category }}</td>
+                                                <td>{{ $purchase_work_order->vendor_name }}</td>
+                                                <td>{{ $purchase_work_order->total_amount }}</td>
+                                                
+                                                <td>
+                                    <a 
+                                    href="{{route('admin_report.fetch-work-purchase-work-order-agreement',$purchase_work_order->id)}}" data-toggle="tooltp"
+                                                        data-placement="top" title="view"
+                                                        data-target=".bd-example-modal-xl"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" fill="none" viewBox="0 0 24 24"
+                                                            stroke="currentColor" stroke-width="2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                        </svg></a>
 
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                       
 
-                                        <td>
-                                            <a href="javascript:void(0);" data-placement="top" title="Edit"
-                                                data-toggle="modal" data-target="#editmodel"><svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-edit-2 text-success">
-                                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
-                                                    </path>
-                                                </svg></a>
-                                            <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top"
-                                                title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-trash-2 text-danger">
-                                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                                    <path
-                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                    </path>
-                                                    <line x1="10" y1="11" x2="10" y2="17">
-                                                    </line>
-                                                    <line x1="14" y1="11" x2="14" y2="17">
-                                                    </line>
-                                                </svg></a>
 
-                                        </td>
+                                                </td>
 
-                                    </tr>
-
+                                            </tr>
+                                        @endforeach
 
 
                                 </tbody>
@@ -130,7 +132,7 @@
 
             $(document).on('change', '#company_id', function() {
                 $.ajax({
-                    url: "{{ route('admin_report.get_vendor_category_by_company') }}",
+                    url: "{{ route('admin_report.get_po_wo_by_company_id') }}",
                     method: "GET",
                     dataType: 'json',
                     data: {
@@ -138,39 +140,18 @@
                     },
                     success: function(result) {
 
-                        $("#vendor_category").empty();
-                        $("#vendor_category").append(
-                            '<option value="" disabled selected>Select Vendor Category</option>');
+                        $("#po_wo_number").empty();
+                        $("#po_wo_number").append(
+                            '<option value="" disabled selected>Please Select Option</option>');
                            $.each(result, function(a, b) {
-                            $("#vendor_category").append('<option value="' + b.id + '">' + b
-                                .vendor_category_name + '</option>');
+                            $("#po_wo_number").append('<option value="' + b.id + '">' + b
+                                .generate_po_wo_number + '</option>');
                         });
                     }
                 })
             })
 
-            $(document).on('change', '#vendor_category', function() {
-                $.ajax({
-                    url: "{{ route('admin_report.get_vendor_details_by_vendor_category') }}",
-                    method: "GET",
-                    dataType: 'json',
-                    data: {
-                        vendor_category_id: $(this).val(),
-                        company_id: $("#company_id").val(),
-                    },
-                    success: function(result) {
-
-                        $("#vendor_name").empty();
-                        $("#vendor_name").append(
-                            '<option value="" disabled selected>Select Vendor Name</option>');
-                           $.each(result, function(a, b) {
-                            $("#vendor_name").append('<option value="' + b.id + '">' + b
-                                .vendor_name + '</option>');
-                        });
-                    }
-                })
-            })
-
+          
           
             var table = $('.datatable_server').DataTable({
                 dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',

@@ -39,7 +39,7 @@ class DeductionController extends Controller
         }
 
         public function update(Request $request){
-            $result=Deduction::whereId($request->hidden_id)->update([
+            $result=Deduction::where('id',$request->hidden_id)->update([
                 'company_id'=>$request->company_id,
                 'deduction_title'=>$request->title,
                 'type'=>$request->type,
