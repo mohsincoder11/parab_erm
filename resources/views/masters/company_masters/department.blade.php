@@ -155,7 +155,7 @@
                                                 <td>{{ $i }}</td>
                                                 <td>{{ $department->department }}</td>
 
-                                                <td>{{ $department->company_name }}</td>
+                                                <td>{{ $department->company_name ?? 'N/A' }}</td>
                                                 <td>
                                                     <a href="javascript:void(0);" data-toggle="modal"
                                                         data-target="#editmodel" data-custom-value="{{ $department->id }}"

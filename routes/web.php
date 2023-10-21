@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use app\Http\Controllers\Template_formatController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,6 +78,12 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     //employees masters
     //Route::get('masters/hr_masters/employeelist', 'EmployeelistCotroller@employeelist')->name('hr_masters.employeelist');
 
+    Route::get('masters/template_format', 'Template_formatController@index')->name('template_format');
+    Route::post('masters/template_format/create', 'Template_formatController@create')->name('template_format_create');
+    Route::get('masters/template_format/delete', 'Template_formatController@delete')->name('template_format_delete');
+    Route::get('masters/template_format/edit/{id}', 'Template_formatController@edit')->name('template_format_edit');
+    Route::post('masters/template_format/update', 'Template_formatController@update')->name('template_format_update');
+    
 
     //officeshift master
     Route::get('masters/hr_masters/officeshift', 'OfficeshiftController@officeshift')->name('hr_masters.officeshift');
@@ -479,6 +485,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/delete-events', 'Event@delete_events')->name('delete-events');
         Route::get('/edit-events', 'Event@edit_events')->name('edit-events');
         Route::get('/get-events', 'Event@get_events')->name('get-events');
+        Route::get('/get-events1', 'Event@get_events1')->name('get-events1');
  
         
         Route::get('/meeting', 'Meeting@meeting')->name('meeting');
@@ -516,6 +523,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
       
             Route::get('/purchase_work_order', 'PurchaseWorkOrder@purchase_work_order')->name('purchase_work_order');
             Route::post('/store_purchase_work', 'PurchaseWorkOrder@store_purchase_work')->name('store_purchase_work');
+            Route::get('/fetch-work-purchase-work-order-agreement/{id}', 'PurchaseWorkOrder@fetch_work_purchase_work_order_agreement')->name('fetch-work-purchase-work-order');
+
+
             //Route::post('/update-inward', 'Inward@update_inward')->name('update-inward');
             Route::get('/delete_purchase_work_order', 'PurchaseWorkOrder@delete_purchase_work_order')->name('delete_purchase_work_order');
             Route::get('/edit_purchase_work_order', 'PurchaseWorkOrder@edit_purchase_work_order')->name('edit_purchase_work_order');
@@ -568,25 +578,60 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::get('/get_po_wo_by_company_id', 'PurchaseWorkAgreementReport@get_po_wo_by_company_id')->name('get_po_wo_by_company_id');
         Route::get('/fetch-work-purchase-work-order-agreement/{id}', 'PurchaseWorkAgreementReport@fetch_work_purchase_work_order_agreement')->name('fetch-work-purchase-work-order-agreement');
 
+
+
+
+
         Route::get('/vendor-report', 'VendorReport@vendor_report')->name('vendor-report');
         Route::get('/get_vendor_category_by_company', 'VendorReport@get_vendor_category_by_company')->name('get_vendor_category_by_company');
         Route::get('/get_vendor_category_by_expense_category', 'VendorReport@get_vendor_category_by_expense_category')->name('get_vendor_category_by_expense_category');
         Route::get('/get_vendor_details_by_vendor_category', 'VendorReport@get_vendor_details_by_vendor_category')->name('get_vendor_details_by_vendor_category');
         Route::get('/get_expense_category_by_company', 'VendorReport@get_expense_category_by_company')->name('get_expense_category_by_company');
-        
+        Route::get('/fetch-work-purchase-work-order-agreement1/{id}', 'VendorReport@fetch_work_purchase_work_order_agreement1')->name('fetch-work-purchase-work-order-agreement1');
+        Route::get('/purchase-work-order-agreement1', 'VendorReport@purchase_work_order_agreement1')->name('purchase-work-order-agreement1');
+
+
+
+
         
         Route::get('/event-report', 'event_meeting\EventReport@event_report')->name('event-report');
-        Route::get('/meeting-report', 'event_meeting\MeetingReport@meeting_report')->name('meeting-report');
+        Route::get('/fetch-event_report/{id}', 'event_meeting\EventReport@fetch_event_report')->name('fetch-event_report');
+        Route::get('/get_event_id', 'event_meeting\EventReport@get_event_id')->name('get_event_id');
 
-        Route::get('/training-report', 'training\TrainingReport@training_report')->name('training-report');
+        
+        Route::get('/meeting-report', 'event_meeting\MeetingReport@meeting_report')->name('meeting-report');
+        Route::get('/fetch-meeting_report/{id}', 'event_meeting\MeetingReport@fetch_meeting_report')->name('fetch-meeting_report');
+        Route::get('/get_meeting_id', 'event_meeting\MeetingReport@get_meeting_id')->name('get_meeting_id');
+
+
+
+        Route::get('/training-report', 'training\TrainingReport@training_calender_report')->name('training-report');
+        Route::get('/fetch_training_calender_report/{id}', 'training\TrainingReport@fetch_training_calender_report')->name('fetch_training_calender_report');
+        
+        
+        
+        
         Route::get('/training-certificate-report', 'training\TrainingCertificateReport@training_certificate_report')->name('training-certificate-report');
+        Route::get('/get_training_id', 'training\TrainingCertificateReport@get_training_id')->name('get_training_id');
+        Route::get('/fetch-certificate_report/{id}', 'training\TrainingCertificateReport@fetch_training_report')->name('fetch_training_report');
+
+
+
 
         Route::get('/inward-report', 'inward_outward\InwardReport@inward_report')->name('inward-report');
+        Route::get('/fetch-inward_report/{id}', 'inward_outward\InwardReport@fetch_inward_report')->name('fetch_inward_report');
+
+
+
         Route::get('/outward-report', 'inward_outward\OutwardReport@outward_report')->name('outward-report');
+        Route::get('/fetch-outward_report/{id}', 'inward_outward\OutwardReport@fetch_outward_report')->name('fetch_outward_report');
 
 
       
         Route::get('/expenses-report', 'ExpensesReport@expenses_report')->name('expenses-report');
+        Route::get('/fetch-expenses-report_report/{id}', 'ExpensesReport@fetch_expenses_report')->name('fetch-expenses_report');
+
+        
         Route::get('/get_expense_category_by_location_company', 'ExpensesReport@get_expense_category_by_location_company')->name('get_expense_category_by_location_company');
         Route::get('/get_vendor_category_by_location_company_expense_category', 'ExpensesReport@get_vendor_category_by_location_company_expense_category')->name('get_vendor_category_by_location_company_expense_category');
         

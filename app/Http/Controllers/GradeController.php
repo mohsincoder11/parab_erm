@@ -7,6 +7,7 @@ use App\Company;
 use App\Grade;
 use App\Designation;
 use App\gradeDesignations;
+use Illuminate\Support\Facades\Validator;
 
 class GradeController extends Controller
 {
@@ -27,24 +28,41 @@ class GradeController extends Controller
     }
 
     public function store(Request $request){
-    $result=Grade::create([
-        'company_id'=>$request->company_id,
-        'grade_name'=>$request->grade_name,
-        'grade_description'=>$request->grade_description,
-    ]);
-
-    $id=$result->id;
-    for($i=0;$i<count($request->designations);$i++)
-    {
-        $result=gradeDesignations::create([
-                'grade_id'=>$id,
-                'designation_id'=>$request->designations[$i],
+$validator = validator::make($request->all(),[
+         'company_id' => 'required',
+            'grade_name' => 'required',
+            'grade_description' =>'required'  
+         ]);
+         if ($validator->fails()) {
+            $return = '';
+            $messages = $validator->messages();
+            foreach($messages->all() as $messages)
+                {
+                    $return .=$messages."<br>";
+                }
+                echo json_encode(201,$return);
+                        }
+                else
+                {
+                $result=Grade::create([
+                'company_id'=>$request->company_id,
+                'grade_name'=>$request->grade_name,
+                'grade_description'=>$request->grade_description,
             ]);
-    }
+
+                $id=$result->id;
+                for($i=0;$i<count($request->designations);$i++)
+                {
+                    $result=gradeDesignations::create([
+                            'grade_id'=>$id,
+                            'designation_id'=>$request->designations[$i],
+                        ]);
+                }
 
 
-    return response()->json(['success' => 'Data Added successfully.']);
-}
+                return response()->json(['success' => 'Data Added successfully.']);
+            }
+        }
 
     public function edit(Request $request){
 

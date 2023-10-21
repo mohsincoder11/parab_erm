@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin\admin_process\event_meeting;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin_process\event_meeting\MeetingModel;
+use App\Models\admin_process\event_meeting\MeetingItemsDetailsModel;
+
 use Yajra\DataTables\DataTables;
 use DB;
 class Meeting extends Controller
@@ -26,7 +28,7 @@ class Meeting extends Controller
         } else {
             $file_name = '';
         }
-        MeetingModel::create([
+        $MeetingModel = MeetingModel::create([
             'company_id' => $request->company_id,
             'location_id' => $request->location_id,
             'department_id' => $request->department_id,
@@ -43,6 +45,15 @@ class Meeting extends Controller
             'file' =>  $file_name,
             'meeting_id' => $request->meeting_id,
         ]);
+
+        foreach($request->perticular as $key => $perticular)
+        {
+            MeetingItemsDetailsModel::create([          
+                'meetings_id' => $MeetingModel->id,
+                'perticular' => $perticular,
+                'price' => $request->price[$key]            
+            ]);
+        }
         return back()->with('success', 'Record added successfully.');
     }
 
@@ -81,14 +92,30 @@ class Meeting extends Controller
             'meeting_id' => $request->meeting_id,
 
         ]);
+
+        MeetingItemsDetailsModel::where('events_id',$request->id)->delete();         
+
+        foreach($request->perticular as $key => $perticular)
+        {
+            MeetingItemsDetailsModel::create([          
+                'meetings_id' =>$request->id,
+                'perticular' => $perticular,
+                'price' => $request->price[$key]            
+            ]);
+        }
+
+        
         return back()->with('success', 'Record updated successfully.');
     }
 
     public function edit_meeting(Request $request)
     {
-        $data = DB::table('meetings')
+        $data['first'] = DB::table('meetings')
             ->where('meetings.id', $request->id)
             ->first();
+        $data['second']=DB::table('meetings_items_detail')
+            ->where('meetings_id', $data['first']->id)
+            ->get();
         return response()->json($data);
     }
 

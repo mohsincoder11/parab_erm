@@ -605,7 +605,7 @@
                         </div>
                         <div class="col-md-3 form-group">
                             <label>Select Template Format*</label>
-                            <select name="template_id" id="template_id" class="form-control selectpicker"
+                            {{-- <select name="template_id" id="template_id" class="form-control selectpicker"
                                 data-live-search="true" data-live-search-style="begins" title='Select Employee...'>
                                 <option value="1">Template 1</option>
                                 <option value="2">Template 2</option>
@@ -613,7 +613,18 @@
                                 <option value="4">Template 4</option>
 
 
-                            </select>
+                            </select> --}}
+
+                            <select name="template_id" id="template_id" class="form-control selectpicker"
+                            data-live-search="true" data-live-search-style="begins" title='Select Company Type...'>
+                            <option value="">Select Template Format
+                            </option>
+                            @foreach ($template as $templates)
+                                <option value="{{ $templates->template_id }}">{{ $templates->template_file }}
+                                </option>
+                            @endforeach
+                        </select>
+
                         </div>
                         <div class="col-md-3 form-group">
                             <label>Generate PO or WO number*</label>
@@ -812,11 +823,17 @@
                                                 <td>{{ $purchase_work_order->po_wo_validity_days }}</td>
                                                 <td>{{ $purchase_work_order->approved_by }}</td>
                                                 <td>{{ $purchase_work_order->approved_date }}</td>
-                                                <td>{{ $purchase_work_order->template_id }}</td>
+                                     
+                                                <td>
+                                            
+                                            <a target="_black" href="{{ asset('public/images/' . $purchase_work_order->template_file) }}">
+                                                {{ $purchase_work_order->template_file }}
+                                            </a>
+                                                </td>
                                                 <td>{{ $purchase_work_order->generate_po_wo_number }}</td>
 
                                                 <td>
-                                                    <a href="javascript:void(0);" data-toggle="modal"
+                                                    <a href="{{route('admin_process.admin_documents.fetch-work-purchase-work-order',$purchase_work_order->id)}}" 
                                                         data-placement="top" title="view"
                                                         data-target=".bd-example-modal-xl"><svg
                                                             xmlns="http://www.w3.org/2000/svg" width="24"
@@ -829,7 +846,7 @@
                                                         </svg></a>
 
 
-                                                    <a href="javascript:void(0);" data-toggle="modal"
+                                                    {{-- <a href="javascript:void(0);" data-toggle="modal"
                                                         data-placement="top" title="Edit" data-target="#editmodel"><svg
                                                             xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24" fill="none"
@@ -839,7 +856,7 @@
                                                             <path
                                                                 d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
                                                             </path>
-                                                        </svg></a>
+                                                        </svg></a> --}}
 
                                                     <a href="javascript:void(0);" data-toggle="tooltip"
                                                         data-placement="top" title="Delete" class="delete_stored"

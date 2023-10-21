@@ -6,11 +6,6 @@
 
             <div style=" background-color:white; margin-top: 10px;">
 
-                <div class="row" style="padding-left:3.5%; padding-top:10px;">
-                    <button id="print_btn"
-                    type="download" class="btn btn-primary"> <i class="fa fa-print"></i> Print</button>
-                </div>
-
                 <div class="layout-px-spacing" style="padding:30px !important">
 
                     <div class="row">
@@ -121,24 +116,12 @@
                         </div>
                         
                     </div>
-                    
+                    <div class="row">
+                        <button class="btn btn-primary"> <i class="fas fa-print"></i> Print</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    @stop
-    @section('js')
-    <script>
 
-        $(document).on( 'click','#print_btn',function () {
-            $("#print_btn").hide();
-            var printContents = document.getElementById('content').innerHTML;
-            var originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-            $("#print_btn").show();
-
- });
-</script>
 @stop

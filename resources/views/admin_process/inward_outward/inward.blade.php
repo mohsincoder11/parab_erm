@@ -131,6 +131,18 @@
                                         </div>
 
 
+                                        {{-- <div class="col-md-6 form-group">
+                                            <label>Employee Name *</label>
+                                            <select name="employee_id" id="employee_id"
+                                                class="form-control selectpicker" data-live-search="true"
+                                                data-live-search-style="begins" title='Select Employee'>
+
+                                                </option>
+
+                                            </select>
+                                        </div> --}}
+
+
                                         <div class="col-md-6 form-group">
                                             <label> Inward number *</label>
                                             <input type="text" name="inward_number" id="inward_number"
@@ -251,14 +263,21 @@
 
                         $("#department_id").empty();
                         $("#location_id").empty();
+                     
                         $("#location_id").append(
                             '<option value="" disabled selected>Select Location</option>');
                         $("#department_id").append(
                             '<option value="" disabled selected>Select Department</option>');
+
+                           
+
+
                         $.each(result['department'], function(a, b) {
                             $("#department_id").append('<option value="' + b.id + '">' +
                                 b.department + '</option>');
                         });
+                       
+
                         $.each(result['location'], function(a, b) {
                             $("#location_id").append('<option value="' + b.id + '">' + b
                                 .location_name + '</option>');
@@ -399,6 +418,7 @@
                     },
                     success: function(result) {
                         $("#id").val(result.id);
+                        $("#employee_name").val(result.employee_name);
                         $("#company_id").val(result.company_id);
                         $("#inward_type").val(result.inward_type);
                         $("#from_name").val(result.from_name);

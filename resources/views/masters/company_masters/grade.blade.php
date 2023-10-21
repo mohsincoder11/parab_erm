@@ -270,6 +270,10 @@
                         }
                         // $('#form_result').html(html).slideDown(300).delay(5000).slideUp(300);
         
+                    },
+                    error:function(e){
+                        alert('please select designation');
+
                     }
                 });
             });
@@ -311,6 +315,10 @@
         
                         // $('#form_result1').html(html).slideDown(300).delay(5000).slideUp(300);
         
+                    },
+                    catch(e){
+                        alert('there is error');
+
                     }
                 });
             });

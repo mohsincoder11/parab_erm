@@ -65,6 +65,8 @@ class Outward extends Controller
     {
         $data = DB::table('outwards')
             ->where('outwards.id', $request->id)
+            ->join('personal_detail','personal_detail.id','=','outwards.employee_id')
+            ->select('outwards.*','personal_detail.employee_name')
             ->first();
         return response()->json($data);
     }

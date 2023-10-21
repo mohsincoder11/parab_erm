@@ -110,7 +110,8 @@
 
                                         <div class="col-md-6 form-group">
                                             <label> Select Event Proposer Employees * </label>
-                                            <select class="form-control select2" name="event_proposer_employee" id="event_proposer_employee">
+                                            <select class="form-control select2" name="event_proposer_employee"
+                                                id="event_proposer_employee">
                                                 @foreach ($employee as $emp1)
                                                     <option value="{{ $emp1->id }}">{{ $emp1->full_name }}</option>
                                                 @endforeach
@@ -127,20 +128,76 @@
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label> Select Vendor * </label>
-                                            <select class="form-control select2 " multiple="multiple" name="vendor_id[]" id="vendor_id">
+                                            <select class="form-control select2 " multiple="multiple" name="vendor_id[]"
+                                                id="vendor_id">
                                                 @foreach ($vendor as $vendor)
                                                     <option value="{{ $vendor->id }}">{{ $vendor->vendor_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
 
+                                        {{-- <div class="col-md-12 " style="border-top: solid 1px rgb(233, 243, 140);margin: 1vh;">
+
+                                        </div> --}}
+
+                                        <div class="col-md-5 form-group">
+                                            <label>Particular*</label>
+                                            <input type="text" class="form-control" placeholder="Particular"
+                                                id="perticular" name='perticular'>
+
+                                        </div>
+                                        <div class="col-md-5 form-group">
+                                            <label>Add Price*</label>
+                                            <input type="number" class="form-control" placeholder="Add Price"
+                                                id="price" name="price">
+
+                                        </div>
+                                        {{-- <div class="col-md-2 form-group">
+                                            <label>Add Order Details*</label>
+                                            <input type="text" class="form-control" placeholder="Add " id="details"
+                                                name="details">
+                
+                                        </div> --}}
+                                        <div class="col-md-2 form-group">
+                                            <label></label>
+
+                                            <div class="form-group" align="center" style="width: full;margin-top: 3vh;">
+
+                                                <input type="button" name="action_button" class="btn btn-warning"
+                                                    value="Add" id="add_row" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 " style="">
+                                            <table class="items_table table table-bordered width80" id="items_table">
+
+                                                <thead>
+                                                    <tr class="filters">
+                                                        <th></th>
+                                                        <th>Particular</th>
+                                                        <th>Price</th>
+                                                        {{-- <th>Details </th> --}}
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="add_more">
+                                                </tbody>
+                                            </table>
+                                            <button type="button" class="delete-row btn btn-danger"
+                                                style="margin-left: 80%; margin-top: 5px;">Delete Row</button>
+
+                                        </div>
+
+
+
+
+
 
 
 
                                         <div class="col-md-6 form-group">
                                             <label> Estimate Amount*</label>
-                                            <input type="number" name="estimate_amount" id="estimate_amount"
-                                                class="form-control" placeholder="">
+                                            <input type="number" name="estimate_amount" id="total_amount"
+                                                class="form-control" placeholder="" value="0">
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label> Approve By</label>
@@ -175,7 +232,7 @@
                                             <label> File Attachment </label>
                                             <input type="file" name="file" id="file" class="form-control"
                                                 placeholder="">
-                                                <span id="store_logo"></span>
+                                            <span id="store_logo"></span>
 
                                         </div>
                                         <div class="col-md-6 form-group">
@@ -219,9 +276,9 @@
                             <div class="modal-content">
                                 <div class="modal-header" id="exampleModalPopoversLabel">
                                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                                        </button>
-                                                                      </div> -->
+                                                                              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                                            </button>
+                                                                          </div> -->
                                     <div class="modal-body">
                                         <p class="modal-text">Parberp.com says<br>
                                             Please select atleast one Checkbox
@@ -465,7 +522,10 @@
                     data: {
                         id: id,
                     },
-                    success: function(result) {
+                    success: function(data) {
+                        let result=data.first;
+                        let second=data.second;
+                        console.log(second);
                         $("#upload_file").addClass('ignore');
                         $("#store_logo").text(result.file);
                         $("#id").val(result.id);
@@ -474,9 +534,10 @@
                         $("#event_type").val(result.event_type);
                         $("#event_date").val(result.event_date);
                         $("#event_proposer_employee").val(result.event_proposer_employee);
-                        $("#event_coordinator_employee").val(result.event_proposer_employee.split(',')).change();
+                        $("#event_coordinator_employee").val(result.event_proposer_employee
+                            .split(',')).change();
                         $("#vendor_id").val(result.vendor_id.split(',')).change();
-                        $("#estimate_amount").val(result.estimate_amount);
+                        $("#total_amount").val(result.estimate_amount);
                         $("#approve_by").val(result.approve_by);
                         $("#approve_date").val(result.approve_date);
                         $("#approve_amount").val(result.approve_amount);
@@ -494,6 +555,18 @@
                         let formaction =
                             '{{ route('admin_process.event_meeting.update-events') }}';
                         $("#add-edit-btn").attr("formaction", formaction);
+                        $("#add_more").empty();
+
+                        $.each(second,function(a,b){
+                            var markup =
+                        "<tr><td><input type='checkbox' class='del_check1' name='record'></td><td><input type='text' class='form-control' name='perticular[]' value='" +
+                        b.perticular +
+                        "' ></td><td><input type='number' class='form-control' step='0.1' name='price[]' value='" +
+                        b.price +"' ></td></tr>";
+                        // "' ></td><td><input type='text' class='form-control'  name='details[]' value='" +
+                        // details + "' ></td></tr>";
+                    $("#add_more").append(markup);
+                        })
 
                     }
 
@@ -655,6 +728,58 @@
                 "responsive": true,
                 "ordering": true,
             });
+
+
+
+
+            //Add Row 
+            $("#add_row").click(function() {
+
+                var perticular = $("#perticular").val();
+                var price = $("#price").val();
+                // var details = $("#details").val();
+                var quantity_multiply_rate = parseFloat(price);
+                var old_total = $("#total_amount").val();
+
+                $("#total_amount").val(parseFloat(old_total) + parseFloat(quantity_multiply_rate));
+
+                if (perticular == '' || price == '') {
+                    alert('Please Fill All Fields');
+                    $("#total_amount").val(old_total);
+                } else {
+                    var markup =
+                        "<tr><td><input type='checkbox' class='del_check1' name='record'></td><td><input type='text' class='form-control' name='perticular[]' value='" +
+                        perticular +
+                        "' ></td><td><input type='number' class='form-control' step='0.1' name='price[]' value='" +
+                        price +"' ></td></tr>";
+                        // "' ></td><td><input type='text' class='form-control'  name='details[]' value='" +
+                        // details + "' ></td></tr>";
+                    $("#add_more").append(markup);
+                    //empty all fields
+
+                    $("#perticular").val('');
+                    $("#price").val('');
+                    // $("#details").val('');
+
+
+                }
+
+            });
+            $(".delete-row").click(function() {
+                $('.del_check1').each(function() {
+                    // alert();
+                    if ($(this).is(":checked")) {
+                        var perticular = $(this).parents("tr").find('input[name="perticular[]"]').val();
+                        var price = $(this).parents("tr").find('input[name="price[]"]').val();
+                        var minus_amount = parseFloat(price);
+                        var old_amount = $("#total_amount").val();
+                        $("#total_amount").val(parseFloat(old_amount) - parseFloat(minus_amount));
+                        $(this).parents("tr").remove();
+
+                    }
+                });
+            });
+
 
 
 

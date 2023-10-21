@@ -7,70 +7,114 @@
             <div style=" background-color:white; margin-top: 10px;">
 
                 <div style="padding-top: 15px; font-size: 30px; margin-left: 1%; ">
-                    <h3 style="color:rgb(36, 36, 191) ;"><b>Expence Report</b></h3>
+                    <h3 style="color:rgb(36, 36, 191) ;"><b>Event Report</b></h3>
 
                 </div>
 
                 <div class="layout-px-spacing">
-                    <form action="{{ route('admin_report.expenses-report') }}" method="get">
+                    <form action="{{ route('admin_report.event-report') }}" method="get">
 
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="col-md-3 form-group">
-                            <label>Company *</label>
-                            <select name="company_id" id="company_id" class="form-control selectpicker"
-                                data-live-search="true" data-live-search-style="begins" title='Select Company Type...'>
-                                <option value="">Please select company
-                                </option>
-                                @foreach ($company as $company)
-                                    <option value="{{ $company->id }}">{{ $company->company_name }}
+                            <div class="col-md-3 form-group">
+                                <label>Company *</label>
+                                <select name="company_id" id="company_id" class="form-control selectpicker"
+                                    data-live-search="true" data-live-search-style="begins" title='Select Company Type...'>
+                                    <option value="">Please select company
                                     </option>
-                                @endforeach
-                            </select>
-                        </div>
+                                    @foreach ($company as $company)
+                                        <option value="{{ $company->id }}">{{ $company->company_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
 
-                        <div class="col-md-3 form-group">
-                            <label>Location *</label>
-                            <select name="location_id" id="location_id" class="form-control selectpicker"
-                                data-live-search="true" data-live-search-style="begins" title='Select location...'>
-                            </select>
-                        </div>
+                            <div class="col-md-3 form-group">
+                                <label>Location *</label>
+                                <select name="location_id" id="location_id" class="form-control selectpicker"
+                                    data-live-search="true" data-live-search-style="begins" title='Select location...'>
+                                </select>
+                            </div>
 
-                        {{-- <div class="col-md-3 form-group">
-                            <label> Select Period From *</label>
-                            <input type="date" name="period_from" id="period_from" class="form-control">
-                        </div>
-
-                        <div class="col-md-3 form-group">
-                            <label> Select Period To *</label>
-                            <input type="date" name="period_to" id="period_to" class="form-control">
+                            {{-- <div class="col-md-3 form-group">
+                            <label> Select Event Type *</label>
+                            <input type="date" name="event_type" id="event_type" class="form-control">
                         </div> --}}
 
 
 
-                        <div class="col-md-3 form-group">
-                            <label>Expense Category *</label>
-                            <select name="expense_category" id="expense_category" class="form-control selectpicker"
+                            <div class="col-md-3 form-group">
+                                <label>Event Type *</label>
+                                <select name="event_type" id="event_type" class="form-control selectpicker"
+                                    data-live-search="true" data-live-search-style="begins" title='Select events...'>
+                                    <option value="" disabled selected>Select events</option>
+                                    <option value="Festival">Festival</option>
+                                    <option value="Product Launch"> Product Launch</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Training">Training</option>
+                                    <option value="Employee Get-together">Employee Get-together</option>
+                                    <option value="Celebration">Celebration</option>
+                                    <option value="Employee Activity">Employee Activity</option>
+                                    <option value="Camp">Camp</option>
+                                    <option value="Medical">Medical</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                          
+                            {{-- <div class="col-md-3 form-group">
+                                <label> Events ID *</label>
+                                <input type="text" name="event_id" id="event_id" value="E-{{ time() }}" readonly
+                                    class="form-control" placeholder="">
+                            </div> --}}
+
+
+                            <div class="col-md-3 form-group">
+                                <label>Select Events ID</label>
+                                <select name="event_id" id="event_id" class="form-control selectpicker"
+                                data-live-search="true" data-live-search-style="begins" title='Select option...'>
+                                <option value="">Please Select Option
+                                </option>
+                               
+                            </select>
+                            </div>
+                           
+
+
+                            {{-- <div class="col-md-3 form-group">
+                            <label>Select Event Coordinator *</label>
+                            <select name="event_coordinator" id="event_coordinator" class="form-control selectpicker"
                             data-live-search="true" data-live-search-style="begins" title='Select Expense Category...'>
                         </select>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-md-3 form-group">
+
+                            {{-- <div class="col-md-3 form-group">
+                                <label> Select Event Coordinator * </label>
+                                <select class="form-control select2" multiple="multiple" name="event_coordinator_employee[]"
+                                    id="event_coordinator_employee">
+                                    @foreach ($employee as $emp2)
+                                        <option value="{{ $emp2->id }}">{{ $emp2->full_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div> --}}
+
+                            {{-- <div class="col-md-3 form-group">
                             <label>Vendor Category *</label>
                             <select name="vendor_category" id="vendor_category" class="form-control selectpicker"
                             data-live-search="true" data-live-search-style="begins" title='Select Vendor Category...'>
                         </select>
+                        </div> --}}
+
+
+
+                            <div class="col-lg-2" style="margin-top:29px ;">
+                                <button class="btn btn-primary mb-2">Preview Report</button>
+                            </div>
+
+
                         </div>
-
-
-
-                        <div class="col-lg-2" style="margin-top:29px ;">
-                            <button class="btn btn-primary mb-2">Preview Report</button>
-                        </div>
-
-
-                    </div>
                 </div>
             </div>
 
@@ -91,44 +135,55 @@
                                         <th>Company</th>
                                         <th>Location</th>
                                         <th>Department</th>
-                                        {{-- <th>Period To</th> --}}
-                                        <th>Expence Category</th>
-                                        {{-- <th>Vendor Category</th> --}}
-                                        {{-- <th>Fetch Details</th> --}}
+                                        <th>Event Date</th>
+                                        <th>Event Type</th>
+                                        <th>Proposer Employee</th>
+                                        <th>Coordinator Employee</th>
+                                        <th>Vendors</th>
+                                        <th>Estimate Amount</th>
+                                        <th>Approve By</th>
+                                        <th>Approve Date</th>
+                                        <th>Approve Amount</th>
+                                        <th>Event ID</th>
                                         <th>Action</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($expenses_report as $expenses_report)
-                                        
-                                    <tr>
-                                        <td>{{$loop->index+1}}</td>
-                                        <td>{{$expenses_report->company_name}}</td>
-                                        <td>{{$expenses_report->location_name}}</td>
-                                        <td>{{$expenses_report->department}}</td>
-                                        <td>{{$expenses_report->category}}</td>
-                                        {{-- <td>{{$expenses_report->}}</td> --}}
+                                    @foreach ($event_report as $event_reports)
+                                        <tr>
+                                            <td>{{ $loop->index + 1 }}</td>
+                                            <td>{{ $event_reports->company_name }}</td>
+                                            <td>{{ $event_reports->location_name }}</td>
+                                            <td>{{ $event_reports->department }}</td>
+                                            <td>{{ $event_reports->event_date }}</td>
+                                            <td>{{ $event_reports->event_type }}</td>
+                                            <td>{{ $event_reports->proposer_employee }}</td>
+                                            <td>{{ $event_reports->proposer_employee }}</td>
+                                            <td>{{ $event_reports->vendor_category_name }}</td>
+                                            <td>{{ $event_reports->estimate_amount }}</td>
+                                            <td>{{ $event_reports->approve_by }}</td>
+                                            <td>{{ $event_reports->approve_date }}</td>
+                                            <td>{{ $event_reports->approve_amount }}</td>
+                                            <td>{{ $event_reports->event_id }}</td>
+                                            <td>
+                                                <a 
+                                    href="{{route('admin_report.fetch-event_report',$event_reports->id)}}" data-toggle="tooltp"
+                                                        data-placement="top" title="view"
+                                                        data-target=".bd-example-modal-xl"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" fill="none" viewBox="0 0 24 24"
+                                                            stroke="currentColor" stroke-width="2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                        </svg></a>
 
-                                        <td>
-                                            <a 
-                                            href="{{route('admin_report.fetch-expenses_report',$expenses_report->id)}}" data-toggle="tooltp"
-                                                                data-placement="top" title="view"
-                                                                data-target=".bd-example-modal-xl"><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" fill="none" viewBox="0 0 24 24"
-                                                                    stroke="currentColor" stroke-width="2">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                                </svg></a>
+                                            </td>
 
-                                        </td>
-
-                                    </tr>
-
-                                @endforeach
+                                        </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>
@@ -166,7 +221,7 @@
                         $("#location_id").empty();
                         $("#location_id").append(
                             '<option value="" disabled selected>Select Location</option>');
-                           $.each(result['location'], function(a, b) {
+                        $.each(result['location'], function(a, b) {
                             $("#location_id").append('<option value="' + b.id + '">' + b
                                 .location_name + '</option>');
                         });
@@ -176,22 +231,20 @@
 
             $(document).on('change', '#location_id', function() {
                 $.ajax({
-                    url: "{{ route('admin_report.get_expense_category_by_location_company') }}",
+                    url: "{{ route('admin_report.get_event_id') }}",
                     method: "GET",
                     dataType: 'json',
                     data: {
-                        company_id: $("#company_id").val(),
                         location_id: $(this).val(),
                     },
                     success: function(result) {
-                        console.log(result);
 
-                        $("#expense_category").empty();
-                        $("#expense_category").append(
-                            '<option value="" disabled selected>Select Expense Category</option>');
+                        $("#event_id").empty();
+                        $("#event_id").append(
+                            '<option value="" disabled selected>Please Select Option</option>');
                            $.each(result, function(a, b) {
-                            $("#expense_category").append('<option value="' + b.id + '">' + b
-                                .category + '</option>');
+                            $("#event_id").append('<option value="' + b.event_id + '">' + b
+                                .event_id + '</option>');
                         });
                     }
                 })
@@ -204,25 +257,27 @@
                     dataType: 'json',
                     data: {
                         company_id: $("#company_id").val(),
-                        location_id:  $("#location_id").val(),
+                        location_id: $("#location_id").val(),
                         expense_category_id: $(this).val(),
                     },
                     success: function(result) {
 
                         $("#vendor_category").empty();
                         $("#vendor_category").append(
-                            '<option value="" disabled selected>Select Vendor Category</option>');
-                           $.each(result, function(a, b) {
-                            $("#vendor_category").append('<option value="' + b.id + '">' + b
+                            '<option value="" disabled selected>Select Vendor Category</option>'
+                            );
+                        $.each(result, function(a, b) {
+                            $("#vendor_category").append('<option value="' + b.id +
+                                '">' + b
                                 .vendor_category_name + '</option>');
                         });
                     }
                 })
             })
 
-            
 
-         
+
+
 
             var table = $('.datatable_server').DataTable({
                 dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',

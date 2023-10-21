@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models\admin_process\event_meeting;
 
 use Illuminate\Database\Eloquent\Model;

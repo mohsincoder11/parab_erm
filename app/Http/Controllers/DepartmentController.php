@@ -65,25 +65,25 @@ class DepartmentController extends Controller
         
         $data = [];
         $data['department'] = $request->department;
-        $data['department_head'] = $request->department_head;
+       // $data['department_head'] = $request->department_head;
         $data ['company_id'] = $request->company_id;
-        $data ['project_id'] = $request->project_id;
+        //$data ['project_id'] = $request->project_id;
         
         $company_logo =$request->icon;
        
-
+       $file_name="";
         if (isset($company_logo))
-        {
+        { 
 
             if ($company_logo->isValid())
             {
                 $file_name = preg_replace('/\s+/', '', rand()) . '_' . time() . '.' . $company_logo->getClientOriginalExtension();
                 $company_logo->move('public/companyimg/', $file_name);
                
-                $data['icon'] = $file_name;
+                //$data['icon'] = $file_name;
             }
         }elseif($company_logo == null){
-            $data['icon'] = $request->previous_icon;
+            //$data['icon'] = $request->previous_icon;
         }
         
         Department::where('id',$request->hidden_id)->update($data);

@@ -9,7 +9,8 @@ use DB;
 use Yajra\DataTables\DataTables;
 use App\Department;
 use App\Location;
-
+use App\Models\employee_master\OfficialDetailModel;
+use App\Models\employee_master\PersonalDetailModel;
 
 class ExpenseCategory extends Controller
 {
@@ -121,6 +122,11 @@ class ExpenseCategory extends Controller
             ->orderby('department', 'asc')
             ->where('company_id', $request->company_id)
             ->get();;
-        return response()->json(['location' => $location, 'department' => $department]);
+          
+            $emp_name = PersonalDetailModel::select('employee_name', 'id')
+            ->orderby('employee_name', 'asc')
+            ->where('company_id', $request->company_id)
+            ->get();;    
+        return response()->json(['location' => $location, 'department' => $department, 'emp_name' => $emp_name]);
     }
 }

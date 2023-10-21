@@ -5,12 +5,15 @@ namespace App\Http\Controllers\admin\admin_process\admin_documents;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin_process\admin_document\PaymentOrderModel;
+use App\TemplateFormat;
 use DB;
 class PaymentOrder extends Controller
 {
     //
     public function payment_order (){
         $company = get_company_name_and_id();
+        $template = TemplateFormat :: all();
+
         $expense_category = get_expense_category_name_and_id();
         $vendor_category = get_vendor_category_name_and_id();
         $vendor = get_vendor_name_and_id();
@@ -22,10 +25,12 @@ class PaymentOrder extends Controller
         ->leftjoin('vendor_category', 'vendor_category.id', '=', 'payment_order.vendor_category_id')
         ->leftjoin('vendor_details', 'vendor_details.id', '=', 'payment_order.vendor_id')
         ->leftjoin('purchase_invoice', 'purchase_invoice.id', '=', 'payment_order.purchase_invoice_id')
-        ->select('payment_order.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'vendor_category.vendor_category_name','vendor_details.vendor_name','purchase_invoice.invoice_number')
+        ->leftjoin('template_format', 'template_format.template_id', '=', 'payment_order.template_id')
+
+        ->select('payment_order.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'vendor_category.vendor_category_name','vendor_details.vendor_name','purchase_invoice.invoice_number','template_format.template_file')
         ->orderby('payment_order.id', 'desc')
         ->get();
-        return view('admin_process.admin_documents.payment_order',compact('vendor','company','vendor_category','expense_category','payment_order','purchase_invoice'));
+        return view('admin_process.admin_documents.payment_order',compact('vendor','company','vendor_category','expense_category','payment_order','purchase_invoice','template'));
     }
 
     public function fetch_purchase_invoice_detail(Request $request){

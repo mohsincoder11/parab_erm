@@ -60,6 +60,8 @@ class Inward extends Controller
     {
         $data = DB::table('inwards')
             ->where('inwards.id', $request->id)
+            ->join('personal_detail','personal_detail.id','=','inwards.employee_id')
+            ->select('inwards.*','personal_detail.employee_name')
             ->first();
         return response()->json($data);
     }

@@ -19,7 +19,9 @@ class PurchaseWorkAgreementReport extends Controller
         ->leftjoin('vendor_category', 'vendor_category.id', '=', 'purchase_work_order.vendor_category_id')
         ->leftjoin('expenses_category', 'expenses_category.id', '=', 'purchase_work_order.expense_category_id')
         ->leftjoin('vendor_details', 'vendor_details.id', '=', 'purchase_work_order.vendor_id')
-        ->select('purchase_work_order.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'vendor_category.vendor_category_name','expenses_category.category as expenses_category','vendor_details.vendor_name')
+        ->leftjoin('template_format', 'template_format.template_id', '=', 'purchase_work_order.template_id')
+
+        ->select('purchase_work_order.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'vendor_category.vendor_category_name','expenses_category.category as expenses_category','vendor_details.vendor_name','template_format.template_file')
         ->orderby('purchase_work_order.id', 'desc')
         ->where(['purchase_work_order.id' =>$request->po_wo_number])
         ->get();
@@ -42,7 +44,8 @@ class PurchaseWorkAgreementReport extends Controller
         ->leftjoin('vendor_category', 'vendor_category.id', '=', 'purchase_work_order.vendor_category_id')
         ->leftjoin('expenses_category', 'expenses_category.id', '=', 'purchase_work_order.expense_category_id')
         ->leftjoin('vendor_details', 'vendor_details.id', '=', 'purchase_work_order.vendor_id')
-        ->select('purchase_work_order.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'vendor_category.vendor_category_name','expenses_category.category as expenses_category','vendor_details.vendor_name')
+        ->leftjoin('template_format', 'template_format.template_id', '=', 'purchase_work_order.template_id')
+        ->select('purchase_work_order.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'vendor_category.vendor_category_name','expenses_category.category as expenses_category','vendor_details.vendor_name','template_format.template_file')
         ->orderby('purchase_work_order.id', 'desc')
         ->where(['purchase_work_order.id' =>$request->id])
         ->first();

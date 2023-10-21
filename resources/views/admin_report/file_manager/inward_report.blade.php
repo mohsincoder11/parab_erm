@@ -7,59 +7,62 @@
             <div style=" background-color:white; margin-top: 10px;">
 
                 <div style="padding-top: 15px; font-size: 30px; margin-left: 1%; ">
-                    <h3 style="color:rgb(36, 36, 191) ;"><b>Vendor Report</b></h3>
+                    <h3 style="color:rgb(36, 36, 191) ;"><b>Inwards Report</b></h3>
 
                 </div>
 
                 <div class="layout-px-spacing">
-                    <form action="{{route('admin_report.purchase-work-order-agreement1')}}" method="get">
+                    <form action="{{ route('admin_report.inward-report') }}" method="get">
 
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="col-md-3 form-group">
-                            <label>Company *</label>
-                            <select name="company_id" id="company_id" class="form-control selectpicker"
-                                data-live-search="true" data-live-search-style="begins" title='Select Company Type...'>
-                                <option value="">Please select company
-                                </option>
-                                @foreach ($company as $company)
-                                    <option value="{{ $company->id }}">{{ $company->company_name }}
+                            <div class="col-md-3 form-group">
+                                <label>Company *</label>
+                                <select name="company_id" id="company_id" class="form-control selectpicker"
+                                    data-live-search="true" data-live-search-style="begins" title='Select Company Type...'>
+                                    <option value="">Please select company
                                     </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-3 form-group">
-                            <label>Vendor Category *</label>
-                            <select name="vendor_category" id="vendor_category" class="form-control selectpicker"
-                            data-live-search="true" data-live-search-style="begins" title='Select Vendor Category...'>
-                        </select>
-                        </div>
-                        <div class="col-md-3 form-group">
-                            <label>Vendor Name *</label>
-                            <select name="vendor_name" id="vendor_name" class="form-control selectpicker"
-                            data-live-search="true" data-live-search-style="begins" title='Select Vendor Name...'>
-                        </select>
-                        </div>
-                       
-                       
-
-                        <div class="col-md-3 form-group">
-                            <label> Select Period From *</label>
-                            <input type="date" name="period_from" id="period_from" class="form-control">
-                        </div>
-
-                        <div class="col-md-3 form-group">
-                            <label> Select Period To *</label>
-                            <input type="date" name="period_to" id="period_to" class="form-control">
-                        </div>
+                                    @foreach ($company as $company)
+                                        <option value="{{ $company->id }}">{{ $company->company_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
 
-                        <div class="col-lg-2" style="margin-top:29px ;">
-                            <button type="submit" class="btn btn-primary mb-2">Preview Report</button>
+                            <div class="col-md-3 form-group">
+                                <label>Location *</label>
+                                <select name="location_id" id="location_id" class="form-control selectpicker"
+                                    data-live-search="true" data-live-search-style="begins" title='Select location...'>
+                                </select>
+                            </div>
+
+                        
+                            <div class="col-md-3 form-group">
+                                <label>Inward Type *</label>
+
+                                <select name="inward_type" id="inward_type" class="form-control selectpicker"
+                                    data-live-search="true" data-live-search-style="begins"
+                                    title='Select Inward...'>
+                                    <option value="" disabled selected>Select Inward</option>
+                                    <option value="Quotation">Quotation</option>
+                                    <option value="Correspondence">Correspondence</option>
+                                    <option value="Complaint">Complaint</option>
+                                    <option value="Application">Application</option>
+                                    <option value="Statutory">Statutory</option>
+                                    <option value="Information">Information</option>
+                                </select>
+                            </div>
+
+
+                      
+
+                            <div class="col-lg-2" style="margin-top:29px ;">
+                                <button class="btn btn-primary mb-2">Preview Report</button>
+                            </div>
+
+
                         </div>
-
-
-                    </div>
                 </div>
             </div>
 
@@ -79,50 +82,49 @@
                                         <th>Sr.no</th>
                                         <th>Company</th>
                                         <th>Location</th>
-                                        {{-- <th>Period From</th> --}}
-                                        {{-- <th>Period To</th> --}}
-                                        <th>Expence Category</th>
-                                        <th>Vendor Category</th>
-                                        <th>Fetch Details</th>
+                                        <th>Department</th>
+                                        <th>Inward Type</th>
+                                        <th>Received Date</th>
+                                        <th>To Name</th>
+                                        <th>Employee Name</th>
+                                        <th>Inward Number</th>
+
                                         <th>Action</th>
+
+
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($purchase_work_order_data as $purchase_work_order)
-                                    <tr>
-                                        <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $purchase_work_order->company_name }}</td>
-                                        <td>{{ $purchase_work_order->location_name }}</td>
-                                        {{-- <td>{{ $purchase_work_order->department }}</td> --}}
-                                        {{-- <td>{{ $purchase_work_order->date }}</td> --}}
-                                        <td>{{ $purchase_work_order->vendor_category_name }}</td>
-                                        <td>{{ $purchase_work_order->expenses_category }}</td>
-                                        {{-- <td>{{ $purchase_work_order->vendor_name }}</td> --}}
-                                        {{-- <td>{{ $purchase_work_order->total_amount }}</td> --}}
-                                        
-                                        <td>
-                            <a 
-                            href="{{route('admin_report.fetch-work-purchase-work-order-agreement1',$purchase_work_order->id)}}" data-toggle="tooltp"
-                                                data-placement="top" title="view"
-                                                data-target=".bd-example-modal-xl"><svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor" stroke-width="2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                </svg></a>
+                                    @foreach ($inwards_report as $inwards_report)
+                                        <tr>
+                                            <td>{{ $loop->index + 1 }}</td>
+                                            <td>{{ $inwards_report->company_name }}</td>
+                                            <td>{{ $inwards_report->location_name }}</td>
+                                            <td>{{ $inwards_report->department }}</td>
+                                            <td>{{ $inwards_report->inward_type }}</td>
+                                            <td>{{ $inwards_report->received_date }}</td>
+                                            <td>{{ $inwards_report->to_name }}</td>
+                                            <td>{{ $inwards_report->employee_name }}</td>
+                                            <td>{{ $inwards_report->inward_number }}</td>
+                                            <td>
+                                                <a 
+                                    href="{{route('admin_report.fetch_inward_report',$inwards_report->id)}}" data-toggle="tooltp"
+                                                        data-placement="top" title="view"
+                                                        data-target=".bd-example-modal-xl"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" fill="none" viewBox="0 0 24 24"
+                                                            stroke="currentColor" stroke-width="2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                        </svg></a>
 
+                                            </td>
 
-
-                                        </td>
-
-                                    </tr>
-                                @endforeach
-
-
+                                        </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>
@@ -149,7 +151,7 @@
 
             $(document).on('change', '#company_id', function() {
                 $.ajax({
-                    url: "{{ route('admin_report.get_vendor_category_by_company') }}",
+                    url: "{{ route('get_department_location_by_company') }}",
                     method: "GET",
                     dataType: 'json',
                     data: {
@@ -157,40 +159,67 @@
                     },
                     success: function(result) {
 
+                        $("#location_id").empty();
+                        $("#location_id").append(
+                            '<option value="" disabled selected>Select Location</option>');
+                        $.each(result['location'], function(a, b) {
+                            $("#location_id").append('<option value="' + b.id + '">' + b
+                                .location_name + '</option>');
+                        });
+                    }
+                })
+            })
+
+            $(document).on('change', '#location_id', function() {
+                $.ajax({
+                    url: "{{ route('admin_report.get_training_id') }}",
+                    method: "GET",
+                    dataType: 'json',
+                    data: {
+                        location_id: $(this).val(),
+                    },
+                    success: function(result) {
+
+                        $("#training_id").empty();
+                        $("#training_id").append(
+                            '<option value="" disabled selected>Please Select Option</option>');
+                           $.each(result, function(a, b) {
+                            $("#training_id").append('<option value="' + b.training_code + '">' + b
+                                .training_code + '</option>');
+                        });
+                    }
+                })
+            })
+
+            $(document).on('change', '#expense_category', function() {
+                $.ajax({
+                    url: "{{ route('admin_report.get_vendor_category_by_location_company_expense_category') }}",
+                    method: "GET",
+                    dataType: 'json',
+                    data: {
+                        company_id: $("#company_id").val(),
+                        location_id: $("#location_id").val(),
+                        expense_category_id: $(this).val(),
+                    },
+                    success: function(result) {
+
                         $("#vendor_category").empty();
                         $("#vendor_category").append(
-                            '<option value="" disabled selected>Select Vendor Category</option>');
-                           $.each(result, function(a, b) {
-                            $("#vendor_category").append('<option value="' + b.id + '">' + b
+                            '<option value="" disabled selected>Select Vendor Category</option>'
+                            );
+                        $.each(result, function(a, b) {
+                            $("#vendor_category").append('<option value="' + b.id +
+                                '">' + b
                                 .vendor_category_name + '</option>');
                         });
                     }
                 })
             })
 
-            $(document).on('change', '#vendor_category', function() {
-                $.ajax({
-                    url: "{{ route('admin_report.get_vendor_details_by_vendor_category') }}",
-                    method: "GET",
-                    dataType: 'json',
-                    data: {
-                        vendor_category_id: $(this).val(),
-                        company_id: $("#company_id").val(),
-                    },
-                    success: function(result) {
 
-                        $("#vendor_name").empty();
-                        $("#vendor_name").append(
-                            '<option value="" disabled selected>Select Vendor Name</option>');
-                           $.each(result, function(a, b) {
-                            $("#vendor_name").append('<option value="' + b.id + '">' + b
-                                .vendor_name + '</option>');
-                        });
-                    }
-                })
-            })
 
-          
+
+
             var table = $('.datatable_server').DataTable({
                 dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
                 buttons: {

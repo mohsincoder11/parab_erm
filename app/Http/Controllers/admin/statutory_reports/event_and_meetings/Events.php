@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 class Events extends Controller
 {
     public function events(){
-        return view('statutory_reports.events-and-meetings.events');
+        $company = get_company_name_and_id();
+
+        return view('statutory_reports.events-and-meetings.events',compact('company'));
     }
 }

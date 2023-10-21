@@ -36,7 +36,10 @@ class AssetPerkDetail extends Controller
     }
     public function edit_assetperk_details(Request $request)
     {
-        $official_detail = AssetPerkDetailModel::where('id', $request->id)->first();
+        $official_detail = AssetPerkDetailModel::where('assetperk_detail.id', $request->id)
+        ->join('personal_detail','personal_detail.id','=','assetperk_detail.employee_id')
+        ->select('assetperk_detail.*','personal_detail.employee_name')
+        ->first();
         return response()->json($official_detail);
     }
     public function update_assetperk_details(Request $request)

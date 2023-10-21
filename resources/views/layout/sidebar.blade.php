@@ -182,6 +182,7 @@
                         </ul>
                     </li>
 
+
                     <li
                         class="@php check_actice_or_show([
                             'salary_masters.allowances',
@@ -633,6 +634,10 @@
                         </ul>
                     </li>
 
+                    <li class="">
+                        <a href="{{ route('template_format') }}"> Template Format </a>
+                    </li>
+
                 </ul>
             </li>
 
@@ -767,6 +772,11 @@
 
 
 
+          
+
+            {{-- newly added by SK--}}
+
+
             <li
                 class="menu @php check_actice_or_show([
                 'admin_process.inward_outward.inward',
@@ -781,11 +791,9 @@
                 'admin_process.admin_documents.purchase_work_order',
                 'admin_process.admin_documents.agreement',
                 'admin_process.admin_documents.purchase-invoice',
-                'admin_process.admin_documents.payment-order',
-
-              
+                'admin_process.admin_documents.payment-order'
                 ],'active') @endphp">
-                <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <a href="#pages" data-toggle="collapse" aria-expanded="false"     class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -807,273 +815,196 @@
 
                     <li
                         class="@php check_actice_or_show([
-                        'admin_process.inward_outward.inward',
-                        'admin_process.inward_outward.outward'],'active') @endphp">
-                        <a href="#pages-error11" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle"> Inward / Outward <svg xmlns="http://www.w3.org/2000/svg"
+                            'admin_process.inward_outward.inward',
+                            'admin_process.inward_outward.outward'
+                            ],'active') @endphp">
+                        <a href="#pages-error12s" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle"> Inward & Outward <svg xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-chevron-right">
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg> </a>
-                        <ul class="collapse list-unstyled sub-submenu" id="pages-error11" data-parent="#pages">
+                        <ul class="collapse submenu list-unstyled sub-submenu" id="pages-error12s"
+                            data-parent="#pages">
                             <li
                                 class="@php check_actice_or_show([
-                'admin_process.inward_outward.inward',
-                ],'active') @endphp">
+                                'admin_process.inward_outward.inward'
+                                ],'active') @endphp">
                                 <a href="{{ route('admin_process.inward_outward.inward') }}"> Inward </a>
                             </li>
                             <li
-                                class="@php check_actice_or_show([                
-                'admin_process.inward_outward.outward'],'active') @endphp">
+                                class="@php check_actice_or_show([
+                             'admin_process.inward_outward.outward'],'active') @endphp">
                                 <a href="{{ route('admin_process.inward_outward.outward') }}"> Outward </a>
                             </li>
 
                         </ul>
                     </li>
+
+
                     <li
-                        class="@php check_actice_or_show([                
-                'admin_process.event_meeting.events',
-                'admin_process.event_meeting.meeting',
-                ],'active') @endphp">
-                        <a href="#pages-error12" data-toggle="collapse" aria-expanded="false"
+                        class="@php check_actice_or_show([
+                        'admin_process.event_meeting.events',
+                        'admin_process.event_meeting.meeting'
+                            ],'active') @endphp">
+                        <a href="#pages-error12sm" data-toggle="collapse" aria-expanded="false"
                             class="dropdown-toggle"> Events & Meetings <svg xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-chevron-right">
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg> </a>
-                        <ul class="collapse list-unstyled sub-submenu" id="pages-error12" data-parent="#pages">
+                        <ul class="collapse submenu list-unstyled sub-submenu" id="pages-error12sm"
+                            data-parent="#pages">
                             <li
-                                class="@php check_actice_or_show([                
-                'admin_process.event_meeting.events',
-                ],'active') @endphp">
+                                class="@php check_actice_or_show([
+                                'admin_process.event_meeting.events'
+                                ],'active') @endphp">
                                 <a href="{{ route('admin_process.event_meeting.events') }}"> Events </a>
                             </li>
                             <li
-                                class="@php check_actice_or_show([                
-                'admin_process.event_meeting.meeting',
-                ],'active') @endphp">
+                                class="@php check_actice_or_show([
+                                    'admin_process.event_meeting.meeting'],'active') @endphp">
                                 <a href="{{ route('admin_process.event_meeting.meeting') }}"> Meetings </a>
                             </li>
 
                         </ul>
                     </li>
                     <li
-                        class="@php check_actice_or_show([                
-                'admin_process.training.training-calendar',
-                'admin_process.training.training-feedback',
-                ],'active') @endphp">
-                        <a href="#pages-error53" data-toggle="collapse" aria-expanded="false"
+                        class="@php check_actice_or_show([
+                        'admin_process.training.training-calendar',
+                        'admin_process.training.training-feedback'
+                            ],'active') @endphp">
+                        <a href="#pages-error53s" data-toggle="collapse" aria-expanded="false"
                             class="dropdown-toggle"> Training <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-right">
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg> </a>
-                        <ul class="collapse list-unstyled sub-submenu" id="pages-error53" data-parent="#pages">
-                            {{-- <li>
-                                <a href="#"> Training List</a>
-                            </li>
-                            <li>
-                                <a href="#"> Training Type </a>
-                            </li>
-                            <li>
-                                <a href="#"> Trainers </a>
-                            </li> --}}
+                        <ul class="collapse submenu list-unstyled sub-submenu" id="pages-error53s"
+                            data-parent="#pages">
                             <li
-                                class="@php check_actice_or_show([                
-                                'admin_process.training.training-calendar',
-                                ],'active') @endphp">
+                                class="@php check_actice_or_show([
+                                    'admin_process.training.training-calendar',
+                                    ],'active') @endphp">
                                 <a href="{{ route('admin_process.training.training-calendar') }}"> Training
-                                    Calendar</a>
+                                    Calender</a>
                             </li>
+
                             <li
-                                class="@php check_actice_or_show([                
-                                    'admin_process.training.training-feedback',
-                ],'active') @endphp">
+                                class="@php check_actice_or_show([
+                                'admin_process.training.training-feedback'
+                                ],'active') @endphp">
                                 <a href="{{ route('admin_process.training.training-feedback') }}"> Training Feedback
                                 </a>
                             </li>
 
                         </ul>
                     </li>
+
+
                     <li
-                        class="@php check_actice_or_show([                
-                        'admin_process.admin_documents.purchase_work_order',
-                        'admin_process.admin_documents.agreement',
-                        'admin_process.admin_documents.purchase-invoice',
-                        'admin_process.admin_documents.payment-order',
-    ],'active') @endphp">
-                        <a href="#pages-error03" data-toggle="collapse" aria-expanded="false"
+                        class="@php check_actice_or_show([
+                            'admin_process.admin_documents.purchase_work_order',
+                                'admin_process.admin_documents.agreement',
+                                'admin_process.admin_documents.purchase-invoice',
+                                'admin_process.admin_documents.payment-order' 
+                            ],'active') @endphp">
+                        <a href="#pages-error53sm" data-toggle="collapse" aria-expanded="false"
                             class="dropdown-toggle"> Admin Documents <svg xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-chevron-right">
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg> </a>
-                        <ul class="collapse list-unstyled sub-submenu" id="pages-error03" data-parent="#pages">
+                        <ul class="collapse submenu list-unstyled sub-submenu" id="pages-error53sm"
+                            data-parent="#pages">
                             <li
-                                class="@php check_actice_or_show([                
-                        'admin_process.admin_documents.purchase_work_order',
-                       
-    ],'active') @endphp">
-                                <a href="{{ route('admin_process.admin_documents.purchase_work_order') }}"> Purhchase Order / Work Order</a>
+                                class="@php check_actice_or_show([
+                                    'admin_process.admin_documents.purchase_work_order',
+                                    ],'active') @endphp">
+                                <a href="{{ route('admin_process.admin_documents.purchase_work_order') }}"> Purhchase
+                                    Order / Work Order</a>
                             </li>
+
                             <li
-                                class="@php check_actice_or_show([                
-                'admin_process.admin_documents.agreement',
-                       
-    ],'active') @endphp">
-                                <a href="{{ route('admin_process.admin_documents.agreement') }}"> Agreements </a>
+                                class="@php check_actice_or_show([
+                                'admin_process.admin_documents.agreement'
+                                ],'active') @endphp">
+                                <a href="{{ route('admin_process.admin_documents.agreement') }}"> Training Agreement
+                                </a>
                             </li>
-                             <li
-                                class="@php check_actice_or_show([            
-                      
-                        'admin_process.admin_documents.purchase-invoice',
-    ],'active') @endphp">
-                                <a href="{{ route('admin_process.admin_documents.purchase-invoice') }}"> Purhchase Invoice</a>
-                            </li>
+
                             <li
-                                class="@php check_actice_or_show([                
-                        'admin_process.admin_documents.payment-order',
-                       
-    ],'active') @endphp">
-                                <a href="{{ route('admin_process.admin_documents.payment-order') }}"> Payment Order </a>
+                                class="@php check_actice_or_show([
+                                'admin_process.admin_documents.purchase-invoice',
+                                ],'active') @endphp">
+                                <a href="{{ route('admin_process.admin_documents.purchase-invoice') }}"> Purchase
+                                    Invoice
+                                </a>
                             </li>
-                           
+
+                            <li
+                                class="@php check_actice_or_show([
+                                'admin_process.admin_documents.payment-order'
+                                ],'active') @endphp">
+                                <a href="{{ route('admin_process.admin_documents.payment-order') }}"> Payment Order
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
 
+
                     <li
-                        class="@php check_actice_or_show([    
-                      
+                        class="@php check_actice_or_show([
                         'admin_process.activity_documents.training-certificate',
                         'admin_process.activity_documents.travel-allowance',
-                        'admin_process.activity_documents.event-meeting',
-    ],'active') @endphp">
-                        <a href="#pages-error33" data-toggle="collapse" aria-expanded="false"
+                        'admin_process.activity_documents.event-meeting' 
+                        ],'active') @endphp">
+                        <a href="#pages-error5sm" data-toggle="collapse" aria-expanded="false"
                             class="dropdown-toggle"> Activity Documents <svg xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-chevron-right">
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg> </a>
-                        <ul class="collapse list-unstyled sub-submenu" id="pages-error33" data-parent="#pages">
+                        <ul class="collapse submenu list-unstyled sub-submenu" id="pages-error5sm"
+                            data-parent="#pages">
                             <li
-                                class="@php check_actice_or_show([         
-                      
-                      'admin_process.activity_documents.training-certificate'
-
-            ],'active') @endphp">
+                                class="@php check_actice_or_show([
+                                'admin_process.activity_documents.training-certificate',
+                                ],'active') @endphp">
                                 <a href="{{ route('admin_process.activity_documents.training-certificate') }}">
                                     Training Certificate</a>
                             </li>
+
                             <li
-                                class="@php check_actice_or_show([            
-                      
-                      'admin_process.activity_documents.travel-allowance'
-            ],'active') @endphp">
-                                <a href="{{ route('admin_process.activity_documents.travel-allowance') }}">Travel
-                                    Allowance</a>
+                                class="@php check_actice_or_show([
+                                'admin_process.activity_documents.travel-allowance'
+                                ],'active') @endphp">
+                                <a href="{{ route('admin_process.activity_documents.travel-allowance') }}"> Travel
+                                    Allowance
+                                </a>
                             </li>
+
                             <li
-                                class="@php check_actice_or_show([            
-                      
-                      'admin_process.activity_documents.event-meeting'
-            ],'active') @endphp">
-                                <a href="{{ route('admin_process.activity_documents.event-meeting') }}"> Event &
-                                    Meeting </a>
+                                class="@php check_actice_or_show([
+                                    'admin_process.activity_documents.event-meeting'
+                                    ],'active') @endphp">
+                                <a href="{{ route('admin_process.activity_documents.event-meeting') }}">Event &
+                                    Meeting
+                                </a>
                             </li>
 
                         </ul>
                     </li>
+
                 </ul>
             </li>
-
-
-            {{-- <li class="menu">
-                    <a href="#" aria-expanded="false" class="dropdown-toggle">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-credit-card">
-                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                                <line x1="1" y1="10" x2="23" y2="10"></line>
-                            </svg>
-                            <span>Purchase Order</span>
-                        </div>
-                    </a>
-                </li> --}}
-
-
-            {{-- <li class="menu">
-                    <a href="#components1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-file-plus">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="12" y1="18" x2="12" y2="12"></line>
-                                <line x1="9" y1="15" x2="15" y2="15"></line>
-                            </svg>
-                            <span>Recruitment</span>
-                        </div>
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-chevron-right">
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                        </div>
-                    </a>
-                    <ul class="collapse submenu list-unstyled" id="components1" data-parent="#accordionExample">
-                        <li>
-                            <a href="#"> Job Post </a>
-                        </li>
-                        <li>
-                            <a href="#"> Job Candidates </a>
-                        </li>
-                        <li>
-                            <a href="#"> Job Interview </a>
-                        </li>
-
-                        <li>
-                            <a href="#">Interview Schedule</a>
-                        </li>
-                        <li>
-                            <a href="#">Interview Assessment</a>
-                        </li>
-                        <li>
-                            <a href="#pages-error256" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle">Recruitment Report<svg xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-chevron-right">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg> </a>
-                            <ul class="collapse list-unstyled sub-submenu" id="pages-error256" data-parent="#pages">
-                                <li>
-                                    <a href="#">Candidate List - as Per Criteria</a>
-                                </li>
-
-                                <li>
-                                    <a href="#"> Interview Report</a>
-                                </li>
-                                <li>
-                                    <a href="#">Joining Report</a>
-                                </li>
-
-                                <li>
-                                    <a href="#">Interview call Letter</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                    </ul>
-                </li> --}}
-
+            {{-- for checking --}}
 
             {{-- <li class="menu">
                     <a href="#components111" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -1140,7 +1071,7 @@
                 'event_and_meetings.event',
                 'event_and_meetings.meeting',
                 'training.training-list',
-                        'training.trainer'
+                'training.trainer'
                 ],'active') @endphp">
                 <a href="#components222" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -1246,26 +1177,51 @@
 
                         </ul>
                     </li>
-                    <li>
-                        <a href="#pages-error03" data-toggle="collapse" aria-expanded="false"
+                    <li
+                        class="menu @php check_actice_or_show([
+                        'admin_process.admin_documents.purchase_work_order',
+                        'admin_process.admin_documents.agreement',
+                        'admin_process.admin_documents.purchase-invoice',
+                        'admin_process.admin_documents.payment-order'                                
+                        ],'active') @endphp">
+                        <a href="#pages-error033" data-toggle="collapse" aria-expanded="false"
                             class="dropdown-toggle"> Admin Documents <svg xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-chevron-right">
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg> </a>
-                        <ul class="collapse list-unstyled sub-submenu" id="pages-error03" data-parent="#pages">
-                            <li>
-                                <a href="#"> Purhchase Order / Work Order</a>
+                        <ul class="collapse list-unstyled sub-submenu" id="pages-error033" data-parent="#pages">
+                            <li
+                                class="@php check_actice_or_show([
+                                'admin_process.admin_documents.purchase_work_order'
+                                ],'active') @endphp">
+                                <a href="{{ route('admin_process.admin_documents.purchase_work_order') }}">
+                                    Purhchase
+                                    Order / Work Order</a>
                             </li>
-                            <li>
-                                <a href="#"> Agreements </a>
+                            <li
+                                class="@php check_actice_or_show([
+                                'admin_process.admin_documents.agreement'
+                                ],'active') @endphp">
+                                <a href="{{ route('admin_process.admin_documents.agreement') }}"> Agreements
+                                </a>
                             </li>
-                            <li>
-                                <a href="#"> Payment Order </a>
+                            <li
+                                class="@php check_actice_or_show([
+                                'admin_process.admin_documents.payment-order'
+                                ],'active') @endphp">
+                                <a href="{{ route('admin_process.admin_documents.payment-order') }}"> Payment
+                                    Order
+                                </a>
                             </li>
-                            <li>
-                                <a href="#"> Purhchase Invoice Entry</a>
+                            <li
+                                class="@php check_actice_or_show([
+                                'admin_process.admin_documents.purchase-invoice'
+                                ],'active') @endphp">
+                                <a href="{{ route('admin_process.admin_documents.purchase-invoice') }}">
+                                    Purhchase
+                                    Invoice Entry</a>
                             </li>
                         </ul>
                     </li>
@@ -1274,7 +1230,8 @@
 
             </li>
 
-            <li class="menu @php check_actice_or_show([
+            <li
+                class="menu @php check_actice_or_show([
                         'admin_report.expenses-report',
                         'admin_report.vendor-report',
                         'admin_report.purchase-work-order-agreement',
@@ -1308,21 +1265,26 @@
                     </div>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="components_ar" data-parent="#accordionExample">
-                    
-                    <li class="@php check_actice_or_show([
+
+                    <li
+                        class="@php check_actice_or_show([
                         'admin_report.purchase-work-order-agreement',
                         'admin_report.fetch-work-purchase-work-order-agreement',
                         ],'active') @endphp">
-                        <a href="{{route('admin_report.purchase-work-order-agreement')}}"> Purchase order/work order/ contract report </a>
+                        <a href="{{ route('admin_report.purchase-work-order-agreement') }}"> Purchase
+                            order/work
+                            order/ contract report </a>
                     </li>
-                    <li class="@php check_actice_or_show([
+                    <li
+                        class="@php check_actice_or_show([
                         'admin_report.vendor-report',
                         ],'active') @endphp">
                         <a href="{{ route('admin_report.vendor-report') }}">
-                        Vendor Report </a>
+                            Vendor Report </a>
                     </li>
 
-                    <li  class="@php check_actice_or_show([
+                    <li
+                        class="@php check_actice_or_show([
                         'admin_report.event-report',
                         'admin_report.meeting-report',
                         ],'active') @endphp">
@@ -1334,21 +1296,24 @@
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg> </a>
                         <ul class="collapse list-unstyled sub-submenu" id="pages-error256" data-parent="#pages">
-                            <li class="@php check_actice_or_show([
+                            <li
+                                class="@php check_actice_or_show([
                         'admin_report.event-report',
                         ],'active') @endphp">
                                 <a href="{{ route('admin_report.event-report') }}">Event Reports</a>
-                            </li > 
-                            <li class="@php check_actice_or_show([
+                            </li>
+                            <li
+                                class="@php check_actice_or_show([
                         'admin_report.meeting-report',
                         ],'active') @endphp">
-                                <a href="{{route('admin_report.meeting-report')}}">Meeting Reports</a>
+                                <a href="{{ route('admin_report.meeting-report') }}">Meeting Reports</a>
                             </li>
 
                         </ul>
                     </li>
 
-                    <li  class="@php check_actice_or_show([
+                    <li
+                        class="@php check_actice_or_show([
                         'admin_report.training-report',
                         'admin_report.training-certificate-report',
                         ],'active') @endphp">
@@ -1360,21 +1325,25 @@
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg> </a>
                         <ul class="collapse list-unstyled sub-submenu" id="pages-error258" data-parent="#pages">
-                            <li class="@php check_actice_or_show([
+                            <li
+                                class="@php check_actice_or_show([
                         'admin_report.training-report',
                         ],'active') @endphp">
                                 <a href="{{ route('admin_report.training-report') }}">Training Reports</a>
-                            </li > 
-                            <li class="@php check_actice_or_show([
+                            </li>
+                            <li
+                                class="@php check_actice_or_show([
                         'admin_report.training-certificate-report',
                         ],'active') @endphp">
-                                <a href="{{route('admin_report.training-certificate-report')}}">Training Certificate</a>
+                                <a href="{{ route('admin_report.training-certificate-report') }}">Training
+                                    Certificate</a>
                             </li>
 
                         </ul>
                     </li>
 
-                    <li  class="@php check_actice_or_show([
+                    <li
+                        class="@php check_actice_or_show([
                         'admin_report.inward-report',
                         'admin_report.outward-report',
                         ],'active') @endphp">
@@ -1386,28 +1355,31 @@
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg> </a>
                         <ul class="collapse list-unstyled sub-submenu" id="pages-error259" data-parent="#pages">
-                            <li class="@php check_actice_or_show([
+                            <li
+                                class="@php check_actice_or_show([
                         'admin_report.inward-report',
                         ],'active') @endphp">
                                 <a href="{{ route('admin_report.inward-report') }}">Inward Report</a>
-                            </li > 
-                            <li class="@php check_actice_or_show([
+                            </li>
+                            <li
+                                class="@php check_actice_or_show([
                         'admin_report.outward-report',
                         ],'active') @endphp">
-                                <a href="{{route('admin_report.outward-report')}}">Outward Report</a>
+                                <a href="{{ route('admin_report.outward-report') }}">Outward Report</a>
                             </li>
 
                         </ul>
                     </li>
 
-                    
 
-                    <li class="@php check_actice_or_show([
+
+                    <li
+                        class="@php check_actice_or_show([
                         'admin_report.expenses-report',
                         ],'active') @endphp">
                         <a href="{{ route('admin_report.expenses-report') }}">Expenses Report</a>
                     </li>
-                    
+
                 </ul>
             </li>
 
@@ -1456,9 +1428,9 @@
                 ],'active') @endphp">
                 <a href="#components0112" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="feather feather-file-plus">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-plus">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                             <polyline points="14 2 14 8 20 8"></polyline>
                             <line x1="12" y1="18" x2="12" y2="12"></line>
@@ -1467,9 +1439,9 @@
                         <span>General Master</span>
                     </div>
                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="feather feather-chevron-right">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
                             <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>
                     </div>
@@ -1503,9 +1475,9 @@
                 ],'active') @endphp">
                 <a href="#components015" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="feather feather-file-plus">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-plus">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                             <polyline points="14 2 14 8 20 8"></polyline>
                             <line x1="12" y1="18" x2="12" y2="12"></line>
@@ -1514,9 +1486,9 @@
                         <span>User Management</span>
                     </div>
                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="feather feather-chevron-right">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
                             <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>
                     </div>

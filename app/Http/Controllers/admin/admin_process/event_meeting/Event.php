@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin\admin_process\event_meeting;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin_process\event_meeting\EventModel;
+use App\Models\admin_process\event_meeting\EventItemsDetailsModel;
+
 use Yajra\DataTables\DataTables;
 use DB;
 
@@ -29,7 +31,7 @@ class Event extends Controller
         } else {
             $file_name = '';
         }
-        EventModel::create([
+        $EventModel = EventModel::create([
             'company_id' => $request->company_id,
             'location_id' => $request->location_id,
             'department_id' => $request->department_id,
@@ -46,6 +48,16 @@ class Event extends Controller
             'file' =>  $file_name,
             'event_id' => $request->event_id,
         ]);
+
+        foreach($request->perticular as $key => $perticular)
+        {
+            EventItemsDetailsModel::create([          
+                'events_id' => $EventModel->id,
+                'perticular' => $perticular,
+                'price' => $request->price[$key]            
+            ]);
+        }
+
         return back()->with('success', 'Record added successfully.');
     }
 
@@ -66,7 +78,7 @@ class Event extends Controller
         } else {
             $file_name = '';
         }
-        EventModel::where('id', $request->id)->update([
+        $EventModel = EventModel::where('id', $request->id)->update([
             'company_id' => $request->company_id,
             'location_id' => $request->location_id,
             'department_id' => $request->department_id,
@@ -84,14 +96,27 @@ class Event extends Controller
             'event_id' => $request->event_id,
 
         ]);
+        EventItemsDetailsModel::where('events_id',$request->id)->delete();
+        foreach($request->perticular as $key => $perticular)
+        {
+            EventItemsDetailsModel::create([          
+                'events_id' => $request->id,
+                'perticular' => $perticular,
+                'price' => $request->price[$key]            
+            ]);
+        }
+
         return back()->with('success', 'Record updated successfully.');
     }
 
     public function edit_events(Request $request)
     {
-        $data = DB::table('events')
+        $data['first'] = DB::table('events')
             ->where('events.id', $request->id)
             ->first();
+            $data['second']=DB::table('events_items_detail')
+            ->where('events_id', $data['first']->id)
+            ->get();
         return response()->json($data);
     }
 
@@ -109,7 +134,7 @@ class Event extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->rawColumns([
-                'company_name', 'location_name', 'department', 'event_date', 'event_type', 'event_coordinator_employee', 'vendor_id', 'estimate_amount',  'approve_by', 'approve_date',                'approve_amount', 'file',  'event_id', 'action'
+                'company_name', 'location_name', 'department', 'event_date', 'event_type', 'event_coordinator_employee', 'vendor_id', 'estimate_amount',  'approve_by', 'approve_date', 'approve_amount', 'file',  'event_id', 'action'
             ])
 
             ->addColumn('company_name', function ($data) {

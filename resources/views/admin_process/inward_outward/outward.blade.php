@@ -234,7 +234,6 @@
                                         <th>Outward Date</th>
                                         <th>Inward Number</th>
                                         <th>To Name</th>
-
                                         <th>Courier Name</th>
                                         <th>AWB Number</th>
                                         <th>Employee Name</th>
@@ -442,6 +441,7 @@
                     },
                     success: function(result) {
                         $("#id").val(result.id);
+                        $("#employee_name").val(result.employee_name);
                         $("#company_id").val(result.company_id);
                         $("#outward_type").val(result.outward_type);
                         $("#outward_date").val(result.outward_date);

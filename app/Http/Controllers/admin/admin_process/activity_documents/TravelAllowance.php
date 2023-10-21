@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\admin\admin_process\activity_documents;
-
 use App\Models\admin_process\event_meeting\EventModel;
 use App\Models\admin_process\event_meeting\MeetingModel;
 use App\Http\Controllers\Controller;

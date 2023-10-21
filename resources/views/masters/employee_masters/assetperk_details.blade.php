@@ -327,6 +327,10 @@
                     },
                     success: function(result) {
                         $("#id").val(result.id);
+                        $("#employee_name").val(result.employee_name);
+                        console.log(result);
+                        $("#company_id").val(result.company_id);
+                        $("#emp_code ").val(result.emp_code );
                         $("#perk_name").val(result.perk_name);
                         $("#sr_no").val(result.sr_no);
                         $("#issue_date").val(result.issue_date);

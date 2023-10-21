@@ -8,11 +8,13 @@ use DB;
 use App\Models\admin_process\admin_document\AgreementModel;
 use App\Models\admin_process\admin_document\AgreementItemsDetailsModel;
 use App\Models\admin_master\VendorDetailsModel;
+use App\TemplateFormat;
 
 class Agreement extends Controller
 {
     public function agreement(){
         $company = get_company_name_and_id();
+        $template = TemplateFormat :: all();
         $agreement = DB::table('agreements')
         ->join('companies', 'companies.id', '=', 'agreements.company_id')
         ->leftjoin('locations', 'locations.id', '=', 'agreements.location_id')
@@ -20,10 +22,11 @@ class Agreement extends Controller
         ->leftjoin('vendor_category', 'vendor_category.id', '=', 'agreements.vendor_category_id')
         ->leftjoin('expenses_category', 'expenses_category.id', '=', 'agreements.expense_category_id')
         ->leftjoin('vendor_details', 'vendor_details.id', '=', 'agreements.vendor_id')
-        ->select('agreements.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'vendor_category.vendor_category_name','expenses_category.category as expenses_category','vendor_details.vendor_name')
+        ->leftjoin('template_format', 'template_format.template_id', '=', 'agreements.template_id')
+        ->select('agreements.*', 'locations.location_name', 'departments.department', 'companies.company_name', 'vendor_category.vendor_category_name','expenses_category.category as expenses_category','vendor_details.vendor_name','template_format.template_file')
         ->orderby('agreements.id', 'desc')
         ->get();
-        return view('admin_process.admin_documents.agreement',compact('company','agreement'));
+        return view('admin_process.admin_documents.agreement',compact('company','agreement','template'));
     }
 
     public function get_vendor_name(Request $request){

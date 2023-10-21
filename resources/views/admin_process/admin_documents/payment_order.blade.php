@@ -508,14 +508,26 @@
                 </div>
                 <div class="col-md-3 form-group">
                     <label>Select Template Format*</label>
-                    <select name="template_id" id="template_id" class="form-control selectpicker" data-live-search="true" data-live-search-style="begins" title='Select Employee...'>
+                    {{-- <select name="template_id" id="template_id" class="form-control selectpicker" data-live-search="true" data-live-search-style="begins" title='Select Employee...'>
                                     <option value="1">Template 1</option>
                                     <option value="2">Template 2</option>
                                     <option value="3">Template 3</option>
                                     <option value="4">Template 4</option>
 
 
-                                </select>
+                                </select> --}}
+
+                                <select name="template_id" id="template_id" class="form-control selectpicker"
+                                data-live-search="true" data-live-search-style="begins" title='Select Company Type...'>
+                                <option value="">Select Template Format
+                                </option>
+                                @foreach ($template as $templates)
+                                    <option value="{{ $templates->template_id }}">{{ $templates->template_file }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+
                 </div>
                 <div class="col-md-3 form-group">
                     <label>Payment Order Number</label>

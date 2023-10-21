@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin\admin_process\training;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin_process\training\TrainingCalendarModel;
+use App\Models\admin_process\training\TrainingCalendarItemsDetailsModel;
+
 use Yajra\DataTables\DataTables;
 use DB;
 
@@ -27,7 +29,7 @@ class TrainingCalendar extends Controller
         } else {
             $file_name = '';
         }
-        TrainingCalendarModel::create([
+        $TrainingCalendarModel= TrainingCalendarModel::create([
             'company_id' => $request->company_id,
             'location_id' => $request->location_id,
             'department_id' => $request->department_id,
@@ -44,6 +46,14 @@ class TrainingCalendar extends Controller
             'file' =>  $file_name,
             'training_code' => $request->training_code,
         ]);
+        foreach($request->perticular as $key => $perticular)
+        {
+            TrainingCalendarItemsDetailsModel::create([          
+                'training_calendar_id' => $TrainingCalendarModel->id,
+                'perticular' => $perticular,
+                'price' => $request->price[$key]            
+            ]);
+        }
         return back()->with('success', 'Record added successfully.');
     }
 
@@ -82,14 +92,28 @@ class TrainingCalendar extends Controller
             'training_code' => $request->training_code,
 
         ]);
+
+        foreach($request->perticular as $key => $perticular)
+        {
+           TrainingCalendarItemsDetailsModel::create([          
+            'training_calendar_id' => $request->id,
+            'perticular' => $perticular,
+            'price' => $request->price[$key]          
+            ]);
+        }
+
+
         return back()->with('success', 'Record updated successfully.');
     }
 
     public function edit_training_calendar(Request $request)
     {
-        $data = DB::table('training_calendar')
+        $data['first'] = DB::table('training_calendar')
             ->where('training_calendar.id', $request->id)
             ->first();
+        $data['second']=DB::table('training_calender_items_detail')
+            ->where('training_calendar_id', $data['first']->id)
+            ->get();    
         return response()->json($data);
     }
 
